@@ -198,19 +198,209 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .deep-sleep-has,.homepage.homepage .with-over-two-years{width:auto;height:auto;margin:0;font-size:clamp(18px,1.7vw,24px)}
 
 /* FAQ */
-.homepage.homepage .group-173{padding-top:100px;padding-bottom:100px;display:flex;flex-direction:column}
+.homepage.homepage .group-173{
+  height:auto!important;
+  padding-top:100px;
+  padding-bottom:100px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:0;
+  background-color:#f6f6f6;
+}
 .homepage.homepage .group-174{width:100%;height:auto;margin:0;align-items:center;text-align:center}
 .homepage.homepage .group-174 > *{margin-left:0!important;width:auto;height:auto}
-.homepage.homepage .frequently-asked{white-space:normal;font-size:clamp(30px,3vw,40px)}
-.homepage.homepage .frame-52{width:100%;height:auto;flex-wrap:wrap;justify-content:center}
-.homepage.homepage .group-175,.homepage.homepage .group-179{width:100%;height:auto}
-.homepage.homepage .group-176,.homepage.homepage .group-180{width:100%;height:auto;min-height:82px}
-.homepage.homepage .rectangle-27,.homepage.homepage .rectangle-28{width:100%;height:100%;top:0;left:0}
-.homepage.homepage .group-177,.homepage.homepage .group-181{position:relative;top:auto;left:auto;width:100%;height:auto;padding:24px 30px}
-.homepage.homepage .group-178,.homepage.homepage .group-182,.homepage.homepage .group-183,.homepage.homepage .group-184{width:100%;gap:24px;justify-content:space-between}
+.homepage.homepage .q-a{align-self:center;margin:0;text-align:center}
+.homepage.homepage .frequently-asked{white-space:normal;height:auto;width:100%;font-size:clamp(30px,3vw,40px);line-height:1.15;text-align:center}
+.homepage.homepage .text-wrapper-109{max-width:661px;width:100%;height:auto;margin-top:12px;text-align:center}
+.homepage.homepage .frame-52{
+  width:100%;
+  max-width:100%;
+  height:auto;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:16px;
+  margin-top:50px;
+}
+.homepage.homepage .frame-53,
+.homepage.homepage .frame-54{
+  appearance:none;
+  -webkit-appearance:none;
+  border:0;
+  margin:0;
+  cursor:pointer;
+  font:inherit;
+  line-height:normal;
+  padding:13px 31px;
+  border-radius:60px;
+  overflow:hidden;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  flex:0 0 auto;
+  transition:background-color .28s ease,color .28s ease,box-shadow .28s ease,transform .28s ease;
+}
+.homepage.homepage .frame-53{
+  background-color:#ffbb00;
+  box-shadow:0 4px 12px rgba(255,187,0,.22);
+}
+.homepage.homepage .frame-54{
+  background-color:#e7e7e7;
+  box-shadow:none;
+}
+.homepage.homepage .frame-53:hover{background-color:#f0b100}
+.homepage.homepage .frame-54:hover{background-color:#dddddd}
+.homepage.homepage .frame-53:focus-visible,
+.homepage.homepage .frame-54:focus-visible{
+  outline:2px solid #00baf5;
+  outline-offset:3px;
+}
+.homepage.homepage .text-wrapper-110,
+.homepage.homepage .text-wrapper-111{
+  pointer-events:none;
+  transition:color .28s ease;
+}
+.homepage.homepage .text-wrapper-110{font-weight:700;color:#252525}
+.homepage.homepage .text-wrapper-111{font-weight:500;color:#25252599}
+.homepage.homepage .group-175,
+.homepage.homepage .group-179{width:100%;height:auto}
+.homepage.homepage .group-176,
+.homepage.homepage .group-180{width:100%;height:auto;min-height:82px}
+.homepage.homepage .rectangle-27,
+.homepage.homepage .rectangle-28{width:100%;height:100%;top:0;left:0}
+.homepage.homepage .group-177,
+.homepage.homepage .group-181{position:relative;top:auto;left:auto;width:100%;height:auto;padding:24px 30px}
+.homepage.homepage .group-178,
+.homepage.homepage .group-182,
+.homepage.homepage .group-183,
+.homepage.homepage .group-184{width:100%;gap:24px;justify-content:space-between}
 .homepage.homepage [class^="element-"]{width:auto;height:auto;flex:1}
 .homepage.homepage .text-wrapper-114{width:auto;height:auto;margin-left:0;padding-right:58px}
-.homepage.homepage .group-185{margin:50px auto 0}
+.homepage.homepage .group-185{margin:50px auto 0;flex-shrink:0}
+
+/* FAQ accordion (JS-built markup) */
+.homepage.homepage .faq-panels{width:100%;margin-top:34px}
+.homepage.homepage .faq-tabpanel{display:none}
+.homepage.homepage .faq-tabpanel.is-active{display:block;animation:faqPanelIn .35s ease}
+.homepage.homepage .faq-clip,
+.homepage.homepage .faq-list{width:100%}
+.homepage.homepage .faq-list{display:flex;flex-direction:column;gap:24px}
+.homepage.homepage .faq-item{
+  background:#fff;
+  border:1px solid #ebebeb;
+  border-radius:15px;
+  padding:24px 30px;
+  box-shadow:none;
+  transition:box-shadow .4s ease,border-color .4s ease,background-color .4s ease;
+}
+.homepage.homepage .faq-item.is-open{
+  border-color:transparent;
+  box-shadow:0 8px 24px #00baf51f;
+}
+.homepage.homepage .faq-item__head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:24px;
+  width:100%;
+  min-height:34px;
+  margin:0;
+  padding:0;
+  border:0;
+  background:none;
+  cursor:pointer;
+  text-align:left;
+  font:inherit;
+  color:inherit;
+}
+.homepage.homepage .faq-item__head:focus-visible{
+  outline:2px solid #00baf5;
+  outline-offset:4px;
+  border-radius:8px;
+}
+.homepage.homepage .faq-item__q{
+  display:block;
+  flex:1;
+  min-width:0;
+  font-family:"Google Sans Flex",Helvetica,sans-serif;
+  font-size:20px;
+  font-weight:600;
+  color:#252525;
+  line-height:1.25;
+  letter-spacing:0;
+}
+.homepage.homepage .faq-item__n{
+  font-weight:600;
+  color:#ffbb00;
+}
+.homepage.homepage .faq-item__icon{
+  width:34px;
+  height:34px;
+  flex:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  border:1px solid #646464;
+  background:#fff;
+  color:#1f1f1f;
+  transition:background .35s ease,border-color .35s ease,transform .35s ease,box-shadow .35s ease;
+}
+.homepage.homepage .faq-item__icon svg{
+  display:block;
+  width:16px;
+  height:16px;
+  transition:transform .4s cubic-bezier(.22,1,.36,1);
+}
+.homepage.homepage .faq-item.is-open .faq-item__icon{
+  border-color:transparent;
+  background:linear-gradient(90deg,#ffbb00 0%,#f0b30d 100%);
+}
+.homepage.homepage .faq-item.is-open .faq-item__icon svg{transform:rotate(180deg)}
+.homepage.homepage .faq-item__panel{
+  display:grid;
+  grid-template-rows:0fr;
+  transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1);
+}
+.homepage.homepage .faq-item.is-open .faq-item__panel{grid-template-rows:1fr}
+.homepage.homepage .faq-item__panel-inner{overflow:hidden;min-height:0}
+.homepage.homepage .faq-item__a{
+  margin:16px 0 0;
+  padding:0 58px 0 36px;
+  font-family:"DM Sans",Helvetica,sans-serif;
+  font-weight:400;
+  font-size:16px;
+  line-height:24px;
+  letter-spacing:0;
+  color:#646464;
+}
+@keyframes faqPanelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){
+  .homepage.homepage .faq-item,
+  .homepage.homepage .faq-item__panel,
+  .homepage.homepage .faq-item__icon,
+  .homepage.homepage .faq-item__icon svg,
+  .homepage.homepage .frame-53,
+  .homepage.homepage .frame-54{transition:none}
+  .homepage.homepage .faq-tabpanel.is-active{animation:none}
+}
+@media(max-width:900px){
+  .homepage.homepage .group-173{padding-top:72px;padding-bottom:72px}
+  .homepage.homepage .frame-52{margin-top:32px;gap:12px}
+  .homepage.homepage .frame-53,
+  .homepage.homepage .frame-54{padding:11px 20px}
+  .homepage.homepage .faq-item{padding:20px 20px}
+  .homepage.homepage .faq-item__q{font-size:17px}
+  .homepage.homepage .faq-item__a{padding:0 0 0 0;font-size:15px}
+  .homepage.homepage .faq-list{gap:16px}
+  .homepage.homepage .group-185{margin-top:36px}
+}
+@media(max-width:600px){
+  .homepage.homepage .frame-52{justify-content:center}
+  .homepage.homepage .faq-item__head{align-items:flex-start;gap:12px}
+  .homepage.homepage .faq-item__q{font-size:16px}
+}
 
 /* contact */
 .homepage.homepage .group-188{overflow:hidden;padding:100px 0}
@@ -431,4 +621,73 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
   .homepage.homepage .after-case-studies > .ind-layout{grid-column:2/3;grid-template-columns:minmax(0,1fr)}
   .homepage.homepage .ind-layout > .frame-42,.homepage.homepage .ind-layout > .ind-media{grid-column:1}
   .homepage.homepage .ind-layout > .ind-media{position:relative;top:auto;justify-self:stretch;max-width:none;height:360px;margin-top:40px}
+}
+/* =====================================================================
+   INDUSTRIES v3 — fade/scale gallery + stacked (tablet/mobile) mode
+   Add AFTER layout.css. Existing .ind-layout / .ind-media rules stay.
+   ===================================================================== */
+
+/* sticky image: vertically centred in the viewport while the list scrolls */
+.homepage.homepage .ind-layout > .ind-media{
+  top:max(24px, calc(50vh - 300px));
+  height:min(600px, calc(100vh - 48px));
+  isolation:isolate;
+}
+.homepage.homepage .ind-media .rectangle-20{
+  backface-visibility:hidden;
+  transform-origin:50% 50%;
+}
+
+/* active row (supplements the existing .is-active rules) */
+.homepage.homepage .frame-42 .group-119{outline:none}
+.homepage.homepage .frame-42 .group-119:focus-visible{outline:2px solid #00baf5;outline-offset:6px;border-radius:6px}
+
+/* mobile inline images: hidden on desktop */
+.homepage.homepage .ind-inline{display:none}
+
+/* ---------- tablet / mobile: no sticky, image under each row ---------- */
+@media(max-width:900px){
+  .homepage.homepage .ind-layout > .ind-media{display:none}
+  .homepage.homepage .frame-42{gap:20px}
+  .homepage.homepage .frame-42 .group-119{opacity:1!important}
+  .homepage.homepage .frame-42 .group-119:not(.is-active){opacity:.6!important}
+  .homepage.homepage .ind-inline{
+    display:block;overflow:hidden;border-radius:12px;
+    max-height:0;opacity:0;margin:0;
+    transition:max-height .6s cubic-bezier(.22,1,.36,1),opacity .4s ease,margin .4s ease}
+  .homepage.homepage .ind-inline.is-open{max-height:420px;opacity:1;margin:4px 0 8px}
+  .homepage.homepage .ind-inline img{
+    display:block;width:100%;height:clamp(220px,52vw,380px);object-fit:cover;
+    transform:scale(1.06);transition:transform .9s cubic-bezier(.22,1,.36,1)}
+  .homepage.homepage .ind-inline.is-open img{transform:scale(1)}
+}
+@media(prefers-reduced-motion:reduce){
+  .homepage.homepage .ind-inline,.homepage.homepage .ind-inline img{transition:none}
+}
+
+/* Performance: isolate decorative glows on their own GPU layer (visuals unchanged). */
+.homepage .ellipse-2,
+.homepage .ellipse-3,
+.homepage .ellipse-4,
+.homepage .ellipse-5,
+.homepage .ellipse-7,
+.homepage .ellipse-8,
+.homepage .ellipse-9,
+.homepage .group-101,
+.homepage .group-102,
+.homepage .group-190{
+  transform:translateZ(0);
+  backface-visibility:hidden;
+  pointer-events:none
+}
+
+/* Off-screen decorative layers: skip paint without collapsing layout */
+.homepage .wc-offpaint{
+  visibility:hidden!important
+}
+
+.homepage .cs-card,
+.homepage .cs-card__media .rectangle-7{
+  backface-visibility:hidden;
+  transform:translateZ(0)
 }
