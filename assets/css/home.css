@@ -4238,21 +4238,27 @@ body {
   line-height: normal;
 }
 
+/* ==========================================================================
+   TESTIMONIALS SECTION — group-153
+   ========================================================================== */
+
 .homepage .group-153 {
   position: absolute;
   top: 11086px;
-  left: 80px;
-  width: 1280px;
-  height: 775px;
+  left: 0;
+  width: 100%;
+  padding: 0 80px;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 40px;
 }
 
+/* ── Header ── */
 .homepage .group-154 {
-  width: 1286px;
-  height: 87px;
   position: relative;
+  width: 100%;
+  min-height: 87px;
 }
 
 .homepage .testimonials {
@@ -4270,7 +4276,7 @@ body {
 .homepage .see-how-we-ve-made {
   position: absolute;
   top: 34px;
-  left: calc(50% - 643px);
+  left: 0;
   font-family: "Google Sans Flex", Helvetica;
   font-weight: 400;
   color: transparent;
@@ -4282,9 +4288,9 @@ body {
 
 .homepage .text-wrapper-102 {
   position: absolute;
-  top: 39px;
-  left: calc(50% + 106px);
-  width: 531px;
+  top: 34px;
+  right: 0;
+  width: 420px;
   font-family: "DM Sans", Helvetica;
   font-weight: 400;
   color: #646464;
@@ -4293,382 +4299,425 @@ body {
   line-height: 24px;
 }
 
+/* ── 3-column row ── */
 .homepage .group-155 {
-  width: 1279px;
   display: flex;
+  gap: 20px;
+  align-items: stretch;
+  width: 100%;
 }
-
+/* ── COL 1: Dark stats card ── */
 .homepage .group-156 {
-  width: 381px;
-  height: 534px;
+  flex: 0 0 300px;
+  width: 300px;
+  min-height: 520px;
   position: relative;
+  border-radius: 18px;
+  overflow: hidden;
 }
 
 .homepage .frame-48 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 377px;
-  height: 534px;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
 }
 
 .homepage .text-wrapper-103 {
   position: absolute;
-  top: 30px;
-  left: calc(50% - 166px);
+  top: 28px;
+  left: 24px;
   font-family: "DM Sans", Helvetica;
   font-weight: 400;
   color: #ffffffcc;
-  font-size: 16px;
-  text-align: center;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: normal;
 }
 
 .homepage .group-157 {
   position: absolute;
-  top: 76px;
+  top: 68px;
   left: 24px;
-  width: 91px;
-  height: 63px;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
 }
 
 .homepage .text-wrapper-104 {
-  position: absolute;
-  top: 0;
-  left: calc(50% - 46px);
   font-family: "Google Sans Flex", Helvetica;
-  font-weight: 500;
+  font-weight: 600;
   color: #ffffff;
-  font-size: 50px;
+  font-size: 52px;
   letter-spacing: 0;
-  line-height: normal;
+  line-height: 1;
 }
 
 .homepage .text-wrapper-105 {
-  position: absolute;
-  top: 30px;
-  left: calc(50% + 22px);
   font-family: "Google Sans Flex", Helvetica;
   font-weight: 500;
   color: #ffffff;
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: 0;
-  line-height: normal;
+  line-height: 1;
 }
 
 .homepage .group-158 {
   position: absolute;
-  top: 30px;
-  left: 258px;
-  width: 92px;
-  height: 92px;
+  top: 24px;
+  right: 24px;
+  width: 80px;
+  height: 80px;
 }
 
 .homepage .trusted-by-founders {
   position: absolute;
-  top: 173px;
-  left: calc(50% - 166px);
-  width: 319px;
-  line-height: 24px;
+  top: 168px;
+  left: 24px;
+  right: 24px;
   font-family: "DM Sans", Helvetica;
   font-weight: 400;
   color: #ffffffcc;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 0;
+  line-height: 24px;
 }
 
 .homepage .group-159 {
   position: absolute;
-  top: 385px;
+  bottom: 28px;
   left: 24px;
-  width: 172px;
-  height: 109px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .homepage .group-160 {
-  height: 50px;
+  height: 44px;
   position: relative;
+  width: 160px;
 }
 
 .homepage .ellipse-10 {
   position: absolute;
   top: 0;
   left: 0;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .homepage .ellipse-11 {
   position: absolute;
   top: 0;
-  left: 38px;
-  width: 50px;
-  height: 50px;
-  border: 2px solid;
-  border-color: #ffffff;
+  left: 32px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
   object-fit: cover;
 }
 
 .homepage .ellipse-12 {
   position: absolute;
   top: 0;
-  left: 78px;
-  width: 50px;
-  height: 50px;
-  border: 2px solid;
-  border-color: #ffffff;
+  left: 64px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
   object-fit: cover;
 }
 
 .homepage .ellipse-13 {
   position: absolute;
   top: 0;
-  left: 122px;
-  width: 50px;
-  height: 50px;
-  border: 2px solid;
-  border-color: #ffffff;
+  left: 96px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
   object-fit: cover;
 }
 
 .homepage .group-161 {
-  width: 164px;
-  height: 43px;
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
 
 .homepage .text-wrapper-106 {
-  margin-left: -2px;
-  height: 21px;
-  width: 162px;
-  align-self: center;
-  line-height: normal;
   font-family: "DM Sans", Helvetica;
   font-weight: 400;
   color: #ffffffcc;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 0;
+  line-height: normal;
 }
 
 .homepage .frame-49 {
-  width: 104px;
-  height: 16px;
-  position: relative;
+  width: 96px;
+  height: 14px;
 }
 
+/* ── COL 2: Matt Lobel quote card ── */
 .homepage .group-162 {
-  width: 427px;
-  height: 534px;
+  flex: 1;
+  min-width: 0;
   position: relative;
-  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  /* equal height with col 3 */
+  align-self: stretch;
 }
 
 .homepage .rectangle-26 {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 427px;
-  height: 412px;
-  background-color: #2525250a;
+  inset: 0 0 110px 0;
+  background-color: #ebebeb;
   border-radius: 15px;
 }
 
 .homepage .group-163 {
-  position: absolute;
-  top: 30px;
-  left: 24px;
-  width: 365px;
-  height: 352px;
+  position: relative;
+  padding: 28px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  flex: 1;            /* grows to fill available height */
+  min-height: 0;
 }
 
 .homepage .frame-50 {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
 }
 
 .homepage .deep-sleep-has {
-  margin-left: -2px;
-  height: 288px;
-  width: 363px;
-  align-self: center;
   font-family: "DM Sans", Helvetica;
   font-weight: 500;
   color: #252525;
-  font-size: 24px;
+  font-size: 20px;
   letter-spacing: 0;
-  line-height: 32px;
+  line-height: 30px;
 }
 
 .homepage .group-164 {
-  position: absolute;
-  top: 428px;
-  left: 0;
-  width: 427px;
-  height: 106px;
+  position: relative;
+  width: 100%;
+  min-height: 100px;
   display: flex;
-  background-color: #2525250a;
+  background-color: #ebebeb;
   border-radius: 15px;
+  padding: 16px 20px;
+  box-sizing: border-box;
 }
 
 .homepage .group-165 {
-  margin-top: 18px;
-  width: 292px;
-  margin-left: 19px;
   display: flex;
-  gap: 16px;
+  align-items: center;
+  gap: 14px;
 }
 
 .homepage .ellipse-14 {
-  width: 70px;
-  height: 70px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
 }
 
 .homepage .group-166 {
-  margin-top: 8px;
-  width: 210px;
-  height: 54px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 2px;
+  gap: 4px;
 }
 
 .homepage .text-wrapper-107 {
-  margin-left: -84px;
-  width: 126px;
-  height: 31px;
   font-family: "DM Sans", Helvetica;
   font-weight: 700;
   color: #252525;
-  font-size: 24px;
+  font-size: 20px;
   letter-spacing: 0;
   line-height: normal;
 }
 
 .homepage .founder-CEO-deep {
-  margin-left: -4px;
-  height: 21px;
-  width: 206px;
   font-family: "DM Sans", Helvetica;
   font-weight: 400;
   color: #646464;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: normal;
 }
 
+/* ── COL 3: Steve Perrin card ── */
 .homepage .group-167 {
-  width: 427px;
-  height: 534px;
-  margin-left: 24px;
+  flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  align-self: stretch;  /* equal height with col 2 */
 }
 
+/* Reviewer info — top card */
 .homepage .group-168 {
-  width: 427px;
-  height: 106px;
-  display: flex;
-  background-color: #2525250a;
+  width: 100%;
+  background-color: #ebebeb;
   border-radius: 15px;
+  padding: 16px 20px;
+  box-sizing: border-box;
+  flex-shrink: 0;       /* fixed height — doesn't grow */
 }
 
 .homepage .group-169 {
-  margin-top: 18px;
-  width: 275px;
-  margin-left: 19px;
   display: flex;
-  gap: 16px;
+  align-items: center;
+  gap: 14px;
 }
 
 .homepage .ellipse-15 {
-  border: 2px solid;
-  border-color: #ffffff;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   object-fit: cover;
-  width: 70px;
-  height: 70px;
+  flex-shrink: 0;
+  border: 2px solid #e0e0e0;
 }
 
 .homepage .group-170 {
-  margin-top: 8px;
-  width: 193px;
-  height: 54px;
-  gap: 2px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 4px;
 }
 
 .homepage .text-wrapper-108 {
-  margin-left: -51px;
-  width: 142px;
-  height: 31px;
   font-family: "DM Sans", Helvetica;
   font-weight: 700;
   color: #252525;
-  font-size: 24px;
+  font-size: 20px;
   letter-spacing: 0;
   line-height: normal;
 }
 
 .homepage .founder-CEO-epic {
-  margin-left: -4px;
-  height: 21px;
-  width: 189px;
   font-family: "DM Sans", Helvetica;
   font-weight: 400;
   color: #646464;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 0;
   line-height: normal;
 }
 
+/* Quote body card — fills remaining height to match col 2 */
 .homepage .group-171 {
-  width: 427px;
-  height: 412px;
-  display: flex;
-  background-color: #2525250a;
+  flex: 1;                /* takes all leftover height in col 3 */
+  background-color: #ebebeb;
   border-radius: 15px;
+  padding: 28px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .homepage .group-172 {
-  margin-top: 30px;
-  width: 372px;
-  height: 320px;
-  margin-left: 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
+  height: 100%;
 }
 
 .homepage .with-over-two-years {
-  margin-left: -2px;
-  height: 256px;
-  width: 370px;
-  align-self: center;
   font-family: "DM Sans", Helvetica;
   font-weight: 400;
-  color: transparent;
-  font-size: 24px;
+  color: #252525;
+  font-size: 20px;
   letter-spacing: 0;
-  line-height: 32px;
+  line-height: 30px;
 }
 
+/* ── Navigation arrows ── */
+.testy-nav {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.testy-nav__btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.testy-nav__prev {
+  background-color: #00baf5 !important;
+  color: #ffffff !important;
+}
+
+.testy-nav__next {
+  background-color: #1a1a1a !important;
+  color: #ffffff !important;
+}
+
+.testy-nav__btn:hover {
+  transform: scale(1.1);
+}
+
+.testy-nav__prev:hover { background-color: #009fd6 !important; }
+.testy-nav__next:hover { background-color: #333333 !important; }
+
+/* ── frame-51 (dots strip) hidden — replaced by nav arrows ── */
 .homepage .frame-51 {
-  height: 54px;
-  width: 124px;
-  align-self: center;
-  position: relative;
+  display: none;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1100px) {
+  .homepage .group-153 {
+    padding: 0 40px;
+  }
+  .homepage .group-155 {
+    flex-wrap: wrap;
+  }
+  .homepage .group-156 {
+    flex: 0 0 100%;
+    width: 100%;
+    min-height: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .homepage .group-153 {
+    padding: 0 20px;
+  }
+  .homepage .group-162,
+  .homepage .group-167 {
+    flex: 0 0 100%;
+  }
+  .homepage .text-wrapper-102 {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: 100%;
+    margin-top: 8px;
+  }
+  .homepage .see-how-we-ve-made {
+    white-space: normal;
+    font-size: 32px;
+  }
 }
 
 .homepage .group-173 {

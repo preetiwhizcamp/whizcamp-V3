@@ -1,0 +1,434 @@
+/* WHIZCAMP — global layout system. Load AFTER responsive.css.
+   One container (.layout-container-lg), one gutter variable. */
+:root{--gutter:120px}
+@media(max-width:1024px){:root{--gutter:32px}}
+@media(max-width:767px){:root{--gutter:20px}}
+
+.layout-container-lg{max-width:100%;margin:0 auto;padding:0 var(--gutter);width:100%;position:relative;z-index:2}
+
+/* ---------- shell: flow layout, no fixed page height ---------- */
+html body .responsive-stage,
+.homepage.homepage{min-height:0!important;height:auto!important;overflow-x:clip!important;overflow-y:visible!important}
+.homepage.homepage{display:block}
+
+/* ---------- ticker ---------- */
+.homepage.homepage .frame-wrapper{overflow:hidden}
+.homepage.homepage .frame{margin:13px 0 0;padding:0 var(--gutter);overflow-x:auto;scrollbar-width:none}
+.homepage.homepage .frame::-webkit-scrollbar{display:none}
+.homepage.homepage .frame .div{white-space:nowrap;width:max-content}
+
+/* ---------- hero (bg is in flow; loose items hang off the gutter) ---------- */
+.homepage.homepage .group{position:relative!important;top:auto!important;height:830px!important}
+.homepage.homepage .AI-powered-digital,
+.homepage.homepage .text-wrapper-6,
+.homepage.homepage .technology-solutions{left:var(--gutter)!important;right:var(--gutter);width:auto;max-width:640px}
+.homepage.homepage .text-wrapper-6{max-width:445px}
+.homepage.homepage .technology-solutions{max-width:none;font-size:clamp(40px,5.6vw,80px)}
+.homepage.homepage .technology-solutions span{line-height:1.05!important}
+.homepage.homepage .group-4{left:auto!important;right:var(--gutter)}
+.homepage.homepage .group-2{left:auto!important;right:calc(var(--gutter) + 278px)}
+.homepage.homepage .group-5{left:auto!important;right:var(--gutter)}
+.homepage.homepage .group-25{left:var(--gutter)!important;width:calc(100% - 2*var(--gutter))!important}
+.homepage.homepage .group-26{width:auto;margin:16px 24px 0}
+.homepage.homepage .frame-10{left:50%!important;transform:translateX(-50%)}
+.homepage.homepage .group-28{left:auto;right:0}
+.homepage.homepage .group-27{left:0}
+@media(max-width:1100px){.homepage.homepage .frame-10{display:none}}
+@media(max-width:767px){
+  .homepage.homepage .group{height:900px!important}
+  .homepage.homepage .AI-powered-digital{top:170px}
+  .homepage.homepage .text-wrapper-6{top:235px}
+  .homepage.homepage .technology-solutions{top:400px}
+  .homepage.homepage .group-2{top:720px;left:var(--gutter)!important;right:auto}
+  .homepage.homepage .group-4{top:790px;left:var(--gutter)!important;right:auto}
+  .homepage.homepage .group-5{top:300px}
+}
+
+/* ---------- brands band ---------- */
+.homepage.homepage .group-wrapper.trusted-brands-section{position:relative!important;top:auto!important;width:100%!important}
+.homepage.homepage .trusted-brands-section .group-7{padding:0 var(--gutter);max-width:none}
+.homepage.homepage .trusted-brands-section .vector-2,.homepage.homepage .trusted-brands-section .vector-3{width:calc(50% - 190px);max-width:333px}
+.homepage.homepage .trusted-brands-section .vector-3{left:var(--gutter)}
+.homepage.homepage .trusted-brands-section .vector-2{left:auto;right:var(--gutter)}
+@media(max-width:900px){.homepage.homepage .trusted-brands-section .vector-2,.homepage.homepage .trusted-brands-section .vector-3{display:none}.homepage.homepage .trusted-by-industry{left:var(--gutter)}}
+
+/* ---------- WHO WE ARE ---------- */
+.homepage.homepage .group-9{position:relative;left:auto!important;top:auto;width:100%!important;height:auto;padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:minmax(0,321px) minmax(0,1fr);gap:32px 70px}
+.homepage.homepage .group-9 > *{position:static!important;margin:0}
+.homepage.homepage .who-we-are{grid-column:1/-1;grid-row:1}
+.homepage.homepage .rectangle-4{grid-column:1;grid-row:2;width:100%;height:auto;max-height:474px;object-fit:cover}
+.homepage.homepage .group-17{grid-column:2;grid-row:2;width:auto;height:auto;gap:32px}
+.homepage.homepage .vector-4{grid-column:1/-1;grid-row:3;width:100%}
+.homepage.homepage .group-11{grid-column:1/-1;grid-row:4;width:100%;height:auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.homepage.homepage .group-11 > div{width:auto;margin:0;height:auto;min-height:240px}
+.homepage.homepage .group-10{grid-column:1/-1;grid-row:5;justify-self:center;width:262px;height:54px;position:relative!important}
+.homepage.homepage .group-12,.homepage.homepage .group-16{width:100%;height:auto;margin:30px;margin-top:30px}
+.homepage.homepage .group-12 > *,.homepage.homepage .group-16 > *{margin-left:0!important;width:auto;align-self:flex-start}
+.homepage.homepage .group-12 .vector-5{width:100%}
+.homepage.homepage .group-18{width:100%;height:auto}
+.homepage.homepage .at-whizcamp-LLC-we{width:100%;height:auto;margin:0;font-size:clamp(20px,2vw,26px);line-height:1.4}
+.homepage.homepage .group-19{display:flex;flex-wrap:wrap;gap:12px;width:100%;height:auto}
+.homepage.homepage .group-19 > *{position:static!important}
+.homepage.homepage .group-17 .vector-6{width:100%}
+.homepage.homepage .group-20{width:100%;display:flex;flex-wrap:wrap;gap:24px 46px}
+.homepage.homepage .group-20 > div{width:auto;height:auto;display:flex;flex-direction:column-reverse}
+.homepage.homepage .group-20 > div > div{position:static!important}
+@media(max-width:900px){
+  .homepage.homepage .group-9{grid-template-columns:minmax(0,1fr)}
+  .homepage.homepage .group-17{grid-column:1;grid-row:3}
+  .homepage.homepage .vector-4{grid-row:4}.homepage.homepage .group-11{grid-row:5}.homepage.homepage .group-10{grid-row:6}
+  .homepage.homepage .rectangle-4{max-height:360px}
+}
+
+/* ---------- case studies (GSAP pin): only align to the gutter ---------- */
+.homepage.homepage .group-34{position:relative!important;top:auto!important;width:100%!important}
+.homepage.homepage .group-35{left:var(--gutter)!important;width:calc(100% - var(--gutter))!important;margin:0!important}
+
+/* ---------- everything after: one grid sharing the gutter columns ---------- */
+.homepage.homepage .after-case-studies{position:relative!important;top:auto!important;left:auto;width:100%;height:auto!important;display:grid;grid-auto-flow:row dense;
+  grid-template-columns:[full-start] var(--gutter) [c-start] minmax(0,1fr) minmax(0,1fr) [c-end] var(--gutter) [full-end]}
+.homepage.homepage .after-case-studies > *{grid-column:1/5;position:relative!important;top:auto!important;left:auto!important;width:auto!important;height:auto!important;margin:0}
+
+/* AI modernization */
+.homepage.homepage .ai-modernization-section{padding:100px 0 80px;min-height:0}
+html body .homepage .ai-modernization-section .ai-modernization__container.layout-container-lg{width:100%!important;max-width:100%;margin:0 auto!important;padding:0 var(--gutter)!important}
+
+/* what we add */
+.homepage.homepage .group-72{display:block;padding:45px 0;background-size:cover}
+.homepage.homepage .group-72 .group-73{width:100%!important;margin:0!important;gap:34px}
+.homepage.homepage .frame-20{width:100%;display:flex}
+.homepage.homepage .frame-20 .vector-8{flex:1;min-width:0;width:auto}
+.homepage.homepage .group-74,.homepage.homepage .group-75,.homepage.homepage .group-76{width:100%;height:auto;margin:0;display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.homepage.homepage .group-75 > *,.homepage.homepage .group-76 > *{position:relative!important;left:auto!important;margin:0!important;width:auto!important;max-width:100%}
+.homepage.homepage .frame-24 .text-wrapper-46{width:auto}
+@media(max-width:900px){.homepage.homepage .frame-20 .vector-8{display:none}.homepage.homepage .frame-20{justify-content:center}}
+
+/* three cards */
+.homepage.homepage .group-77{padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:stretch}
+.homepage.homepage .group-77 > div{position:relative!important;left:auto!important;width:100%!important;height:auto!important;min-height:471px}
+.homepage.homepage .group-77 .group-79,.homepage.homepage .group-77 .group-82{width:auto;height:auto}
+.homepage.homepage .group-77 .group-79 > *,.homepage.homepage .group-77 .group-82 > *{margin-left:0!important;width:auto;height:auto;align-self:flex-start}
+.homepage.homepage .rectangle-14{width:calc(100% - 48px);margin:0 24px 24px;height:251px}
+
+/* shared section-header pattern */
+.homepage.homepage .group-111,.homepage.homepage .group-137,.homepage.homepage .group-154,.homepage.homepage .group-85{width:100%;height:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px 48px;position:relative}
+.homepage.homepage .group-111 > *,.homepage.homepage .group-137 > *,.homepage.homepage .group-154 > *,.homepage.homepage .group-85 > *,.homepage.homepage .group-86 > *{position:static!important;margin:0!important;width:auto;height:auto;left:auto;top:auto}
+.homepage.homepage .group-111 > .our-foundation,.homepage.homepage .group-137 > .text-wrapper-93,.homepage.homepage .group-154 > .testimonials{flex-basis:100%}
+.homepage.homepage .a-trusted-technology,.homepage.homepage .see-how-we-ve-made,.homepage.homepage .insights-ideas,.homepage.homepage .transforming{width:auto;max-width:600px;white-space:normal}
+.homepage.homepage .text-wrapper-68,.homepage.homepage .text-wrapper-102,.homepage.homepage .text-wrapper-94,.homepage.homepage .text-wrapper-50{max-width:485px;flex:1 1 320px}
+.homepage.homepage .group-86{width:auto;height:auto;gap:16px}
+.homepage.homepage .group-138{position:relative!important;width:260px;height:54px;margin-left:auto!important}
+.homepage.homepage .group-138 > *{position:absolute!important}
+
+/* services accordion */
+.homepage.homepage .group-83{height:auto!important;padding:80px 0;overflow:hidden}
+.homepage.homepage .group-83 .frame-32{width:100%!important;height:100%;left:0;padding:0;top:0}
+.homepage.homepage .group-84{position:relative!important;top:auto;left:auto!important;width:100%!important;height:auto;padding-top:0;padding-bottom:0}
+.homepage.homepage .frame-35{width:100%;min-height:0;margin-top:48px}
+
+/* stats band */
+.homepage.homepage .group-99{padding:100px 0;overflow:hidden}
+.homepage.homepage .group-99 .group-100{height:100%!important;top:0!important}
+.homepage.homepage .group-99 .frame-40{height:100%!important}
+.homepage.homepage .group-103{position:relative!important;left:auto!important;top:auto!important;width:100%!important;height:auto;gap:50px}
+.homepage.homepage .at-whizcamp-LLC-we-3{width:100%;max-width:1019px;height:auto;margin:0;font-size:clamp(20px,2vw,26px)}
+.homepage.homepage .frame-41{width:100%;height:auto;margin:0;flex-wrap:wrap;justify-content:space-between;gap:24px 32px}
+.homepage.homepage .frame-41 > div{width:auto;height:68px;margin:0}
+.homepage.homepage .frame-41 > div > div{position:static!important;display:block}
+.homepage.homepage .frame-41 > div{display:flex;flex-direction:column-reverse}
+.homepage.homepage .group-109{margin:0}
+
+/* foundation */
+.homepage.homepage .group-110{padding-top:100px;padding-bottom:100px;gap:60px;display:flex;flex-direction:column}
+.homepage.homepage .group-112{width:100%;margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:21px}
+.homepage.homepage .group-113,.homepage.homepage .group-115{width:auto;height:224px}
+.homepage.homepage .group-114{width:100%;margin:24px 16px 0}
+.homepage.homepage .group-114 > *{margin-left:0!important;width:auto!important;height:auto!important;align-self:flex-start}
+.homepage.homepage .group-114 > .vector-11{width:100%!important;height:1px!important}
+.homepage.homepage .group-114 > .group-13{width:54px!important;height:54px!important}
+.homepage.homepage .group-116{margin:0 auto;width:269px;align-self:center}
+
+/* industries (loose items placed on the shared grid) */
+.homepage.homepage .vector-12,.homepage.homepage .vector-13{grid-column:2/4;width:100%!important;height:1px!important}
+.homepage.homepage .vector-13{order:1;margin:80px 0 0}
+.homepage.homepage .industries-we-serve{grid-column:2/4;margin-top:100px}
+.homepage.homepage .supporting-all{grid-column:2/3;margin-top:16px;font-size:clamp(30px,3vw,40px)}
+.homepage.homepage .from-healthcare-to{grid-column:3/4;margin-top:16px;padding-left:40px}
+.homepage.homepage .rectangle-20{grid-column:3/4;grid-row:span 2;width:100%!important;max-width:520px;height:600px!important;margin:50px 0 0 40px;justify-self:end;object-fit:cover}
+.homepage.homepage .frame-42{grid-column:2/3;width:100%!important;margin-top:50px;gap:34px}
+.homepage.homepage .frame-42 .group-119,.homepage.homepage .frame-42 .vector-14{width:100%}
+.homepage.homepage .frame-42 .group-119 > div{width:auto}
+.homepage.homepage .frame-42 .group-119 > div > div{position:static!important}
+.homepage.homepage .frame-42 .group-119 > div{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:24px}
+.homepage.homepage .frame-42 .frame-43{left:auto;right:0}
+.homepage.homepage .group-132{grid-column:2/4;width:234px!important;height:54px!important;margin:50px 0 100px 0}
+@media(max-width:900px){
+  .homepage.homepage .after-case-studies{grid-template-columns:var(--gutter) minmax(0,1fr) var(--gutter)}
+  .homepage.homepage .vector-12,.homepage.homepage .vector-13,.homepage.homepage .industries-we-serve,.homepage.homepage .supporting-all,.homepage.homepage .from-healthcare-to,.homepage.homepage .rectangle-20,.homepage.homepage .frame-42,.homepage.homepage .group-132{grid-column:2/3}
+  .homepage.homepage .from-healthcare-to{padding-left:0}
+  .homepage.homepage .rectangle-20{grid-row:auto;margin:40px 0 0;max-width:none;height:360px!important;justify-self:stretch}
+  .homepage.homepage .frame-42{order:0}
+  .homepage.homepage .from-healthcare-to br{display:none}
+}
+
+/* blogs */
+.homepage.homepage .group-135{padding:80px 0;overflow:hidden}
+.homepage.homepage .group-135 .frame-44{height:100%!important}
+.homepage.homepage .group-136{position:relative!important;top:auto!important;left:auto!important;width:100%!important;height:auto;gap:60px}
+.homepage.homepage .group-141{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.homepage.homepage .group-142,.homepage.homepage .group-145{width:100%;height:497px}
+.homepage.homepage .rectangle-23{width:calc(100% - 32px)}
+.homepage.homepage .group-146{width:100%;height:100%;object-fit:cover}
+
+/* CTA banner */
+.homepage.homepage .group-148{overflow:hidden;min-height:361px}
+.homepage.homepage .group-148 .group-149{height:100%!important}
+.homepage.homepage .group-148 .group-150{position:relative!important;top:auto!important;left:auto!important;width:100%!important;height:auto;padding-top:100px;padding-bottom:100px}
+.homepage.homepage .group-151{height:auto;text-align:center}
+.homepage.homepage .inspired-to-advance{width:auto;height:auto;margin:0;white-space:normal;font-size:clamp(22px,2.4vw,26px)}
+.homepage.homepage .text-wrapper-100{width:auto;height:auto;margin:0;max-width:604px}
+
+/* testimonials */
+.homepage.homepage .group-153{padding-top:100px;padding-bottom:100px;gap:50px;display:flex;flex-direction:column}
+.homepage.homepage .group-155{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:start}
+.homepage.homepage .group-156,.homepage.homepage .group-162,.homepage.homepage .group-167{width:100%;margin:0}
+.homepage.homepage .frame-48{width:100%}
+.homepage.homepage .frame-51{display:none}
+.homepage.homepage .group-163,.homepage.homepage .group-172{width:calc(100% - 48px);height:auto}
+.homepage.homepage .deep-sleep-has,.homepage.homepage .with-over-two-years{width:auto;height:auto;margin:0;font-size:clamp(18px,1.7vw,24px)}
+
+/* FAQ */
+.homepage.homepage .group-173{padding-top:100px;padding-bottom:100px;display:flex;flex-direction:column}
+.homepage.homepage .group-174{width:100%;height:auto;margin:0;align-items:center;text-align:center}
+.homepage.homepage .group-174 > *{margin-left:0!important;width:auto;height:auto}
+.homepage.homepage .frequently-asked{white-space:normal;font-size:clamp(30px,3vw,40px)}
+.homepage.homepage .frame-52{width:100%;height:auto;flex-wrap:wrap;justify-content:center}
+.homepage.homepage .group-175,.homepage.homepage .group-179{width:100%;height:auto}
+.homepage.homepage .group-176,.homepage.homepage .group-180{width:100%;height:auto;min-height:82px}
+.homepage.homepage .rectangle-27,.homepage.homepage .rectangle-28{width:100%;height:100%;top:0;left:0}
+.homepage.homepage .group-177,.homepage.homepage .group-181{position:relative;top:auto;left:auto;width:100%;height:auto;padding:24px 30px}
+.homepage.homepage .group-178,.homepage.homepage .group-182,.homepage.homepage .group-183,.homepage.homepage .group-184{width:100%;gap:24px;justify-content:space-between}
+.homepage.homepage [class^="element-"]{width:auto;height:auto;flex:1}
+.homepage.homepage .text-wrapper-114{width:auto;height:auto;margin-left:0;padding-right:58px}
+.homepage.homepage .group-185{margin:50px auto 0}
+
+/* contact */
+.homepage.homepage .group-188{overflow:hidden;padding:100px 0}
+.homepage.homepage .group-188 .group-189,.homepage.homepage .group-188 .frame-55{height:100%!important}
+.homepage.homepage .group-188 .group-191{position:relative!important;top:auto!important;left:auto!important;width:100%!important;height:auto;display:flex;flex-wrap:wrap;gap:60px 80px;align-items:flex-start}
+.homepage.homepage .group-192{flex:1 1 520px;max-width:593px;width:100%;overflow-x:auto}
+.homepage.homepage .group-193{width:550px;max-width:none}
+.homepage.homepage .group-209{flex:1 1 360px;width:auto;margin-top:0;height:auto}
+.homepage.homepage .frame-64,.homepage.homepage .group-210{width:100%;height:auto;margin:0}
+.homepage.homepage .group-210 > *{position:static!important;margin:0 0 24px!important}
+.homepage.homepage .vector-16{width:100%}
+.homepage.homepage .group-216{margin:0!important;align-self:flex-start}
+.homepage.homepage .group-213{width:100%;height:auto;display:flex;flex-wrap:wrap;gap:24px 48px}
+.homepage.homepage .group-213 > div{position:static!important;width:auto}
+
+/* footer */
+.homepage.homepage .group-217{overflow:hidden;padding-top:396px;padding-bottom:40px}
+.homepage.homepage .group-217 .frame-65{height:100%!important}
+.homepage.homepage .group-217 .whizcamp{left:var(--gutter)!important;font-size:clamp(64px,13.9vw,200px)}
+.homepage.homepage .group-217 .we-custom-develop{left:var(--gutter)!important;font-size:clamp(26px,2.8vw,40px)}
+.homepage.homepage .group-217 .vector-17{left:var(--gutter)!important;width:calc(100% - 2*var(--gutter))!important}
+.homepage.homepage .group-217 .group-218{position:relative!important;top:auto!important;left:auto!important;width:100%!important;height:auto;display:flex;flex-direction:column;gap:48px;padding-top:0}
+.homepage.homepage .group-218 .vector-18{display:none}
+.homepage.homepage .group-218 > .group-219,.homepage.homepage .group-218 > .group-223,.homepage.homepage .group-218 > .group-230{position:relative!important;top:auto!important;left:auto!important;width:100%!important}
+.homepage.homepage .group-223{height:auto;flex-wrap:wrap;gap:40px 48px}
+.homepage.homepage .group-223 > *{width:auto;height:auto;margin:0}
+.homepage.homepage .group-219{flex-direction:row;flex-wrap:wrap;align-items:center;gap:24px 48px;height:auto}
+.homepage.homepage .group-220{flex:none}
+.homepage.homepage .text-wrapper-134{margin:0;width:auto;max-width:381px;height:auto}
+.homepage.homepage .group-230{height:auto;flex-wrap:wrap;justify-content:space-between;gap:16px 48px;padding-top:24px;border-top:1px solid #ffffff1f}
+.homepage.homepage .group-230 .text-wrapper-141{width:auto;height:auto}
+@media(max-width:1100px){.homepage.homepage .group-217 .frame-75,.homepage.homepage .group-217 .frame-76,.homepage.homepage .group-217 .frame-77,.homepage.homepage .group-217 .frame-78,.homepage.homepage .group-217 .frame-79,.homepage.homepage .group-217 .frame-80,.homepage.homepage .group-217 .frame-81{display:none}}
+
+/* order: divider before FAQ must follow testimonials */
+.homepage.homepage .group-173{order:2}.homepage.homepage .group-188{order:3}.homepage.homepage .group-217{order:4}
+
+/* =====================================================================
+   FIXES v2 — gutter applied directly (no HTML class required) + bug fixes
+   ===================================================================== */
+.homepage.homepage :is(.group-9,.group-73,.group-77,.group-84,.group-103,.group-110,.group-136,.group-150,.group-153,.group-173,.group-191,.group-218,.ai-modernization__container){
+  max-width:100%;margin-left:auto;margin-right:auto;padding-left:var(--gutter);padding-right:var(--gutter);width:100%;position:relative;z-index:2;box-sizing:border-box}
+
+/* nav bar: let the inner row fill the glass bar */
+.homepage.homepage .group-25{display:flex}
+.homepage.homepage .group-26{flex:1 1 auto;position:relative;width:auto;min-width:0}
+
+/* services accordion: use full container width */
+.homepage.homepage .frame-35,.homepage.homepage .services-accordion{max-width:none!important;width:100%!important}
+
+/* blog cards: let titles breathe, no clipping */
+.homepage.homepage .group-141{align-items:stretch}
+.homepage.homepage .group-142{height:auto;min-height:497px;gap:48px;padding-bottom:24px}
+.homepage.homepage .group-145{height:auto;min-height:497px}
+.homepage.homepage .group-143,.homepage.homepage .group-144{width:auto;margin-right:20px;height:auto}
+.homepage.homepage .why-cybersecurity,.homepage.homepage .why-choosing-the{width:auto;height:auto;margin-left:0}
+
+/* testimonials: dark card keeps its 381px design, others fill their column */
+.homepage.homepage .group-155{grid-template-columns:381px minmax(0,1fr) minmax(0,1fr);gap:24px}
+.homepage.homepage .group-156{max-width:381px}
+.homepage.homepage .rectangle-26,.homepage.homepage .group-164,.homepage.homepage .group-168,.homepage.homepage .group-171{width:100%}
+.homepage.homepage .group-162,.homepage.homepage .group-167{max-width:none}
+@media(max-width:1100px){.homepage.homepage .group-155{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.homepage.homepage .group-156{max-width:none;width:100%;max-width:381px}}
+
+/* footer: remove the Figma negative offsets so bullets are not cut off */
+.homepage.homepage .group-224,.homepage.homepage .group-225,.homepage.homepage .frame-72{margin-left:0}
+.homepage.homepage .group-224 > *,.homepage.homepage .group-225 > *{margin-left:0!important;width:auto;align-self:flex-start}
+.homepage.homepage .group-217 :is(.frame-68,.frame-69,.frame-70,.frame-71,.frame-72,.frame-73,.frame-74){left:auto!important;right:auto!important}
+.homepage.homepage .group-218 .frame-73{width:100%}
+.homepage.homepage .group-226,.homepage.homepage .group-228,.homepage.homepage .group-229{margin-right:0}
+/* footer pills: anchored to the right gutter, same arrangement as the design */
+.homepage.homepage .group-217 .frame-75{left:calc(100% - var(--gutter) - 1280px + 1059px)!important}
+.homepage.homepage .group-217 .frame-76{left:calc(100% - var(--gutter) - 1280px + 956px)!important}
+.homepage.homepage .group-217 .frame-77{left:calc(100% - var(--gutter) - 1280px + 1075px)!important}
+.homepage.homepage .group-217 .frame-78{left:calc(100% - var(--gutter) - 1280px + 803px)!important}
+.homepage.homepage .group-217 .frame-79{left:calc(100% - var(--gutter) - 1280px + 829px)!important}
+.homepage.homepage .group-217 .frame-80{left:calc(100% - var(--gutter) - 1280px + 681px)!important}
+.homepage.homepage .group-217 .frame-81{left:calc(100% - var(--gutter) - 1280px + 775px)!important}
+
+/* contact: keep the right column clear of the form */
+.homepage.homepage .group-188 .group-191{align-items:flex-start}
+
+/* =====================================================================
+   FIXES v3 — contact + footer, matched to the reference screenshots
+   ===================================================================== */
+
+/* ---------- CONTACT ---------- */
+.homepage.homepage .group-188 .group-191{display:grid;grid-template-columns:minmax(0,593px) minmax(0,527px);justify-content:space-between;align-items:center;gap:60px}
+.homepage.homepage .group-192{width:100%;max-width:593px;flex:none}
+.homepage.homepage .group-209{display:flex;flex-direction:column;gap:34px;width:100%;max-width:527px;justify-self:end;margin:0;height:auto}
+.homepage.homepage .group-209 .frame-64{display:flex;flex-direction:column;gap:24px;width:100%;height:auto;margin:0}
+.homepage.homepage .group-209 .group-210{position:relative;width:100%;height:auto;margin:0}
+.homepage.homepage .group-209 .group-210 > *{position:static!important;display:block;margin:0 0 16px!important;width:auto;height:auto}
+.homepage.homepage .let-s-dive-into-your{text-transform:capitalize;font-size:clamp(32px,2.8vw,40px)}
+/* dividers: plain CSS lines instead of the letter-boxed svg */
+.homepage.homepage .vector-16,
+.homepage.homepage .group-217 .vector-17{display:block;height:0!important;border-top:1px solid rgba(255,255,255,.14);object-fit:fill;margin:0;padding:0}
+.homepage.homepage .vector-16{width:100%!important}
+/* photo + name row: round photo, name beside it */
+.homepage.homepage .group-211{display:flex;align-items:center;gap:24px;width:100%;height:auto;position:relative}
+.homepage.homepage .group-211 .ellipse-16{position:static!important;flex:none;width:150px;height:150px;border-radius:50%;object-fit:cover}
+.homepage.homepage .group-212{position:static!important;width:auto;height:auto;margin:0;align-items:flex-start;gap:4px}
+.homepage.homepage .group-212 > *{margin-left:0!important;width:auto;height:auto}
+/* email / phone */
+.homepage.homepage .group-213{display:flex;flex-wrap:wrap;gap:24px 56px;width:100%;height:auto}
+.homepage.homepage .group-213 > div{position:static!important;width:auto;height:auto;align-items:flex-start;margin:0}
+.homepage.homepage .group-213 > div > *{margin-left:0!important;width:auto;height:auto}
+.homepage.homepage .group-209 .group-216{margin:0!important;align-self:flex-start;width:234px;height:54px}
+@media(max-width:1000px){
+  .homepage.homepage .group-188 .group-191{grid-template-columns:minmax(0,1fr);gap:48px}
+  .homepage.homepage .group-209{justify-self:stretch;max-width:none}
+}
+
+/* ---------- FOOTER ---------- */
+.homepage.homepage .group-217 .whizcamp{font-size:clamp(64px,calc((100vw - 2*var(--gutter))/5.9),380px);letter-spacing:.1em}
+.homepage.homepage .we-custom-develop{text-transform:capitalize}
+/* brand column + three link columns on one grid */
+.homepage.homepage .group-217 .group-218{display:grid;grid-template-columns:1.9fr 1fr 1fr 1fr;gap:48px 24px;align-items:start}
+.homepage.homepage .group-218 > .group-219{grid-column:1;flex-direction:column;align-items:flex-start;gap:24px;width:100%!important}
+.homepage.homepage .group-218 > .group-223{display:contents}
+.homepage.homepage .group-218 .group-224{grid-column:2}
+.homepage.homepage .group-218 .group-225{grid-column:3}
+.homepage.homepage .group-218 .frame-72{grid-column:4}
+.homepage.homepage .group-218 .group-224,.homepage.homepage .group-218 .group-225,.homepage.homepage .group-218 .frame-72{width:100%;height:auto;margin:0}
+.homepage.homepage .group-218 .text-wrapper-134{max-width:381px;width:auto}
+.homepage.homepage .group-218 > .group-230{grid-column:1/-1;margin-top:8px}
+@media(max-width:900px){
+  .homepage.homepage .group-217 .group-218{grid-template-columns:1fr 1fr}
+  .homepage.homepage .group-218 > .group-219{grid-column:1/-1}
+  .homepage.homepage .group-218 .group-224{grid-column:1}.homepage.homepage .group-218 .group-225{grid-column:2}
+  .homepage.homepage .group-218 .frame-72{grid-column:1/-1}
+}
+@media(max-width:560px){
+  .homepage.homepage .group-217 .group-218{grid-template-columns:1fr}
+  .homepage.homepage .group-218 .group-224,.homepage.homepage .group-218 .group-225,.homepage.homepage .group-218 .frame-72{grid-column:1}
+}
+
+/* ---------- CONTACT v4: bring the two columns together, centred ---------- */
+.homepage.homepage .group-188 .group-191{justify-content:center;column-gap:clamp(48px,8vw,160px);row-gap:48px}
+.homepage.homepage .group-209{justify-self:start}
+@media(max-width:1000px){.homepage.homepage .group-188 .group-191{justify-content:stretch}}
+
+/* ---------- WHO WE ARE button: cancel the old top:898px / left offsets ---------- */
+.homepage.homepage .group-9 > .group-10{position:relative!important;top:auto!important;left:auto!important;grid-column:1/-1;justify-self:center;width:262px;height:54px;margin:16px 0 0}
+
+/* =====================================================================
+   MARQUEES (GSAP) — announcement ticker + brand logo strip
+   ===================================================================== */
+/* ticker: viewport clips, track slides */
+.homepage.homepage .frame-wrapper{overflow:hidden}
+.homepage.homepage .frame{padding:0!important;overflow:hidden!important;margin:13px 0 0!important;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 3%,#000 97%,transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0,#000 3%,#000 97%,transparent 100%)}
+.homepage.homepage .frame .div{width:max-content!important;max-width:none;flex:none;gap:16px;will-change:transform;backface-visibility:hidden}
+.homepage.homepage .frame .div > *{flex:none}
+.homepage.homepage .frame .div p{white-space:nowrap}
+
+/* brand strip: plain flex track (Slick is removed by marquee.js) */
+.homepage.homepage .brands-slider-wrap{overflow:hidden}
+.homepage.homepage .brands-slider{display:flex!important;align-items:center;width:max-content;max-width:none;will-change:transform;backface-visibility:hidden}
+.homepage.homepage .brands-slider .brand-slide{flex:none;width:auto!important;float:none}
+
+/* =====================================================================
+   CASE STUDIES — "View Case Study" circle follows the cursor (GSAP)
+   Only for devices with a real hover pointer; touch keeps old behaviour.
+   ===================================================================== */
+@media (hover:hover){
+  .homepage.homepage .cs-card .cs-card__media{cursor:none}
+  .homepage.homepage .cs-card .cs-card__media .group-42{
+    top:0;left:0;                 /* JS positions it with transforms */
+    transition:none!important;    /* CSS transitions would fight GSAP */
+    will-change:transform,opacity;
+    pointer-events:none}
+}
+
+/* =====================================================================
+   INDUSTRIES — list scrolls, image is sticky and changes (industries-scroll.js)
+   ===================================================================== */
+/* more room between rows so the image has distance to stay pinned over */
+.homepage.homepage .frame-42{gap:52px}
+.homepage.homepage .frame-42 .group-119{cursor:pointer;transition:opacity .45s ease}
+.homepage.homepage .frame-42 .group-119:not(.is-active){opacity:.45}
+.homepage.homepage .frame-42 .group-119.is-active [class^="text-wrapper-"]{font-weight:600!important}
+
+/* the sticky picture (wrapper is created by the script) */
+.homepage.homepage .after-case-studies > .ind-media{
+  position:sticky!important;top:110px!important;align-self:start;
+  grid-column:3/4;grid-row:span 2;justify-self:end;
+  width:100%!important;max-width:520px;height:600px!important;margin:50px 0 0 40px;
+  border-radius:12px;overflow:hidden;background:#e9e9e9}
+.homepage.homepage .ind-media .rectangle-20{
+  position:absolute!important;left:0!important;top:0!important;
+  width:100%!important;height:100%!important;max-width:none;margin:0!important;
+  border-radius:0;object-fit:cover;will-change:transform,opacity}
+@media(max-width:900px){
+  .homepage.homepage .after-case-studies > .ind-media{
+    position:relative!important;top:auto!important;grid-column:2/3;grid-row:auto;
+    justify-self:stretch;max-width:none;height:360px!important;margin:40px 0 0}
+}
+
+/* =====================================================================
+   INDUSTRIES v2 — list + sticky image live in one wrapper (.ind-layout)
+   so the image is pinned only while the list is on screen.
+   ===================================================================== */
+.homepage.homepage .after-case-studies > .ind-layout{
+  grid-column:2/4;margin:50px 0 0;width:auto!important;height:auto!important;
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:40px;align-items:start;position:relative!important}
+.homepage.homepage .ind-layout > .frame-42{
+  position:relative!important;top:auto!important;left:auto!important;
+  width:100%!important;margin:0!important;grid-column:1;gap:52px}
+.homepage.homepage .ind-layout > .ind-media{
+  position:sticky;top:110px;align-self:start;justify-self:end;grid-column:2;
+  width:100%;max-width:520px;height:600px;margin:0;
+  border-radius:12px;overflow:hidden;background:#e9e9e9}
+/* tidy list rows: aligned numbers/titles, plain CSS dividers */
+.homepage.homepage .frame-42 .vector-14{display:block;width:100%!important;height:0!important;border-top:1px solid rgba(37,37,37,.12);object-fit:fill}
+.homepage.homepage .frame-42 .group-119 > div > div:last-child{min-width:56px}
+@media(max-width:900px){
+  .homepage.homepage .after-case-studies > .ind-layout{grid-column:2/3;grid-template-columns:minmax(0,1fr)}
+  .homepage.homepage .ind-layout > .frame-42,.homepage.homepage .ind-layout > .ind-media{grid-column:1}
+  .homepage.homepage .ind-layout > .ind-media{position:relative;top:auto;justify-self:stretch;max-width:none;height:360px;margin-top:40px}
+}

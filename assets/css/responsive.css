@@ -378,11 +378,13 @@ body {
 }
 
 /* --------------------------------------------------------------------------
-   16. TESTIMONIALS — centred 1280px grid
+   16. TESTIMONIALS — fluid, full-width with 80px padding
    -------------------------------------------------------------------------- */
 .homepage .group-153 {
-  left: calc(50% - 640px) !important;
-  width: 1280px !important;
+  left: 0 !important;
+  width: 100% !important;
+  padding: 0 80px !important;
+  box-sizing: border-box !important;
 }
 
 /* --------------------------------------------------------------------------
@@ -512,7 +514,6 @@ body {
   .homepage .group-110,
   .homepage .group-136,
   .homepage .group-148 .group-150,
-  .homepage .group-153,
   .homepage .group-173,
   .homepage .group-188 .group-191,
   .homepage .group-217 .group-218 {
@@ -567,7 +568,6 @@ body {
   .homepage .group-110,
   .homepage .group-136,
   .homepage .group-148 .group-150,
-  .homepage .group-153,
   .homepage .group-173,
   .homepage .group-188 .group-191,
   .homepage .group-217 .group-218 {
