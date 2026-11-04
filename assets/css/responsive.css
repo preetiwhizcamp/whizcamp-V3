@@ -65,10 +65,7 @@ body {
     justify-content: center !important;
   }
 
-  .homepage .frame {
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
+ 
 
   /* --------------------------------------------------------------------------
      2. HERO SECTION BACKGROUND & OVERLAYS (.group) -> 100% Full-Width
@@ -720,7 +717,7 @@ body {
 }
 
 .homepage .trusted-brands-section .group-6 {
-  padding: 24px 0 20px !important;
+  padding: 20px 0 18px !important;
 }
 
 .brands-slider-wrap {
@@ -728,21 +725,31 @@ body {
   max-width: 100% !important;
 }
 
+.brand-slide {
+  padding: 0 8px !important;
+}
+
 .brand-slide img {
-  height: 100px;
-  max-width: 180px;
+  width: 120px;
+  height: 80px;
 }
 
 @media (max-width: 768px) {
+  .brand-slide {
+    padding: 0 6px !important;
+  }
   .brand-slide img {
-    height: 70px;
-    max-width: 130px;
+    width: 100px;
+    height: 68px;
   }
 }
 
 @media (max-width: 480px) {
+  .brand-slide {
+    padding: 0 5px !important;
+  }
   .brand-slide img {
-    height: 56px;
-    max-width: 100px;
+    width: 88px;
+    height: 60px;
   }
 }

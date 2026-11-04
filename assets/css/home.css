@@ -1,6 +1,7 @@
 :root {
   --page-width: 1440;
-  --page-height: 14818;
+  --cs-extra: 1550; /* extra px the 4-card case-studies section adds to the original layout */
+  --page-height: calc(14818 + var(--cs-extra));
   --page-scale: 1;
 }
 
@@ -105,24 +106,24 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 1440px;
+ width: 100%;
   height: 50px;
   display: flex;
   background-color: #e5f9ff;
 }
 
 .homepage .frame {
-  margin-top: 13px;
-  width: 1360px;
-  height: 23px;
-  margin-left: 80px;
-  display: flex;
-  overflow: hidden;
+     margin-top: 13px;
+    height: 23px;
+    margin-left: 80px;
+    /* display: flex; */
+    /* overflow: hidden; */
+    width: 100%;
 }
 
 .homepage .div {
   display: inline-flex;
-  width: 1580px;
+  width: 100%;
   height: 23.5px;
   position: relative;
   align-items: center;
@@ -1144,7 +1145,7 @@ body {
   position: absolute;
   top: 28px;
   left: calc(50% + 473px);
-  width: 166px;
+  width: 206px;
   font-family: "Google Sans Flex", Helvetica;
   font-weight: 700;
   color: #ffffff;
@@ -6652,7 +6653,7 @@ body {
   left: 0;
   width: 100vw !important;
   height: auto !important;
-  min-height: 216px;
+  min-height: 180px;
   display: flex;
   align-items: center;
   background-image: url(../icons/rectangle-25026.svg);
@@ -6664,11 +6665,11 @@ body {
 /* Inner column stretches full width */
 .homepage .trusted-brands-section .group-6 {
   width: 100% !important;
-  padding: 28px 0 24px;
+  padding: 22px 0 22px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 18px;
 }
 
 /* Heading row — keep centred */
@@ -6679,77 +6680,364 @@ body {
   height: 18px;
 }
 
-/* Slider wrapper — full bleed with fade-edge mask */
+/* Slider wrapper — full bleed with soft fade-edge mask */
 .brands-slider-wrap {
   width: 100%;
   max-width: 100%;
   overflow: hidden;
-  /* Fade mask: left and right edges blur into the background */
   -webkit-mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0,0,0,0.15) 4%,
-    rgba(0,0,0,0.6) 8%,
-    black 16%,
-    black 84%,
-    rgba(0,0,0,0.6) 92%,
-    rgba(0,0,0,0.15) 96%,
+    rgba(0,0,0,0.4) 5%,
+    black 12%,
+    black 88%,
+    rgba(0,0,0,0.4) 95%,
     transparent 100%
   );
   mask-image: linear-gradient(
     to right,
     transparent 0%,
-    rgba(0,0,0,0.15) 4%,
-    rgba(0,0,0,0.6) 8%,
-    black 16%,
-    black 84%,
-    rgba(0,0,0,0.6) 92%,
-    rgba(0,0,0,0.15) 96%,
+    rgba(0,0,0,0.4) 5%,
+    black 12%,
+    black 88%,
+    rgba(0,0,0,0.4) 95%,
     transparent 100%
   );
 }
 
-/* Each slide */
+/* Each slide — vertically centered, tight gap */
 .brand-slide {
   display: flex !important;
   justify-content: center;
   align-items: center;
-  padding: 10px 28px;
+  padding: 0 10px;
 }
 
-/* Logo image — sized to match design (image 1) */
+/* Logo wrapper — white card with rounded corners */
+.brand-slide a,
+.brand-slide > img {
+  display: block;
+}
+
 .brand-slide img {
-  height: 110px;
-  width: auto;
-  max-width: 200px;
-  object-fit: contain;
-  /* Entering slide starts blurred and scales up */
-  transition: filter 0.5s ease, transform 0.5s ease, opacity 0.5s ease;
-}
-
-/* Slick: slides that are animating in come from blurred state */
-.slick-slide {
-  opacity: 1;
-  filter: blur(0px);
-  transition: filter 0.5s ease, opacity 0.5s ease;
-}
-
-/* Class toggled by JS on slide change — outgoing slide */
-.slick-slide.brand-blur-out {
-  filter: blur(6px);
-  opacity: 0.4;
-}
-
-/* Incoming slide starts blurred, transitions to clear */
-.slick-slide.brand-blur-in {
-  animation: brandBlurIn 0.6s ease forwards;
-}
-
-@keyframes brandBlurIn {
-  0%   { filter: blur(8px); opacity: 0.3; transform: scale(0.96); }
-  100% { filter: blur(0px); opacity: 1;   transform: scale(1);    }
+     display: block;
+    width: 130px;
+    height: 80px;
+    object-fit: contain;
+    background-color: none;
+    border-radius: 8px;
+    padding: 3px 1px;
+    box-sizing: border-box;
+    opacity: 0.9;
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .brand-slide img:hover {
-  transform: scale(1.06);
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* Remove leftover blur animation classes */
+.slick-slide {
+  opacity: 1;
+}
+
+
+/* ==========================================================================
+   FEATURED PROJECTS / CASE STUDIES — 4 stacked cards, scroll-revealed (GSAP)
+   Extra height (--cs-extra) is added to the section + page, and everything
+   after the section lives in .after-case-studies, which is pushed down by it.
+   ========================================================================== */
+.homepage .group-34 {
+  height: calc((1210 + var(--cs-extra)) * 1px);
+}
+
+.homepage .frame-14 {
+  padding-bottom: calc((823 + var(--cs-extra)) * 1px);
+}
+
+.homepage .group-35 {
+  height: auto;
+}
+
+.homepage .after-case-studies {
+  position: absolute;
+  top: calc(var(--cs-extra) * 1px);
+  left: 0;
+  width: 100%;
+  height: 0;
+}
+
+.homepage .cs-stack {
+  margin-left: 145px;
+  width: 991px;
+  height: calc((1050 + 3 * 560) * 1px); /* pinned block (1050) + 3 scroll steps of 560 */
+  position: relative;
+}
+
+.homepage .cs-stack__pin {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%; /* viewport-wide (JS), both when absolute and when fixed */
+  height: 1050px; /* heading 192 + cards 628 + gap 50 + queue row 180 */
+  overflow: hidden; /* next card slides in from below this box */
+}
+
+/* all cards sit on the same spot; later ones paint on top */
+.homepage .cs-heads {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 991px;
+  height: 64px;
+  z-index: 2;
+}
+
+.homepage .cs-heads .cs-card__head {
+  position: absolute;
+  top: 0;
+  left: 0; /* keeps the original 204px margin-left from .group-39 */
+}
+
+.homepage .cs-card {
+  position: absolute;
+  top: 98px; /* 64 heading + 34 gap */
+  left: 0;
+  height: 530px;
+  margin-left: 0;
+  will-change: transform;
+  transform-origin: 50% 60%;
+}
+
+/* image: crisp at rest, frosted + circle on hover */
+.homepage .cs-card__media {
+  display: block;
+  width: 991px;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
+.homepage .cs-card__media .rectangle-7 {
+  will-change: transform;
+}
+
+.homepage .cs-card__media .rectangle-8 {
+  background-color: transparent;
+  backdrop-filter: blur(0) brightness(100%);
+  -webkit-backdrop-filter: blur(0) brightness(100%);
+  transition: background-color 0.35s ease, backdrop-filter 0.35s ease,
+    -webkit-backdrop-filter 0.35s ease;
+}
+
+.homepage .cs-card__media:hover .rectangle-8,
+.homepage .cs-card__media:focus-visible .rectangle-8 {
+  background-color: #ffffff1a;
+  backdrop-filter: blur(3px) brightness(100%);
+  -webkit-backdrop-filter: blur(3px) brightness(100%);
+}
+
+/* "View Case Study" circle — hidden until the image is hovered */
+.homepage .cs-card__media .group-42 {
+  opacity: 0;
+  transform: scale(0.6);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.homepage .cs-card__media:hover .group-42,
+.homepage .cs-card__media:focus-visible .group-42 {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* "View More Case Studies" button */
+.homepage .cs-more {
+  position: relative;
+  width: 1136px;
+  height: 60px;
+  margin-top: -240px; /* pulls the button up under the last image (the queue row is empty by then) */
+  padding-left: 145px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.homepage .cs-more .vector-7 {
+  top: 28px;
+  left: var(--cs-dash-left, 0px);
+}
+
+.homepage .cs-more__btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 32px;
+  border-radius: 28px;
+  font-family: "DM Sans", Helvetica;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1;
+  color: #ffffff;
+  background: #191919;
+  z-index: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* gradient border (same cyan → amber as the circle) */
+.homepage .cs-more__btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(131deg, #00baf5 0%, #eaab00 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* gradient fill on hover */
+.homepage .cs-more__btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(131deg, #00baf5 0%, #eaab00 100%);
+  opacity: 0;
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.homepage .cs-more__btn svg {
+  transition: transform 0.3s ease;
+}
+
+.homepage .cs-more__btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 186, 245, 0.25);
+}
+
+.homepage .cs-more__btn:hover::after {
+  opacity: 1;
+}
+
+.homepage .cs-more__btn:hover svg {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homepage .cs-card__media .group-42,
+  .homepage .cs-card__media .rectangle-8,
+  .homepage .cs-more__btn,
+  .homepage .cs-more__btn svg {
+    transition: none;
+  }
+}
+
+.homepage .cs-scale {
+  position: relative;
+  width: 100%;
+  height: 1050px;
+}
+
+/* section heading travels with the pinned cards */
+.homepage .cs-scale .group-36 {
+  position: absolute;
+  top: 0;
+  left: var(--cs-dash-left, 80px);
+  margin: 0;
+}
+
+.homepage .cs-inner {
+  position: absolute;
+  top: 192px; /* 142 heading + 50 gap */
+  left: calc(50% - 495.5px);
+  width: 991px;
+  height: 628px;
+}
+
+/* project titles: one centred line, never wrapped */
+.homepage .cs-heads .cs-card__head {
+  width: 991px;
+  margin-left: 0;
+  align-items: center;
+}
+
+.homepage .cs-heads .PROJECT {
+  width: auto;
+  margin-left: 0;
+  white-space: nowrap;
+  text-align: center;
+}
+
+.homepage .cs-heads .kaireai-AI-powered {
+  width: auto;
+  margin-left: 0;
+  white-space: nowrap;
+}
+
+.homepage .cs-heads .PROJECT { color: #ffffff; }
+
+/* ---- stacked cards that fly in from the queue (thumbnails at bottom right) ---- */
+.homepage .cs-card {
+  position: absolute;
+  top: 98px;
+  left: 0;
+  width: 991px;
+  height: 530px;
+  overflow: hidden;
+  border-radius: 12px;
+  pointer-events: none;      /* only the front card is hoverable */
+}
+
+.homepage .cs-card.is-active {
+  pointer-events: auto;
+}
+
+.homepage .cs-card .cs-card__media {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.homepage .cs-card .group-40 {
+  height: 100%;
+}
+
+.homepage .cs-card .group-41,
+.homepage .cs-card .rectangle-7,
+.homepage .cs-card .rectangle-8 {
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.homepage .cs-card .group-42 {
+  top: calc(50% - 67px);
+  left: calc(50% - 67px);
+}
+
+.homepage .cs-card:not(.is-active) .group-42 {
+  display: none;
+}
+
+/* "Project 02 - ..." label next to the queued thumbnail */
+.homepage .cs-qtitle {
+  position: absolute;
+  margin: 0;
+  width: 283px;
+  font-family: "Google Sans Flex", Helvetica;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 26px;
+  color: #ffffff;
+  z-index: 3;
+  pointer-events: none;
 }

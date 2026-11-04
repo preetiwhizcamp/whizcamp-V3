@@ -103,28 +103,31 @@
             <div class="brands-slider-wrap">
               <div class="brands-slider">
                 <div class="brand-slide">
-                  <img src="assets/images/whizcamp-bibena-logo.png" alt="Bibena" />
-                </div>
-                <div class="brand-slide">
-                  <img src="assets/images/whizcamp-mastercook-recipe-manager-desktop-and-mobile-app-logo.png" alt="MasterCook" />
-                </div>
-                <div class="brand-slide">
-                  <img src="assets/images/whizcamp-sleepintelligencebyDeep-logo-1.png" alt="Sleep Intelligence by DEEP" />
-                </div>
-                <div class="brand-slide">
-                  <img src="assets/images/whizcamp-vyva-logo.png" alt="VyVa" />
+                  <img src="assets/images/whizcamp-homepage-mumshandmade-ui-section.png" alt="Mums Handmade" />
                 </div>
                 <div class="brand-slide">
                   <img src="assets/images/whizcamp-homepage-kingpool-ui-section.png" alt="KingPool" />
                 </div>
                 <div class="brand-slide">
-                  <img src="assets/images/whizcamp-homepage-mumshandmade-ui-section.png" alt="Mums Handmade" />
-                </div>
-                <div class="brand-slide">
                   <img src="assets/images/whizcamp-kaire-ai-iot-enabled-healthcare-caregiver-web-mobile-app-logo.png" alt="Kaire" />
                 </div>
                 <div class="brand-slide">
+                  <img src="assets/images/whizcamp-sleepintelligencebyDeep-logo-1.png" alt="Sleep Intelligence by DEEP" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-mastercook-recipe-manager-desktop-and-mobile-app-logo.png" alt="MasterCook" />
+                </div>
+                <div class="brand-slide">
                   <img src="assets/images/whizcamp-giuteamconnect-game-scheduling-web-mobile-app-case-study.png" alt="GIU Team Connect" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-bibena-logo.png" alt="Bibena" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-vyva-logo.png" alt="VyVa" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-wedgram-wedding-social-platform-mobile-app-zurich-case-study.png" alt="Wedgram" />
                 </div>
                 <div class="brand-slide">
                   <img src="assets/images/whizcamp-blackdog-logo.png" alt="Black Dog" />
@@ -324,7 +327,11 @@
             <div class="frame-15"><div class="ellipse-3"></div></div>
           </div>
           <div class="group-35">
-            <div class="group-36">
+            <!-- ===== CASE STUDIES: 4 cards stacked: each next card slides up over the previous one while the section stays pinned (GSAP ScrollTrigger, see script at end of body) ===== -->
+            <div class="cs-stack" data-cs-stack>
+              <div class="cs-stack__pin" data-cs-pin>
+              <div class="cs-scale" data-cs-scale>
+              <div class="group-36">
               <div class="text-wrapper-27">2021 - 26</div>
               <div class="group-37">
                 <div class="text-wrapper-28">[FEATURED PROJECTS]</div>
@@ -339,59 +346,101 @@
                 </p>
               </div>
             </div>
-            <div class="group-38">
-              <div class="group-39">
-                <p class="PROJECT">Project 01 - Healthtech · Ai / Iot</p>
-                <p class="kaireai-AI-powered">
-                  <span class="text-wrapper-31">KaireAI</span>
+              <div class="cs-inner">
+              <div class="cs-heads">
+                <div class="group-39 cs-card__head">
+                  <p class="PROJECT">Project 01 - Healthtech · Ai / Iot</p>
+                  <p class="kaireai-AI-powered"><span class="text-wrapper-31">KaireAI</span>
                   <span class="text-wrapper-4">
-                    — AI-Powered Healthcare &amp; Remote Patient
-                    Monitoring</span
-                  >
-                </p>
+                    — AI-Powered Healthcare &amp; Remote Patient Monitoring</span
+                  ></p>
+                </div>
+                <div class="group-39 cs-card__head">
+                  <p class="PROJECT">Project 02 - sportstech · Platform Engineering</p>
+                  <p class="kaireai-AI-powered"><span class="text-wrapper-31">GIU Team Connect</span>
+                  <span class="text-wrapper-4"> — Game Scheduling &amp; Team Management Web / Mobile App</span></p>
+                </div>
+                <div class="group-39 cs-card__head">
+                  <p class="PROJECT">Project 03 - sportstech · Mobile App Development</p>
+                  <p class="kaireai-AI-powered"><span class="text-wrapper-31">KingPool</span>
+                  <span class="text-wrapper-4"> — Sports Pool Manager &amp; Social Network App</span></p>
+                </div>
+                <div class="group-39 cs-card__head">
+                  <p class="PROJECT">Project 04 - Enterprise · Digital Transformation</p>
+                  <p class="kaireai-AI-powered"><span class="text-wrapper-31">Whizcamp</span>
+                  <span class="text-wrapper-4"> — Custom AI &amp; Product Engineering Solutions</span></p>
+                </div>
               </div>
-              <div class="group-40">
-                <div class="group-41">
-                  <img
-                    class="rectangle-7"
-                    src="assets/images/rectangle-25040.png"
-                  />
-                  <div class="rectangle-8"></div>
-                </div>
-                <div class="group-42">
-                  <div class="group-43">
-                    <img
-                      class="frame-16"
-                      src="assets/icons/frame-28.svg"
-                    />
-                    <div class="view-case-study">View<br />Case Study</div>
+              <article class="group-38 cs-card is-active" data-cs-card>
+                <a class="group-40 cs-card__media" href="#" aria-label="View case study: KaireAI">
+                  <div class="group-41">
+                    <img class="rectangle-7" src="assets/images/rectangle-25040.png" alt="KaireAI" loading="lazy" />
+                    <div class="rectangle-8"></div>
                   </div>
-                </div>
+                  <div class="group-42">
+                    <div class="group-43">
+                      <img class="frame-16" src="assets/icons/frame-28.svg" alt="" />
+                      <div class="view-case-study">View<br />Case Study</div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <article class="group-38 cs-card" data-cs-card>
+                <a class="group-40 cs-card__media" href="#" aria-label="View case study: Project 02">
+                  <div class="group-41">
+                    <img class="rectangle-7" src="assets/images/rectangle-25042.png" alt="Project 02" loading="lazy" />
+                    <div class="rectangle-8"></div>
+                  </div>
+                  <div class="group-42">
+                    <div class="group-43">
+                      <img class="frame-16" src="assets/icons/frame-28.svg" alt="" />
+                      <div class="view-case-study">View<br />Case Study</div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <article class="group-38 cs-card" data-cs-card>
+                <a class="group-40 cs-card__media" href="#" aria-label="View case study: Project 03">
+                  <div class="group-41">
+                    <img class="rectangle-7" src="assets/images/rectangle-25043.png" alt="Project 03" loading="lazy" />
+                    <div class="rectangle-8"></div>
+                  </div>
+                  <div class="group-42">
+                    <div class="group-43">
+                      <img class="frame-16" src="assets/icons/frame-28.svg" alt="" />
+                      <div class="view-case-study">View<br />Case Study</div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              <article class="group-38 cs-card" data-cs-card>
+                <a class="group-40 cs-card__media" href="#" aria-label="View case study: Project 04">
+                  <div class="group-41">
+                    <img class="rectangle-7" src="assets/images/rectangle-25046.png" alt="Project 04" loading="lazy" />
+                    <div class="rectangle-8"></div>
+                  </div>
+                  <div class="group-42">
+                    <div class="group-43">
+                      <img class="frame-16" src="assets/icons/frame-28.svg" alt="" />
+                      <div class="view-case-study">View<br />Case Study</div>
+                    </div>
+                  </div>
+                </a>
+              </article>
+              </div><!-- /.cs-inner -->
+              </div><!-- /.cs-scale -->
               </div>
             </div>
-            <div class="group-44">
-              <img
-                class="vector-7"
-                src="assets/icons/vector-5-5.svg"
-              />
-              <div class="group-45">
-                <div class="group-46">
-                  <img
-                    class="rectangle-9"
-                    src="assets/images/rectangle-25042.png"
-                  />
-                  <p class="PROJECT-2">
-                    Project 02 -<br />sportstech · Platform Engineering
-                  </p>
-                </div>
-                <img
-                  class="rectangle-10"
-                  src="assets/images/rectangle-25043.png"
-                />
-              </div>
+            <div class="cs-more">
+              <img class="vector-7" src="assets/icons/vector-5-5.svg" alt="" />
+              <a class="cs-more__btn" href="#" data-cs-more>
+                <span>View More Case Studies</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14m0 0-6-6m6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
             </div>
           </div>
         </div>
+        <div class="after-case-studies">
         <!-- ============================================================
              7. AI MODERNIZATION (Sticky Left Content & Scrolling Cards)
              ============================================================ -->
@@ -2181,8 +2230,180 @@
             <div class="text-wrapper-144">Product Strategy</div>
           </div>
         </div>
+        </div><!-- /.after-case-studies -->
       </div>
     </div>
+    <!-- GSAP + ScrollTrigger (case studies) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+      (function () {
+        if (!window.gsap || !window.ScrollTrigger) return; // content stays visible if GSAP fails to load
+        gsap.registerPlugin(ScrollTrigger);
+
+        var home = document.querySelector('.homepage');
+        var stack = document.querySelector('[data-cs-stack]');
+        var pin = document.querySelector('[data-cs-pin]');
+        var scaleEl = document.querySelector('[data-cs-scale]');
+        var inner = document.querySelector('.cs-inner');
+        var row = document.querySelector('.cs-more');
+        var more = document.querySelector('[data-cs-more]');
+        var cards = gsap.utils.toArray('[data-cs-card]');
+        var heads = gsap.utils.toArray('.cs-card__head');
+        var N = cards.length;
+        var STEP = 560;                 // px of scroll per card
+        var DIST = STEP * (N - 1);
+        var PIN_H = 1050;               // heading 142 + gap 50 + card block 628 + gap 50 + queue row 180
+
+        // placeholder links shouldn't jump the page to the top
+        document.querySelectorAll('.cs-card__media, [data-cs-more]').forEach(function (a) {
+          a.addEventListener('click', function (e) {
+            if (a.getAttribute('href') === '#') e.preventDefault();
+          });
+        });
+
+        // small "Project 0X - ..." label that sits left of the queued thumbnail
+        var qt = [];
+        for (var q = 1; q < N; q++) {
+          var parts = heads[q].querySelector('.PROJECT').textContent.split(' - ');
+          var el = document.createElement('p');
+          el.className = 'cs-qtitle';
+          el.appendChild(document.createTextNode(parts[0] + ' -'));
+          el.appendChild(document.createElement('br'));
+          el.appendChild(document.createTextNode(parts.slice(1).join(' - ')));
+          inner.appendChild(el);
+          qt[q] = el;
+        }
+
+        function pageScale() {
+          return home.offsetWidth ? home.getBoundingClientRect().width / home.offsetWidth : 1;
+        }
+        function fit() { // shrink on short viewports so everything fits
+          return Math.max(0.6, Math.min(1, (window.innerHeight / pageScale() - 32) / PIN_H));
+        }
+        function topOffset() {
+          return Math.max(16, (window.innerHeight - PIN_H * fit() * pageScale()) / 2);
+        }
+
+        var ctx, state = '', native = true, dash = 80;
+
+        // Stack + button row span the viewport so the cards are centred in the window.
+        function fitStack() {
+          var sc = pageScale();
+          [stack, row].forEach(function (el) { el.style.marginLeft = '0px'; });
+          stack.style.width = '991px';
+          var rowLeft = row.getBoundingClientRect().left;   // original content left edge (80px in the design)
+          var left = stack.getBoundingClientRect().left;
+          var w = document.documentElement.clientWidth / sc;
+          stack.style.marginLeft = (-left / sc) + 'px';
+          stack.style.width = w + 'px';
+          row.style.marginLeft = (-rowLeft / sc) + 'px';
+          row.style.width = w + 'px';
+          row.style.paddingLeft = '0px';
+          dash = rowLeft / sc;
+          row.style.setProperty('--cs-dash-left', dash + 'px');
+          stack.style.setProperty('--cs-dash-left', dash + 'px');
+          var f = fit();
+          pin.style.height = (PIN_H * f) + 'px';
+          row.style.marginTop = (-10 - 230 * f) + 'px'; // keeps the button 40px under the last image
+          gsap.set(scaleEl, { scale: f, transformOrigin: '50% 0' });
+        }
+
+        // position:fixed while active (no spacer => no sideways shift); absolute before/after
+        function setPin(mode) {
+          if (state === mode) return;
+          state = mode;
+          var st = pin.style;
+          st.position = mode === 'fixed' ? 'fixed' : 'absolute';
+          st.top = mode === 'before' ? '0px' : mode === 'fixed' ? topOffset() + 'px' : 'auto';
+          st.bottom = mode === 'after' ? '0px' : 'auto';
+        }
+
+        function build() {
+          fitStack();
+          native = getComputedStyle(home).transform === 'none';
+          var sc = pageScale();
+          var vw = document.documentElement.clientWidth / sc;
+          var innerLeft = (vw - 991) / 2;
+
+          // geometry (px, relative to .cs-inner): main image, the two queue thumbnails, and "off-screen right"
+          var MAIN = { x: 0, y: 98, w: 991, h: 530, r: 12 };
+          var T2 = { x: dash + 893 - innerLeft, y: 678, w: 291, h: 180, r: 8 };
+          var T3 = { x: dash + 1208 - innerLeft, y: 758, w: 152, h: 100, r: 6 };
+          var OFF = { x: vw - innerLeft + 40, y: 758, w: 152, h: 100, r: 6 };
+          function P(o) { return { left: o.x, top: o.y, width: o.w, height: o.h, borderRadius: o.r }; }
+
+          ctx = gsap.context(function () {
+            gsap.set(cards[0], P(MAIN));
+            if (cards[1]) gsap.set(cards[1], P(T2));
+            if (cards[2]) gsap.set(cards[2], P(T3));
+            if (cards[3]) gsap.set(cards[3], P(OFF));
+            gsap.set(heads.slice(1), { autoAlpha: 0, y: 14 });
+            qt.forEach(function (el, i) {
+              if (!el) return;
+              gsap.set(el, { left: T2.x - 305, top: 678 + 24, autoAlpha: i === 1 ? 1 : 0 });
+            });
+
+            var tl = gsap.timeline({ defaults: { ease: 'none' } });
+            function mv(card, from, to, t) {
+              var toVars = P(to);
+              toVars.duration = 0.6; toVars.ease = 'power2.inOut'; toVars.immediateRender = false;
+              tl.fromTo(card, P(from), toVars, t);
+            }
+            for (var s = 0; s < N - 1; s++) {
+              var t0 = s + 0.05;
+              tl.to(heads[s], { autoAlpha: 0, y: -14, duration: 0.2 }, s + 0.02);
+              tl.to(cards[s], { scale: 0.95, duration: 0.6 }, t0);            // covered card stays underneath
+              mv(cards[s + 1], T2, MAIN, t0);                                  // next image: thumbnail -> main spot
+              if (cards[s + 2]) mv(cards[s + 2], T3, T2, t0);                  // queue shifts left
+              if (cards[s + 3]) mv(cards[s + 3], OFF, T3, t0);                 // new one enters from the right
+              tl.to(heads[s + 1], { autoAlpha: 1, y: 0, duration: 0.3 }, s + 0.35);
+              tl.to(qt[s + 1], { autoAlpha: 0, duration: 0.2 }, s + 0.02);
+              if (qt[s + 2]) tl.to(qt[s + 2], { autoAlpha: 1, duration: 0.3 }, s + 0.65);
+            }
+            tl.to({}, { duration: 0.05 }, N - 1 - 0.05); // total length = N-1
+
+            var btnTween = null;
+            if (more) {
+              gsap.set(more, { autoAlpha: 0, y: 40 });
+              btnTween = gsap.to(more, { autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out', paused: true });
+            }
+
+            function sync(self) {
+              var p = self.progress;
+              if (native) setPin(p <= 0 ? 'before' : p >= 1 ? 'after' : 'fixed');
+              else { setPin('before'); gsap.set(pin, { y: p * DIST }); } // page is CSS-scaled: emulate pin
+              var idx = Math.min(N - 1, Math.floor(tl.time() + 0.35));
+              cards.forEach(function (c, i) { c.classList.toggle('is-active', i === idx); });
+              if (btnTween) { if (p > 0.9) btnTween.play(); else btnTween.reverse(); }
+            }
+
+            ScrollTrigger.create({
+              trigger: stack,
+              start: function () { return 'top ' + topOffset(); },
+              end: function () { return '+=' + DIST * pageScale(); },
+              animation: tl,
+              scrub: 0.6,
+              onRefresh: function (self) { state = ''; sync(self); },
+              onUpdate: sync
+            });
+          });
+        }
+
+        function rebuild() {
+          if (ctx) ctx.revert();
+          state = '';
+          pin.removeAttribute('style');
+          build();
+          ScrollTrigger.refresh();
+        }
+
+        build();
+        var rt;
+        window.addEventListener('resize', function () { clearTimeout(rt); rt = setTimeout(rebuild, 250); });
+        window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+      })();
+    </script>
     <script src="assets/js/main.js"></script>
     <!-- jQuery + Slick Slider -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
@@ -2193,47 +2414,33 @@
 
         $slider.slick({
           infinite: true,
-          slidesToShow: 5,
+          slidesToShow: 6,
           slidesToScroll: 1,
           autoplay: true,
-          autoplaySpeed: 2000,
-          speed: 700,
+          autoplaySpeed: 2500,
+          speed: 800,
           arrows: false,
           dots: false,
           pauseOnHover: true,
-          cssEase: 'ease-in-out',
+          cssEase: 'linear',
           responsive: [
             {
               breakpoint: 1200,
-              settings: { slidesToShow: 4 }
+              settings: { slidesToShow: 5 }
             },
             {
               breakpoint: 900,
-              settings: { slidesToShow: 3 }
+              settings: { slidesToShow: 4 }
             },
             {
               breakpoint: 600,
-              settings: { slidesToShow: 2 }
+              settings: { slidesToShow: 3 }
             },
             {
               breakpoint: 400,
-              settings: { slidesToShow: 1 }
+              settings: { slidesToShow: 2 }
             }
           ]
-        });
-
-        // Blur-in animation on each slide change
-        $slider.on('beforeChange', function (e, slick, currentSlide, nextSlide) {
-          // Mark the incoming slide for blur-in animation
-          var $nextSlide = $slider.find('[data-slick-index="' + nextSlide + '"]');
-          $nextSlide.addClass('brand-blur-in');
-        });
-
-        $slider.on('afterChange', function (e, slick, currentSlide) {
-          // Remove animation class after it finishes so it can re-trigger
-          setTimeout(function () {
-            $slider.find('.brand-blur-in').removeClass('brand-blur-in');
-          }, 650);
         });
       });
     </script>
