@@ -1,142 +1,171 @@
 /**
  * Whizcamp Main Application Script
- * Orchestrates modules, event handlers, and core interactive components.
- * Works seamlessly in both local file:// and HTTP(S) server environments.
  */
-
 (function () {
   'use strict';
 
   /**
-   * Services Accordion Module
-   * Handles expand/collapse state, accessibility attributes, and dynamic height recalculation on resize.
+   * Services Accordion — auto-play + progress bar + manual row click
+   * A click opens that row and auto-play continues from it.
    */
   function initAccordion() {
-    const accordionItems = document.querySelectorAll("[data-service-item]");
-    if (!accordionItems.length) return;
+    var root = document.querySelector('.services-accordion');
+    if (!root) { console.warn('[accordion] .services-accordion not found'); return; }
+    var items = Array.prototype.slice.call(root.querySelectorAll('[data-service-item]'));
+    if (!items.length) { console.warn('[accordion] no items found'); return; }
 
-    function updatePanelState(item, expand) {
-      const button = item.querySelector(".services-accordion__toggle");
-      const panel = item.querySelector(".services-accordion__panel");
+    var AUTOPLAY_MS = 6000; // how long each row stays open
 
-      if (!button || !panel) return;
+    root.style.setProperty('--svc-duration', AUTOPLAY_MS + 'ms');
 
-      if (expand) {
-        item.classList.add("is-expanded");
-        panel.hidden = false;
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        panel.style.opacity = "1";
-        button.setAttribute("aria-expanded", "true");
-      } else {
-        item.classList.remove("is-expanded");
-        panel.style.maxHeight = "0px";
-        panel.style.opacity = "0";
-        window.setTimeout(function () {
-          if (!item.classList.contains("is-expanded")) {
-            panel.hidden = true;
-          }
-        }, 380);
+    var current = -1;
+    var started = false;
+    var inView = false;
+
+    function syncPlayState() {
+      // Progress bar pauses while the section is off-screen or the tab is hidden
+      root.classList.toggle('is-paused', !inView || document.hidden);
+    }
+
+    function setExpanded(item, expanded) {
+      var row = item.querySelector('.services-accordion__row');
+      var panel = item.querySelector('.services-accordion__panel');
+      item.classList.toggle('is-expanded', expanded);
+      row.setAttribute('aria-expanded', String(expanded));
+      panel.setAttribute('aria-hidden', String(!expanded));
+    }
+
+    function restartProgress() {
+      items.forEach(function (it) { it.classList.remove('is-playing'); });
+      if (current < 0) return;
+      void items[current].offsetWidth; // force reflow so the animation restarts at 0
+      items[current].classList.add('is-playing');
+    }
+
+    function openItem(index) {
+      current = index;
+      items.forEach(function (it, i) { setExpanded(it, i === index); }); // only one open
+      restartProgress();
+    }
+
+    function next() {
+      openItem((current + 1) % items.length);
+    }
+
+    items.forEach(function (item, index) {
+      var row = item.querySelector('.services-accordion__row');
+      var toggle = item.querySelector('.services-accordion__toggle');
+      var panel = item.querySelector('.services-accordion__panel');
+      var title = item.querySelector('.services-accordion__title');
+
+      // Remove anything the old accordion code left behind
+      panel.hidden = false;
+      panel.removeAttribute('hidden');
+      panel.style.maxHeight = '';
+      panel.style.opacity = '';
+
+      // Progress bar (shown at the top of the row)
+      var bar = document.createElement('span');
+      bar.className = 'services-accordion__progress';
+      bar.setAttribute('aria-hidden', 'true');
+      item.appendChild(bar);
+      bar.addEventListener('animationend', function () {
+        if (current === index) next();
+      });
+
+      // Accessibility: the whole row is the control
+      title.id = title.id || 'service-title-' + (index + 1);
+      panel.setAttribute('role', 'region');
+      panel.setAttribute('aria-labelledby', title.id);
+      row.setAttribute('role', 'button');
+      row.setAttribute('tabindex', '0');
+      if (panel.id) row.setAttribute('aria-controls', panel.id);
+      toggle.setAttribute('tabindex', '-1');
+      toggle.setAttribute('aria-hidden', 'true');
+      toggle.removeAttribute('aria-controls');
+      toggle.removeAttribute('aria-expanded');
+
+      function activate() {
+        started = true;
+        openItem(index); // opens this row, restarts its bar, then auto-play continues
+      }
+      row.addEventListener('click', activate);
+      row.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activate();
+        }
+      });
+
+      setExpanded(item, false);
+    });
+
+    document.addEventListener('visibilitychange', syncPlayState);
+
+    function onEnter() {
+      if (!started) {
+        started = true;
+        openItem(0);
       }
     }
 
-    accordionItems.forEach(function (item) {
-      const button = item.querySelector(".services-accordion__toggle");
-      const panel = item.querySelector(".services-accordion__panel");
-      const expanded = item.classList.contains("is-expanded");
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          var was = inView;
+          inView = entry.isIntersecting;
+          syncPlayState();
+          if (inView && !was) onEnter();
+        });
+      }, { threshold: 0.15 }).observe(root);
+    } else {
+      inView = true;
+      syncPlayState();
+      onEnter();
+    }
 
-      if (!button || !panel) return;
-
-      if (expanded) {
-        panel.hidden = false;
-        panel.style.maxHeight = panel.scrollHeight + "px";
-        panel.style.opacity = "1";
-        button.setAttribute("aria-expanded", "true");
-      } else {
-        panel.hidden = true;
-        panel.style.maxHeight = "0px";
-        panel.style.opacity = "0";
-        button.setAttribute("aria-expanded", "false");
-      }
-
-      button.addEventListener("click", function () {
-        updatePanelState(item, !item.classList.contains("is-expanded"));
-      });
-    });
-
-    window.addEventListener("resize", function () {
-      accordionItems.forEach(function (item) {
-        if (!item.classList.contains("is-expanded")) return;
-        const panel = item.querySelector(".services-accordion__panel");
-        if (panel) {
-          panel.style.maxHeight = panel.scrollHeight + "px";
-        }
-      });
-    });
+    console.log('[accordion] ready,', items.length, 'items');
   }
 
   /**
-   * Sticky Scroll Module for AI Modernization Section
-   * Keeps left content sticky while right-side cards scroll, stopping at parent boundaries.
+   * AI Modernization — GSAP scroll reveals
    */
-  function initStickyScroll() {
-    const section = document.querySelector(".ai-modernization-section");
-    const stickyInner = document.querySelector(".ai-modernization__sticky-inner");
-    const leftCol = document.querySelector(".ai-modernization__left");
+  function initModernizationMotion() {
+    if (!window.gsap || !window.ScrollTrigger) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    gsap.registerPlugin(ScrollTrigger);
 
-    if (!section || !stickyInner || !leftCol) return;
+    var section = document.querySelector('.ai-modernization-section');
+    if (!section) return;
 
-    const TOP_OFFSET = 80;
-    let isTicking = false;
-
-    function updateStickyPosition() {
-      if (window.innerWidth < 1024) {
-        stickyInner.style.transform = "";
-        isTicking = false;
-        return;
-      }
-
-      const sectionRect = section.getBoundingClientRect();
-      const sectionHeight = section.offsetHeight;
-      const innerHeight = stickyInner.offsetHeight;
-      const maxTranslate = Math.max(0, sectionHeight - innerHeight - 40);
-
-      if (sectionRect.top > TOP_OFFSET) {
-        stickyInner.style.transform = "translate3d(0, 0, 0)";
-      } else if (sectionRect.top <= TOP_OFFSET && sectionRect.bottom >= innerHeight + TOP_OFFSET) {
-        const currentY = TOP_OFFSET - sectionRect.top;
-        const clampedY = Math.min(currentY, maxTranslate);
-        stickyInner.style.transform = `translate3d(0, ${clampedY}px, 0)`;
-      } else {
-        stickyInner.style.transform = `translate3d(0, ${maxTranslate}px, 0)`;
-      }
-
-      isTicking = false;
+    var leftItems = gsap.utils.toArray('.ai-modernization__sticky-inner > *');
+    if (leftItems.length) {
+      gsap.from(leftItems, {
+        y: 30, opacity: 0, duration: 0.8, ease: 'power3.out', stagger: 0.08,
+        clearProps: 'transform,opacity',
+        scrollTrigger: { trigger: section, start: 'top 85%', once: true }
+      });
     }
 
-    function onScroll() {
-      if (!isTicking) {
-        window.requestAnimationFrame(updateStickyPosition);
-        isTicking = true;
-      }
-    }
+    gsap.utils.toArray('.ai-modernization__right > div').forEach(function (card) {
+      gsap.from(card, {
+        y: 50, opacity: 0, duration: 0.9, ease: 'power3.out',
+        clearProps: 'transform,opacity',
+        scrollTrigger: { trigger: card, start: 'top 90%', once: true }
+      });
+    });
 
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-
-    // Initial positioning
-    updateStickyPosition();
-  }
-
-  // DOM Ready initialization
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", init);
-  } else {
-    init();
+    window.addEventListener('load', function () { ScrollTrigger.refresh(); });
   }
 
   function init() {
-    initAccordion();
-    initStickyScroll();
-    console.log("Whizcamp application initialized successfully.");
+    try { initAccordion(); } catch (e) { console.error('[accordion] failed:', e); }
+    try { initModernizationMotion(); } catch (e) { console.error('[motion] failed:', e); }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
   }
 })();

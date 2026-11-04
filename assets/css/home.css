@@ -1,6 +1,6 @@
 :root {
   --page-width: 1440;
-  --cs-extra: 1550; /* extra px the 4-card case-studies section adds to the original layout */
+  --cs-extra: 1550;
   --page-height: calc(14818 + var(--cs-extra));
   --page-scale: 1;
 }
@@ -8,39 +8,35 @@
 html,
 body {
   width: 100%;
-  overflow-x: hidden;
+  max-width: 100vw;
+  overflow-x: clip;
   background-color: #f6f6f6;
+  margin: 0;
+  padding: 0;
 }
 
 .responsive-stage {
   width: 100%;
+  max-width: 100vw;
   min-height: calc(var(--page-height) * 1px);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  overflow: hidden;
+  display: block;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 .homepage {
   background-color: #f6f6f6;
-  overflow: hidden;
-  width: calc(var(--page-width) * 1px);
+  width: 100%;
+  max-width: 100vw;
   min-width: 0;
   min-height: calc(var(--page-height) * 1px);
   position: relative;
-  transform-origin: top center;
-  transform: scale(var(--page-scale));
+  transform: none;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
-@media (max-width: 1439px) {
-  :root {
-    --page-scale: calc(100vw / (var(--page-width) * 1px));
-  }
-
-  .responsive-stage {
-    min-height: calc(var(--page-height) * var(--page-scale) * 1px);
-  }
-}
+/* Fluid layout — no CSS scaling */
 
 @media (max-width: 1024px) {
   html {
@@ -49,55 +45,40 @@ body {
   }
 }
 
-@media (max-width: 768px) {
-  .homepage .group-5 {
-    left: calc(100% - 172px);
-  }
-}
-
-@media (max-width: 480px) {
-  .homepage .group-5 {
-    left: calc(100% - 152px);
-  }
-}
-
-@media (max-width: 320px) {
-  .homepage .group-5 {
-    left: calc(100% - 142px);
-  }
-}
+/* Orbit badge left position — handled in responsive.css */
 
 .homepage .group {
   position: absolute;
   top: 50px;
   left: 0;
-  width: 1440px;
+  width: 100%;
   height: 830px;
   display: flex;
   background-image: url(../images/rectangle-25017.png);
   background-size: cover;
-  background-position: 50% 50%;
+  background-position: 60% 50%;
 }
 
 .homepage .rectangle-wrapper {
-  width: 1440px;
+  width: 100%;
   height: 830px;
   display: flex;
   background: linear-gradient(
     90deg,
     rgba(17, 28, 46, 1) 0%,
-    rgba(17, 28, 46, 0.8) 48%,
-    rgba(17, 28, 46, 0) 100%
+    rgba(17, 28, 46, 0.85) 35%,
+    rgba(17, 28, 46, 0.45) 65%,
+    rgba(17, 28, 46, 0.05) 100%
   );
 }
 
 .homepage .rectangle {
-  width: 1440px;
+  width: 100%;
   height: 181.68px;
   background: linear-gradient(
     180deg,
-    rgba(17, 28, 46, 0.5) 0%,
-    rgba(17, 28, 46, 0.4) 51%,
+    rgba(17, 28, 46, 0.65) 0%,
+    rgba(17, 28, 46, 0.35) 60%,
     rgba(17, 28, 46, 0) 100%
   );
 }
@@ -367,7 +348,7 @@ body {
   position: absolute;
   top: 880px;
   left: 0;
-  width: 1440px;
+  width: 100%;
   height: 216px;
   display: flex;
   background-image: url(../icons/rectangle-25026.svg);
@@ -376,7 +357,7 @@ body {
 
 .homepage .group-6 {
   margin-top: 50px;
-  width: 1440px;
+  width: 100%;
   height: 146px;
   display: flex;
   flex-direction: column;
@@ -1078,13 +1059,13 @@ body {
   position: absolute;
   top: 2248px;
   left: 0;
-  width: 1440px;
+  width: 100%;
   height: 1210px;
 }
 
 .homepage .frame-14 {
   display: flex;
-  width: 1440px;
+  width: 100%;
   align-items: flex-start;
   gap: 1280px;
   padding: 187px 0px 823px 1px;
@@ -1899,7 +1880,7 @@ body {
   position: absolute;
   top: 4722px;
   left: 0;
-  width: 1440px;
+  width: 100%;
   height: 264px;
   display: flex;
   background-image: url(../icons/frame-1984078277.svg);
@@ -2302,7 +2283,7 @@ body {
   position: absolute;
   top: 5657px;
   left: 0;
-  width: 1440px;
+  width: 100%;
   height: 1384px;
 }
 
@@ -2880,7 +2861,7 @@ body {
   position: absolute;
   top: 7040px;
   left: 0;
-  width: 1440px;
+  width: 100%;
   height: 530px;
 }
 
@@ -2889,13 +2870,13 @@ body {
   height: 530px;
   position: absolute;
   top: 0;
-  width: 1440px;
+  width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .homepage .frame-40 {
-  width: 1440px;
+  width: 100%;
   height: 530px;
   position: relative;
   overflow: hidden;
@@ -2905,7 +2886,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
-  width: 1440px;
+  width: 100%;
   height: 903px;
   background-color: #000000;
 }
@@ -6363,9 +6344,9 @@ body {
    are scoped to the new BEM wrappers so nothing outside is touched.
    ========================================================================== */
 
-/* Allow vertical overflow so the JS translate3d is never clipped */
+/* Allow vertical overflow so sticky works (clip, not hidden) */
 .homepage {
-  overflow-x: hidden;
+  overflow-x: clip;
   overflow-y: visible;
 }
 
@@ -6384,7 +6365,7 @@ body {
 .ai-modernization__container {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
+  align-items: stretch;
   gap: 80px;
   width: 1280px;
   margin-left: calc(50% - 640px);
@@ -6400,8 +6381,9 @@ body {
 }
 
 .ai-modernization__sticky-inner {
-  position: relative;          /* JS sets transform:translate3d on this */
-  will-change: transform;
+  position: sticky;            /* pure CSS sticky */
+  top: 110px;
+  transform: none !important;  /* ignore any old JS translate */
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -6412,7 +6394,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 40px;
   min-width: 0;
 }
 
@@ -7040,4 +7022,338 @@ body {
   color: #ffffff;
   z-index: 3;
   pointer-events: none;
+}
+
+/* ==========================================================================
+   AI MODERNIZATION — smooth scroll, card gap & hover glow
+   ========================================================================== */
+html { scroll-behavior: smooth; }
+
+.ai-modernization__right .group-52,
+.ai-modernization__right .group-59,
+.ai-modernization__right .group-63,
+.ai-modernization__right .group-67 {
+  cursor: pointer;
+  transition: transform 0.35s ease;
+}
+
+.ai-modernization__right .rectangle-11,
+.ai-modernization__right .rectangle-12 {
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+/* same bluish look as card 01 */
+.ai-modernization__right .group-52:hover .rectangle-11,
+.ai-modernization__right .group-59:hover .rectangle-12,
+.ai-modernization__right .group-63:hover .rectangle-12,
+.ai-modernization__right .group-67:hover .rectangle-12 {
+  border-color: #00baf533;
+  box-shadow: 0px 8px 24px #00baf51f;
+}
+
+.ai-modernization__right .group-52:hover,
+.ai-modernization__right .group-59:hover,
+.ai-modernization__right .group-63:hover,
+.ai-modernization__right .group-67:hover {
+  transform: translateY(-4px);
+}
+
+@media (max-width: 1023px) {
+  .ai-modernization__sticky-inner { position: relative; top: auto; }
+}
+
+
+/* ==========================================================================
+   AI MODERNIZATION — fluid layout, responsive sticky, polished hover
+   (higher specificity so it wins over earlier / responsive.css rules)
+   ========================================================================== */
+.homepage .ai-modernization-section .ai-modernization__container {
+  width: min(1280px, calc(100% - 48px));
+  margin-left: auto;
+  margin-right: auto;
+  gap: clamp(32px, 5vw, 80px);
+  align-items: stretch;
+}
+
+.homepage .ai-modernization-section .ai-modernization__left {
+  flex: 0 0 clamp(300px, 42%, 538px);
+  max-width: 538px;
+}
+
+.homepage .ai-modernization-section .ai-modernization__sticky-inner {
+  position: sticky;
+  top: 110px;
+  transform: none !important;
+}
+
+.homepage .ai-modernization-section .ai-modernization__right {
+  gap: 40px;
+}
+
+/* card hover: icon + number micro-animations */
+.ai-modernization__right .group-55 {
+  transition: transform 0.4s cubic-bezier(.22,1,.36,1);
+}
+.ai-modernization__right .text-wrapper-37 {
+  transition: color 0.35s ease;
+}
+.ai-modernization__right .group-52:hover .group-55,
+.ai-modernization__right .group-59:hover .group-55,
+.ai-modernization__right .group-63:hover .group-55,
+.ai-modernization__right .group-67:hover .group-55 {
+  transform: scale(1.08) rotate(-6deg);
+}
+.ai-modernization__right .group-52,
+.ai-modernization__right .group-59,
+.ai-modernization__right .group-63,
+.ai-modernization__right .group-67 {
+  transition: transform 0.45s cubic-bezier(.22,1,.36,1);
+}
+.ai-modernization__right .rectangle-11,
+.ai-modernization__right .rectangle-12 {
+  transition: box-shadow 0.45s ease, border-color 0.45s ease;
+}
+
+/* Tablet (768–1023px): keep two columns + sticky, tighter sizes */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .homepage .ai-modernization-section .ai-modernization__container {
+    flex-direction: row;
+    width: calc(100% - 48px);
+    margin-left: auto;
+    padding: 0;
+    gap: 28px;
+  }
+  .homepage .ai-modernization-section .ai-modernization__left {
+    flex: 0 0 40%;
+    max-width: 40%;
+    width: auto;
+  }
+  .homepage .ai-modernization-section .ai-modernization__right {
+    flex: 1;
+    width: auto;
+    gap: 24px;
+  }
+  .homepage .ai-modernization-section .ai-modernization__sticky-inner {
+    position: sticky;
+    top: 90px;
+  }
+  .ai-modernization__right .group-53 { padding: 24px 18px !important; }
+}
+
+/* Mobile (<768px): single column, no sticky, comfortable gaps */
+@media (max-width: 767px) {
+  .homepage .ai-modernization-section .ai-modernization__container {
+    flex-direction: column;
+    width: calc(100% - 32px);
+    gap: 32px;
+  }
+  .homepage .ai-modernization-section .ai-modernization__left {
+    flex: 1 1 auto;
+    max-width: 100%;
+    width: 100%;
+  }
+  .homepage .ai-modernization-section .ai-modernization__sticky-inner {
+    position: relative;
+    top: auto;
+  }
+  .homepage .ai-modernization-section .ai-modernization__right { gap: 20px; }
+  .ai-modernization__right .group-53 { padding: 22px 16px !important; }
+}
+
+/* Touch devices have no hover: skip lift */
+@media (hover: none) {
+  .ai-modernization__right .group-52:hover,
+  .ai-modernization__right .group-59:hover,
+  .ai-modernization__right .group-63:hover,
+  .ai-modernization__right .group-67:hover { transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ai-modernization__right [class^="group-"],
+  .ai-modernization__right .group-55 { transition: none !important; transform: none !important; }
+  html { scroll-behavior: auto; }
+}
+
+
+/* ==========================================================================
+   STICKY GUARANTEE — beats responsive.css (overflow-x:hidden !important)
+   by specificity, so no edit to responsive.css is required.
+   overflow:hidden on an ancestor makes it a scroll container => sticky dies.
+   clip hides sideways overflow without creating one.
+   ========================================================================== */
+html:root,
+html body {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+html body .responsive-stage,
+html body .responsive-stage .homepage {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
+
+html body .homepage .after-case-studies,
+html body .homepage .ai-modernization-section,
+html body .homepage .ai-modernization__container,
+html body .homepage .ai-modernization__left {
+  overflow: visible !important;
+}
+
+@media (min-width: 768px) {
+  html body .homepage .ai-modernization__sticky-inner {
+    position: sticky !important;
+    top: 110px !important;
+    align-self: flex-start;
+  }
+}
+/* ==========================================================================
+   SERVICES ACCORDION — auto-play, progress bar (top), smooth expand/collapse
+   ========================================================================== */
+.homepage .frame-35,
+.homepage .services-accordion { width: 100%; max-width: 1280px; }
+
+.homepage .services-accordion .services-accordion__item {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Whole row is clickable; wider title column avoids cramped wrapping */
+.homepage .services-accordion .services-accordion__row {
+  width: 100%;
+  box-sizing: border-box;
+  grid-template-columns: 56px 360px 1fr 54px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.homepage .services-accordion .services-accordion__row:focus-visible {
+  outline: 2px solid #00baf5;
+  outline-offset: -2px;
+  border-radius: 8px;
+}
+.homepage .services-accordion .services-accordion__toggle { pointer-events: none; }
+.homepage .services-accordion .services-accordion__row:hover .services-accordion__toggle {
+  background-color: #ffffff14;
+  border-color: #ffffff;
+}
+
+/* Smooth height animation (0fr -> 1fr). !important so nothing else can override it */
+.homepage .services-accordion .services-accordion__panel,
+.homepage .services-accordion .services-accordion__panel[hidden] {
+  display: grid !important;
+  grid-template-rows: 0fr !important;
+  max-height: none !important;
+  opacity: 1 !important;
+  overflow: hidden !important;
+  transition: grid-template-rows 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.homepage .services-accordion .services-accordion__item.is-expanded .services-accordion__panel {
+  grid-template-rows: 1fr !important;
+}
+.homepage .services-accordion .services-accordion__panel-inner {
+  min-height: 0;
+  overflow: hidden;
+  padding: 0 0 0 104px;
+}
+.homepage .services-accordion .services-accordion__tags,
+.homepage .services-accordion .services-accordion__media { margin-bottom: 24px; }
+
+/* Tags + images fade/slide in */
+.homepage .services-accordion .services-accordion__panel-inner > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.homepage .services-accordion .services-accordion__item.is-expanded .services-accordion__panel-inner > * {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.15s;
+}
+.homepage .services-accordion .services-media-circle,
+.homepage .services-accordion .services-media-rect {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.homepage .services-accordion .services-accordion__item.is-expanded .services-media-circle {
+  opacity: 1; transform: none; transition-delay: 0.22s;
+}
+.homepage .services-accordion .services-accordion__item.is-expanded .services-media-rect {
+  opacity: 1; transform: none; transition-delay: 0.32s;
+}
+
+/* Progress bar — sits on the divider at the TOP of the active row */
+.homepage .services-accordion .services-accordion__progress {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: auto;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, #00baf5 0%, #ffbb00 100%);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+}
+.homepage .services-accordion .services-accordion__item.is-expanded.is-playing .services-accordion__progress {
+  opacity: 1;
+  animation: svc-progress var(--svc-duration, 6000ms) linear forwards;
+}
+.homepage .services-accordion.is-paused .services-accordion__progress {
+  animation-play-state: paused;
+}
+@keyframes svc-progress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .homepage .services-accordion .services-accordion__row {
+    grid-template-columns: 40px 1fr 54px;
+    column-gap: 16px;
+  }
+  .homepage .services-accordion .services-accordion__title { font-size: 28px; }
+  .homepage .services-accordion .services-accordion__summary {
+    grid-column: 2;
+    grid-row: 2;
+    max-width: none;
+  }
+  .homepage .services-accordion .services-accordion__toggle {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+  }
+  .homepage .services-accordion .services-accordion__panel-inner {
+    padding-left: 56px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+  }
+  .homepage .services-accordion .services-accordion__tags { margin-bottom: 16px; }
+  .homepage .services-accordion .services-accordion__media {
+    width: 100%;
+    min-width: 0;
+  }
+  .homepage .services-accordion .services-media-circle { width: 120px; height: 120px; flex: none; }
+  .homepage .services-accordion .services-media-rect { flex: 1; min-width: 0; max-width: 224px; height: 120px; }
+}
+@media (max-width: 640px) {
+  .homepage .services-accordion .services-accordion__row { padding: 18px 0; }
+  .homepage .services-accordion .services-accordion__title { font-size: 22px; }
+  .homepage .services-accordion .services-accordion__summary { font-size: 14px; line-height: 21px; }
+  .homepage .services-accordion .services-accordion__toggle { width: 40px; height: 40px; }
+  .homepage .services-accordion .services-accordion__panel-inner { padding-left: 0; }
+  .homepage .services-accordion .services-media-circle { width: 96px; height: 96px; }
+  .homepage .services-accordion .services-media-rect { height: 96px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homepage .services-accordion .services-accordion__panel,
+  .homepage .services-accordion .services-accordion__panel-inner > *,
+  .homepage .services-accordion .services-media-circle,
+  .homepage .services-accordion .services-media-rect { transition: none; }
 }

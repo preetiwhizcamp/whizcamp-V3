@@ -1,12 +1,17 @@
 /* ============================================================================
-   WHIZCAMP - FULL-WIDTH & RESPONSIVE ENGINE
+   WHIZCAMP — FULL-WIDTH RESPONSIVE ENGINE
    ============================================================================
-   Ensures the entire website uses 100% / 100vw for all full-width sections
-   while preserving the exact pixel-perfect UI hierarchy, layout, and spacing
-   from 1920px desktop down to small mobile devices.
+   Strategy:
+   • The homepage canvas is always 1440px in home.css (position: absolute coords).
+   • Here we override it to be 100% wide at every breakpoint, then re-anchor
+     every section using calc(50% − 640px) so content stays centred on a
+     1280px grid, while full-bleed backgrounds extend edge-to-edge.
+   • No CSS scaling/transform trick — everything is fluid widths.
    ============================================================================ */
 
-/* --- Universal resets --- */
+/* --------------------------------------------------------------------------
+   0. GLOBAL RESETS
+   -------------------------------------------------------------------------- */
 *,
 *::before,
 *::after {
@@ -17,685 +22,530 @@ html,
 body {
   width: 100%;
   max-width: 100vw;
-  overflow-x: hidden;
+ overflow-x: clip !important;
   margin: 0;
   padding: 0;
-  background-color: #f6f6f6;
 }
 
-/* ============================================================================
-   DESKTOP & WIDE SCREENS (>= 1440px): FULL-WIDTH 100% / 100vw SECTIONS
-   ============================================================================ */
-@media (min-width: 1440px) {
-  :root {
-    --page-scale: 1 !important;
-  }
-
-  .responsive-stage {
-    width: 100% !important;
-    max-width: 100vw !important;
-    min-height: calc(var(--page-height) * 1px) !important;
-    display: block !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
-  }
-
-  .homepage {
-    width: 100% !important;
-    max-width: 100vw !important;
-    min-width: 100% !important;
-    min-height: calc(var(--page-height) * 1px) !important;
-    position: relative !important;
-    transform: none !important;
-    overflow-x: hidden !important;
-    overflow-y: visible !important;
-    margin: 0 auto !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     1. TOP ANNOUNCEMENT BANNER (.frame-wrapper) -> 100% Full-Width
-     -------------------------------------------------------------------------- */
-  .homepage .frame-wrapper {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
-
+ 
+.responsive-stage,
+.homepage {
+  overflow-x: clip !important;
+  overflow-y: visible !important;
+}
  
 
-  /* --------------------------------------------------------------------------
-     2. HERO SECTION BACKGROUND & OVERLAYS (.group) -> 100% Full-Width
-     -------------------------------------------------------------------------- */
-  .homepage .group {
-    position: absolute !important;
-    top: 50px !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    background-size: cover !important;
-    background-position: center center !important;
+/* --------------------------------------------------------------------------
+   1. LAYOUT SHELL — always fluid, never scaled
+   -------------------------------------------------------------------------- */
+:root {
+  --page-scale: 1 !important;
+}
+
+.responsive-stage {
+  width: 100% !important;
+  max-width: 100vw !important;
+  min-height: calc(var(--page-height) * 1px) !important;
+  display: block !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
+.homepage {
+  width: 100% !important;
+  max-width: 100vw !important;
+  min-width: 0 !important;
+  min-height: calc(var(--page-height) * 1px) !important;
+  position: relative !important;
+  transform: none !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. ANNOUNCEMENT TICKER — full-width band
+   -------------------------------------------------------------------------- */
+.homepage .frame-wrapper {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. HERO BACKGROUND — full-width image + overlays
+   -------------------------------------------------------------------------- */
+.homepage .group {
+  position: absolute !important;
+  top: 50px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  background-size: cover !important;
+  background-position: 60% 50% !important;
+}
+
+.homepage .rectangle-wrapper {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.homepage .rectangle {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. HERO CONTENT — centred on 1280px grid
+   -------------------------------------------------------------------------- */
+.homepage .group-25 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+}
+
+.homepage .AI-powered-digital {
+  left: calc(50% - 640px) !important;
+}
+
+.homepage .text-wrapper-6 {
+  left: calc(50% - 640px) !important;
+}
+
+.homepage .technology-solutions {
+  left: calc(50% - 640px) !important;
+}
+
+/* CTA buttons keep their offset from the left edge of the 1280px grid */
+.homepage .group-2 {
+  left: calc(50% - 640px + 740px) !important;
+}
+
+.homepage .group-4 {
+  left: calc(50% - 640px + 1018px) !important;
+}
+
+.homepage .group-5 {
+  left: calc(50% - 640px + 1144px) !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. TRUSTED BRANDS — full-width band
+   -------------------------------------------------------------------------- */
+.homepage .group-wrapper {
+  position: absolute !important;
+  top: 880px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+}
+
+.homepage .trusted-brands-section {
+  left: 0 !important;
+  width: 100% !important;
+}
+
+.homepage .group-6 {
+  width: 100% !important;
+  margin-left: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+}
+
+.homepage .group-7 {
+  margin-left: 0 !important;
+  align-self: center !important;
+}
+
+.brands-slider-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. WHO WE ARE — centred 1282px grid
+   -------------------------------------------------------------------------- */
+.homepage .group-9 {
+  left: calc(50% - 641px) !important;
+  width: 1282px !important;
+}
+
+/* --------------------------------------------------------------------------
+   7. FEATURED PROJECTS (dark section) — full-width
+   -------------------------------------------------------------------------- */
+.homepage .group-34 {
+  position: absolute !important;
+  top: 2248px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+.homepage .frame-14 {
+  width: 100% !important;
+}
+
+.homepage .group-35 {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* --------------------------------------------------------------------------
+   8. WHAT WE ADD — full-width dark band
+   -------------------------------------------------------------------------- */
+.homepage .group-72 {
+  position: absolute !important;
+  top: 4722px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  display: flex !important;
+  justify-content: center !important;
+  overflow: hidden !important;
+}
+
+.homepage .group-72 .group-73 {
+  margin-top: 45px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 1002px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 34px !important;
+}
+
+/* --------------------------------------------------------------------------
+   9. THREE CARDS — centred 1280px grid
+   -------------------------------------------------------------------------- */
+.homepage .group-77 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+}
+
+/* --------------------------------------------------------------------------
+   10. SERVICES ACCORDION — full-width dark background
+   -------------------------------------------------------------------------- */
+.homepage .group-83 {
+  position: absolute !important;
+  top: 5657px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+.homepage .frame-32 {
+  width: 100% !important;
+}
+
+.homepage .group-84 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+}
+
+/* --------------------------------------------------------------------------
+   11. STATS / NUMBERS — full-width
+   -------------------------------------------------------------------------- */
+.homepage .group-99,
+.homepage .group-100,
+.homepage .frame-40,
+.homepage .rectangle-17,
+.homepage .rectangle-18 {
+  position: absolute !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  left: 0 !important;
+}
+
+/* --------------------------------------------------------------------------
+   12. OUR FOUNDATION — centred 1280px grid
+   -------------------------------------------------------------------------- */
+.homepage .group-110 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+}
+
+/* --------------------------------------------------------------------------
+   13. INDUSTRIES — centred 1280px grid
+   -------------------------------------------------------------------------- */
+.homepage .industries-we-serve {
+  left: calc(50% - 640px) !important;
+}
+
+.homepage .supporting-all {
+  left: calc(50% - 640px) !important;
+  width: 580px !important;
+}
+
+.homepage .from-healthcare-to {
+  left: calc(50% + 121px) !important;
+  width: 520px !important;
+}
+
+.homepage .vector-12 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+}
+
+.homepage .frame-42 {
+  left: calc(50% - 640px) !important;
+  width: 586px !important;
+}
+
+.homepage .rectangle-20 {
+  left: calc(50% + 120px) !important;
+  width: 520px !important;
+}
+
+.homepage .group-132 {
+  left: calc(50% + 120px) !important;
+}
+
+/* --------------------------------------------------------------------------
+   14. BLOGS SECTION — full-width dark background
+   -------------------------------------------------------------------------- */
+.homepage .group-135 {
+  position: absolute !important;
+  top: 9762px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+.homepage .group-135 .frame-44 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+}
+
+.homepage .group-136 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+  position: absolute !important;
+  top: 100px !important;
+  z-index: 2 !important;
+}
+
+/* --------------------------------------------------------------------------
+   15. CTA BANNER — full-width cosmic background
+   -------------------------------------------------------------------------- */
+.homepage .group-148 {
+  position: absolute !important;
+  top: 10625px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+.homepage .group-148 .group-149 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.homepage .group-148 .frame-47 {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+.homepage .group-148 .rectangle-24 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.homepage .group-148 .group-150 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+  position: absolute !important;
+  z-index: 2 !important;
+}
+
+/* --------------------------------------------------------------------------
+   16. TESTIMONIALS — centred 1280px grid
+   -------------------------------------------------------------------------- */
+.homepage .group-153 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+}
+
+/* --------------------------------------------------------------------------
+   17. FAQ — centred 1280px grid
+   -------------------------------------------------------------------------- */
+.homepage .group-173 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+}
+
+/* --------------------------------------------------------------------------
+   18. CONTACT SECTION — full-width dark background
+   -------------------------------------------------------------------------- */
+.homepage .group-188 {
+  position: absolute !important;
+  top: 13024px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+.homepage .group-188 .group-189 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.homepage .group-188 .frame-55 {
+  width: 100% !important;
+  height: 100% !important;
+  overflow: hidden !important;
+}
+
+.homepage .group-188 .group-190 {
+  position: absolute !important;
+  top: -228px !important;
+  left: calc(50% - 775px) !important;
+  width: 1550px !important;
+  height: 1550px !important;
+  border-radius: 775px !important;
+  filter: blur(250px) !important;
+  opacity: 0.7 !important;
+  pointer-events: none !important;
+}
+
+.homepage .group-188 .rectangle-30 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+.homepage .group-188 .group-191 {
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+  position: absolute !important;
+  top: 100px !important;
+  z-index: 2 !important;
+}
+
+/* --------------------------------------------------------------------------
+   19. FOOTER — full-width black background
+   -------------------------------------------------------------------------- */
+.homepage .group-217 {
+  position: absolute !important;
+  top: 14000px !important;
+  left: 0 !important;
+  width: 100% !important;
+  max-width: 100vw !important;
+  overflow: hidden !important;
+}
+
+.homepage .group-217 .frame-65 {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0 !important;
+}
+
+.homepage .group-217 .we-custom-develop {
+  position: absolute !important;
+  top: 140px !important;
+  left: calc(50% - 640px) !important;
+}
+
+.homepage .group-217 .vector-17 {
+  position: absolute !important;
+  top: 346px !important;
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+}
+
+.homepage .group-217 .group-218 {
+  position: absolute !important;
+  top: 396px !important;
+  left: calc(50% - 640px) !important;
+  width: 1280px !important;
+}
+
+/* Footer decorative pills */
+.homepage .group-217 .frame-75 { left: calc(50% - 640px + 1059px) !important; }
+.homepage .group-217 .frame-76 { left: calc(50% - 640px + 956px) !important; }
+.homepage .group-217 .frame-77 { left: calc(50% - 640px + 1075px) !important; }
+.homepage .group-217 .frame-78 { left: calc(50% - 640px + 803px) !important; }
+.homepage .group-217 .frame-79 { left: calc(50% - 640px + 829px) !important; }
+.homepage .group-217 .frame-80 { left: calc(50% - 640px + 681px) !important; }
+.homepage .group-217 .frame-81 { left: calc(50% - 640px + 775px) !important; }
+
+/* --------------------------------------------------------------------------
+   20. TABLET & SMALL DESKTOP (768px – 1439px)
+       Keep fluid layout but clamp the 1280px content grid
+   -------------------------------------------------------------------------- */
+@media (max-width: 1439px) {
+  /* Narrow the grid gracefully */
+  .homepage .group-25,
+  .homepage .group-9,
+  .homepage .group-72 .group-73,
+  .homepage .group-77,
+  .homepage .group-84,
+  .homepage .group-110,
+  .homepage .group-136,
+  .homepage .group-148 .group-150,
+  .homepage .group-153,
+  .homepage .group-173,
+  .homepage .group-188 .group-191,
+  .homepage .group-217 .group-218 {
+    left: 5% !important;
+    width: 90% !important;
   }
 
-  .homepage .rectangle-wrapper {
-    width: 100% !important;
-    max-width: 100% !important;
+  .homepage .AI-powered-digital,
+  .homepage .text-wrapper-6,
+  .homepage .technology-solutions,
+  .homepage .industries-we-serve,
+  .homepage .supporting-all,
+  .homepage .frame-42,
+  .homepage .vector-12,
+  .homepage .group-217 .vector-17,
+  .homepage .group-217 .we-custom-develop {
+    left: 5% !important;
+    width: 90% !important;
   }
 
-  .homepage .rectangle {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     3. HERO CONTENT & NAVBAR -> Centered to 1280px Grid
-     -------------------------------------------------------------------------- */
-  .homepage .group-25 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-  }
-
-  .homepage .AI-powered-digital {
-    left: calc(50% - 640px) !important;
-  }
-
-  .homepage .text-wrapper-6 {
-    left: calc(50% - 640px) !important;
-  }
-
-  .homepage .technology-solutions {
-    left: calc(50% - 640px) !important;
-  }
-
+  /* CTA buttons — keep relative position within fluid grid */
   .homepage .group-2 {
-    left: calc(50% - 640px + 740px) !important;
+    left: calc(5% + 55%) !important;
   }
 
   .homepage .group-4 {
-    left: calc(50% - 640px + 1018px) !important;
+    left: calc(5% + 78%) !important;
   }
 
   .homepage .group-5 {
-    left: calc(50% - 640px + 1144px) !important;
+    left: calc(5% + 88%) !important;
   }
 
-  /* --------------------------------------------------------------------------
-     4. TRUSTED BRANDS (.group-wrapper) -> 100% Full-Width
-     -------------------------------------------------------------------------- */
-  .homepage .group-wrapper {
-    position: absolute !important;
-    top: 880px !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-  }
-
-  .homepage .group-6 {
-    width: 100% !important;
-    margin-left: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-
-  .homepage .group-7 {
-    margin-left: 0 !important;
-    align-self: center !important;
-  }
-
-  .homepage .group-8 {
-    width: 1440px !important;
-    max-width: 100% !important;
-    align-self: center !important;
-    object-fit: contain !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     5. WHO WE ARE (.group-9) -> Centered to 1280px Grid
-     -------------------------------------------------------------------------- */
-  .homepage .group-9 {
-    left: calc(50% - 641px) !important;
-    width: 1282px !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     6. FEATURED PROJECTS (.group-34) -> 100% Full-Width
-     -------------------------------------------------------------------------- */
-  .homepage .group-34 {
-    position: absolute !important;
-    top: 2248px !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .homepage .frame-14 {
-    width: 100% !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-
-  .homepage .frame-15 {
-    width: 100% !important;
-  }
-
-  .homepage .group-35 {
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  .homepage .group-36 {
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     7. AI MODERNIZATION — the elements now live inside .ai-modernization-section
-        which uses its own flex layout (see end of home.css). The old absolute
-        centering rules must NOT be applied to them; they are neutralised here.
-     -------------------------------------------------------------------------- */
-  /* No rules needed — positioning is handled by the scoped flex layout. */
-
-  /* --------------------------------------------------------------------------
-     8. WHAT WE ADD (.group-72) -> 100% Full-Width & Centered Pills
-     -------------------------------------------------------------------------- */
-  .homepage .group-72 {
-    position: absolute !important;
-    top: 4722px !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    height: 264px !important;
-    display: flex !important;
-    justify-content: center !important;
-    background-image: url(../icons/frame-1984078277.svg) !important;
-    background-size: cover !important;
-    background-position: center !important;
-    overflow: hidden !important;
-  }
-
-  .homepage .group-72 .group-73 {
-    margin-top: 45px !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 1002px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 34px !important;
-  }
-
-  .homepage .group-72 .frame-20 {
-    display: inline-flex !important;
-    height: 18px !important;
-    width: 1002px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 16px !important;
-  }
-
-  .homepage .group-72 .group-74 {
-    margin-left: 0 !important;
-    height: 122px !important;
-    width: 940px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 22px !important;
-  }
-
-  .homepage .group-72 .group-75 {
-    width: 940px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-  .homepage .group-72 .frame-21 {
-    display: inline-flex !important;
-    width: 274px !important;
-    height: 50px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    padding: 13px 31px !important;
-    background-color: #ffffff1a !important;
-    border-radius: 60px !important;
-    border: 1px solid #00baf5 !important;
-  }
-
-  .homepage .group-72 .frame-24 {
-    display: inline-flex !important;
-    width: 354px !important;
-    height: 50px !important;
-    margin-left: 28px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    padding: 13px 31px !important;
-    background-color: #ffffff1a !important;
-    border-radius: 60px !important;
-    border: 1px solid #ffbb00 !important;
-  }
-
-  .homepage .group-72 .frame-25 {
-    display: inline-flex !important;
-    width: 260px !important;
-    height: 50px !important;
-    margin-left: 24px !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    padding: 13px 24px !important;
-    background-color: #ffffff1a !important;
-    border-radius: 60px !important;
-    border: 1px solid #00baf5 !important;
-  }
-
-  .homepage .group-72 .group-76 {
-    margin-left: 0 !important;
-    height: 50px !important;
-    width: 569px !important;
-    position: relative !important;
-    display: flex !important;
-    justify-content: center !important;
-    gap: 20px !important;
-  }
-
-  .homepage .group-72 .frame-26 {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    padding: 13px 31px !important;
-    background-color: #ffffff1a !important;
-    border-radius: 60px !important;
-    border: 1px solid #00baf5 !important;
-  }
-
-  .homepage .group-72 .frame-27 {
-    position: relative !important;
-    top: auto !important;
-    left: auto !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 10px !important;
-    padding: 13px 23px !important;
-    background-color: #ffffff1a !important;
-    border-radius: 60px !important;
-    border: 1px solid #ffbb00 !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     9. THREE CARDS (.group-77) -> Centered to 1280px Grid
-     -------------------------------------------------------------------------- */
-  .homepage .group-77 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     10. SERVICES ACCORDION (.group-83) -> 100% Full-Width
-     -------------------------------------------------------------------------- */
-  .homepage .group-83 {
-    position: absolute !important;
-    top: 5657px !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    overflow: hidden !important;
-  }
-
-  .homepage .frame-32 {
-    width: 100% !important;
-  }
-
-  .homepage .group-84 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     11. STATS SECTION (.group-99) -> 100% Full-Width
-     -------------------------------------------------------------------------- */
-  .homepage .group-99,
-  .homepage .group-100,
-  .homepage .frame-40,
-  .homepage .rectangle-17,
-  .homepage .rectangle-18 {
-    position: absolute !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    left: 0 !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     12. OUR FOUNDATION (.group-110) -> Centered to 1280px Grid
-     -------------------------------------------------------------------------- */
-  .homepage .group-110 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     13. INDUSTRIES SECTION -> Centered to 1280px Grid & Non-Colliding Headline
-     -------------------------------------------------------------------------- */
-  .homepage .industries-we-serve {
-    left: calc(50% - 640px) !important;
-  }
-
-  .homepage .supporting-all {
-    left: calc(50% - 640px) !important;
-    width: 580px !important;
-    max-width: 580px !important;
-  }
-
-  .homepage .from-healthcare-to {
-    left: calc(50% + 121px) !important;
-    width: 520px !important;
-    max-width: 520px !important;
-  }
-
-  .homepage .vector-12 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-  }
-
-  .homepage .frame-42 {
-    left: calc(50% - 640px) !important;
-    width: 586px !important;
-  }
-
-  .homepage .rectangle-20 {
-    left: calc(50% + 120px) !important;
-    width: 520px !important;
-  }
-
-  .homepage .group-132 {
-    left: calc(50% + 120px) !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     14. BLOGS SECTION (.group-135) -> 100% Full-Width Dark Background
-     -------------------------------------------------------------------------- */
-  .homepage .group-135 {
-    position: absolute !important;
-    top: 9762px !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    height: 864px !important;
-    background-color: #191919 !important;
-    overflow: hidden !important;
-  }
-
-  .homepage .group-135 .frame-44 {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background-color: #191919 !important;
-    padding: 0 !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    pointer-events: none !important;
-  }
-
-  .homepage .group-136 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-    position: absolute !important;
-    top: 100px !important;
-    z-index: 2 !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     15. CTA BANNER (.group-148) -> 100% Full-Width Cosmic Background
-     -------------------------------------------------------------------------- */
-  .homepage .group-148 {
-    position: absolute !important;
-    top: 10625px !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    height: 361px !important;
-    overflow: hidden !important;
-    background-color: #000000 !important;
-  }
-
-  .homepage .group-148 .group-149 {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
-
-  .homepage .group-148 .frame-47 {
-    position: relative !important;
-    width: 100% !important;
-    height: 100% !important;
-    overflow: hidden !important;
-  }
-
-  .homepage .group-148 .rectangle-17 {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-  }
-
-  .homepage .group-148 .rectangle-24 {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-
-  .homepage .group-148 .group-150 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-    position: absolute !important;
-    top: 90px !important;
-    z-index: 2 !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     16. TESTIMONIALS (.group-153) -> Centered to 1280px Grid
-     -------------------------------------------------------------------------- */
-  .homepage .group-153 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     17. FAQ SECTION (.group-173) -> Centered to 1280px Grid
-     -------------------------------------------------------------------------- */
-  .homepage .group-173 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     18. CONTACT SECTION (.group-188) -> 100% Full-Width Dark Blue Glow Background
-     -------------------------------------------------------------------------- */
-  .homepage .group-188 {
-    position: absolute !important;
-    top: 13024px !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    height: 976px !important;
-    overflow: hidden !important;
-    background-color: #000000 !important;
-  }
-
-  .homepage .group-188 .group-189 {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-  }
-
-  .homepage .group-188 .frame-55 {
-    position: relative !important;
-    width: 100% !important;
-    height: 100% !important;
-    overflow: hidden !important;
-    background-color: #000000 !important;
-  }
-
-  .homepage .group-188 .group-190 {
-    position: absolute !important;
-    top: -228px !important;
-    left: calc(50% - 116px) !important;
-    width: 1550px !important;
-    height: 1550px !important;
-    background-color: #0010c5 !important;
-    border-radius: 775px !important;
-    filter: blur(250px) !important;
-    opacity: 0.7 !important;
-    pointer-events: none !important;
-  }
-
-  .homepage .group-188 .rectangle-30 {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-  }
-
-  .homepage .group-188 .group-191 {
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-    position: absolute !important;
-    top: 100px !important;
-    z-index: 2 !important;
-  }
-
-  /* --------------------------------------------------------------------------
-     19. FOOTER SECTION (.group-217) -> 100% Full-Width Black Background & Aligned Pills
-     -------------------------------------------------------------------------- */
-  .homepage .group-217 {
-    position: absolute !important;
-    top: 14000px !important;
-    left: 0 !important;
-    width: 100% !important;
-    max-width: 100vw !important;
-    height: 816px !important;
-    background-color: #0c0c0c !important;
-    overflow: hidden !important;
-  }
-
-  .homepage .group-217 .frame-65 {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background-color: #0c0c0c !important;
-    padding: 0 !important;
-    display: flex !important;
-    justify-content: space-between !important;
-    pointer-events: none !important;
-  }
-
-  .homepage .group-217 .whizcamp {
-    position: absolute !important;
-    top: 80px !important;
-    left: 50% !important;
-    transform: translateX(-50%) !important;
-  }
-
-  .homepage .group-217 .we-custom-develop {
-    position: absolute !important;
-    top: 140px !important;
-    left: calc(50% - 640px) !important;
-  }
-
-  .homepage .group-217 .vector-17 {
-    position: absolute !important;
-    top: 346px !important;
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-  }
-
-  .homepage .group-217 .group-218 {
-    position: absolute !important;
-    top: 396px !important;
-    left: calc(50% - 640px) !important;
-    width: 1280px !important;
-  }
-
-  /* Floating decorative pills arranged to the right of "We Custom-Develop Solutions" */
-  .homepage .group-217 .frame-75 {
-    left: calc(50% - 640px + 1059px) !important;
-  }
-  .homepage .group-217 .frame-76 {
-    left: calc(50% - 640px + 956px) !important;
-  }
-  .homepage .group-217 .frame-77 {
-    left: calc(50% - 640px + 1075px) !important;
-  }
-  .homepage .group-217 .frame-78 {
-    left: calc(50% - 640px + 803px) !important;
-  }
-  .homepage .group-217 .frame-79 {
-    left: calc(50% - 640px + 829px) !important;
-  }
-  .homepage .group-217 .frame-80 {
-    left: calc(50% - 640px + 681px) !important;
-  }
-  .homepage .group-217 .frame-81 {
-    left: calc(50% - 640px + 775px) !important;
-  }
-}
-
-/* ============================================================================
-   TABLETS & MOBILE SCREENS (< 1440px): PROPORTIONAL SCALING & TOUCH OPTIMIZATION
-   ============================================================================ */
-@media (max-width: 1439px) {
-  :root {
-    --page-scale: calc(100vw / 1440) !important;
-  }
-
-  .responsive-stage {
-    min-height: calc(var(--page-height) * var(--page-scale) * 1px) !important;
-    width: 100% !important;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: flex-start !important;
-    overflow: hidden !important;
-  }
-
-  .homepage {
-    width: 1440px !important;
-    min-width: 1440px !important;
-    transform-origin: top center !important;
-    transform: scale(var(--page-scale)) !important;
-  }
-
-  /* Ensure touch targets meet minimum accessible sizes */
   button,
   a,
   .services-accordion__toggle,
@@ -706,25 +556,43 @@ body {
   }
 }
 
+/* --------------------------------------------------------------------------
+   21. MOBILE (< 768px) — tighten spacing further
+   -------------------------------------------------------------------------- */
+@media (max-width: 767px) {
+  .homepage .group-25,
+  .homepage .group-9,
+  .homepage .group-77,
+  .homepage .group-84,
+  .homepage .group-110,
+  .homepage .group-136,
+  .homepage .group-148 .group-150,
+  .homepage .group-153,
+  .homepage .group-173,
+  .homepage .group-188 .group-191,
+  .homepage .group-217 .group-218 {
+    left: 4% !important;
+    width: 92% !important;
+  }
 
+  .homepage .group-2 {
+    left: 4% !important;
+    top: 800px !important;
+  }
 
-/* ==========================================================================
-   TRUSTED BRANDS Slick Slider — Responsive overrides
-   ========================================================================== */
-.homepage .trusted-brands-section {
-  left: 0 !important;
-  width: 100vw !important;
+  .homepage .group-4 {
+    left: calc(4% + 200px) !important;
+    top: 800px !important;
+  }
+
+  .homepage .group-5 {
+    left: calc(100% - 152px) !important;
+  }
 }
 
-.homepage .trusted-brands-section .group-6 {
-  padding: 20px 0 18px !important;
-}
-
-.brands-slider-wrap {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-
+/* --------------------------------------------------------------------------
+   22. BRAND SLIDER — responsive logo sizes
+   -------------------------------------------------------------------------- */
 .brand-slide {
   padding: 0 8px !important;
 }
@@ -734,10 +602,7 @@ body {
   height: 80px;
 }
 
-@media (max-width: 768px) {
-  .brand-slide {
-    padding: 0 6px !important;
-  }
+@media (max-width: 900px) {
   .brand-slide img {
     width: 100px;
     height: 68px;
@@ -745,9 +610,6 @@ body {
 }
 
 @media (max-width: 480px) {
-  .brand-slide {
-    padding: 0 5px !important;
-  }
   .brand-slide img {
     width: 88px;
     height: 60px;
