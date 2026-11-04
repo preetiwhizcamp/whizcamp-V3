@@ -709,3 +709,40 @@ body {
   }
 }
 
+
+
+/* ==========================================================================
+   TRUSTED BRANDS Slick Slider — Responsive overrides
+   ========================================================================== */
+.homepage .trusted-brands-section {
+  left: 0 !important;
+  width: 100vw !important;
+}
+
+.homepage .trusted-brands-section .group-6 {
+  padding: 24px 0 20px !important;
+}
+
+.brands-slider-wrap {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+.brand-slide img {
+  height: 100px;
+  max-width: 180px;
+}
+
+@media (max-width: 768px) {
+  .brand-slide img {
+    height: 70px;
+    max-width: 130px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-slide img {
+    height: 56px;
+    max-width: 100px;
+  }
+}

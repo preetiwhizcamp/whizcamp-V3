@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="assets/css/globals.css" />
     <link rel="stylesheet" href="assets/css/home.css" />
     <link rel="stylesheet" href="assets/css/responsive.css" />
+    <!-- Slick Slider -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
   </head>
   <body>
     <div class="responsive-stage">
@@ -86,25 +89,48 @@
           <div class="orbit-badge__ring" aria-hidden="true"></div>
           <div class="orbit-badge__center" aria-hidden="true"></div>
         </div>
-        <div class="group-wrapper">
+        <div class="group-wrapper trusted-brands-section">
           <div class="group-6">
             <div class="group-7">
               <div class="trusted-by-industry">
                 TRUSTED BY INDUSTRY-LEADING BRANDS
               </div>
-              <img
-                class="vector-2"
-                src="assets/icons/vector-7.svg"
-              />
-              <img
-                class="vector-3"
-                src="assets/icons/vector-7.svg"
-              />
+              <img class="vector-2" src="assets/icons/vector-7.svg" />
+              <img class="vector-3" src="assets/icons/vector-7.svg" />
             </div>
-            <img
-              class="group-8"
-              src="assets/images/group-1410088642.png"
-            />
+
+            <!-- Slick Logo Slider -->
+            <div class="brands-slider-wrap">
+              <div class="brands-slider">
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-bibena-logo.png" alt="Bibena" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-mastercook-recipe-manager-desktop-and-mobile-app-logo.png" alt="MasterCook" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-sleepintelligencebyDeep-logo-1.png" alt="Sleep Intelligence by DEEP" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-vyva-logo.png" alt="VyVa" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-homepage-kingpool-ui-section.png" alt="KingPool" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-homepage-mumshandmade-ui-section.png" alt="Mums Handmade" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-kaire-ai-iot-enabled-healthcare-caregiver-web-mobile-app-logo.png" alt="Kaire" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-giuteamconnect-game-scheduling-web-mobile-app-case-study.png" alt="GIU Team Connect" />
+                </div>
+                <div class="brand-slide">
+                  <img src="assets/images/whizcamp-blackdog-logo.png" alt="Black Dog" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="group-9">
@@ -2158,5 +2184,58 @@
       </div>
     </div>
     <script src="assets/js/main.js"></script>
+    <!-- jQuery + Slick Slider -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var $slider = $('.brands-slider');
+
+        $slider.slick({
+          infinite: true,
+          slidesToShow: 5,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 2000,
+          speed: 700,
+          arrows: false,
+          dots: false,
+          pauseOnHover: true,
+          cssEase: 'ease-in-out',
+          responsive: [
+            {
+              breakpoint: 1200,
+              settings: { slidesToShow: 4 }
+            },
+            {
+              breakpoint: 900,
+              settings: { slidesToShow: 3 }
+            },
+            {
+              breakpoint: 600,
+              settings: { slidesToShow: 2 }
+            },
+            {
+              breakpoint: 400,
+              settings: { slidesToShow: 1 }
+            }
+          ]
+        });
+
+        // Blur-in animation on each slide change
+        $slider.on('beforeChange', function (e, slick, currentSlide, nextSlide) {
+          // Mark the incoming slide for blur-in animation
+          var $nextSlide = $slider.find('[data-slick-index="' + nextSlide + '"]');
+          $nextSlide.addClass('brand-blur-in');
+        });
+
+        $slider.on('afterChange', function (e, slick, currentSlide) {
+          // Remove animation class after it finishes so it can re-trigger
+          setTimeout(function () {
+            $slider.find('.brand-blur-in').removeClass('brand-blur-in');
+          }, 650);
+        });
+      });
+    </script>
   </body>
 </html>

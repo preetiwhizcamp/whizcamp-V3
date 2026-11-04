@@ -6639,3 +6639,117 @@ body {
     margin-left: calc(50% - 640px);
   }
 }
+
+
+/* ==========================================================================
+   TRUSTED BRANDS — Full-Width Section + Slick Slider
+   ========================================================================== */
+
+/* Full-width band */
+.homepage .trusted-brands-section {
+  position: absolute;
+  top: 880px;
+  left: 0;
+  width: 100vw !important;
+  height: auto !important;
+  min-height: 216px;
+  display: flex;
+  align-items: center;
+  background-image: url(../icons/rectangle-25026.svg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+/* Inner column stretches full width */
+.homepage .trusted-brands-section .group-6 {
+  width: 100% !important;
+  padding: 28px 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Heading row — keep centred */
+.homepage .trusted-brands-section .group-7 {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 18px;
+}
+
+/* Slider wrapper — full bleed with fade-edge mask */
+.brands-slider-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  /* Fade mask: left and right edges blur into the background */
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0,0,0,0.15) 4%,
+    rgba(0,0,0,0.6) 8%,
+    black 16%,
+    black 84%,
+    rgba(0,0,0,0.6) 92%,
+    rgba(0,0,0,0.15) 96%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(0,0,0,0.15) 4%,
+    rgba(0,0,0,0.6) 8%,
+    black 16%,
+    black 84%,
+    rgba(0,0,0,0.6) 92%,
+    rgba(0,0,0,0.15) 96%,
+    transparent 100%
+  );
+}
+
+/* Each slide */
+.brand-slide {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 28px;
+}
+
+/* Logo image — sized to match design (image 1) */
+.brand-slide img {
+  height: 110px;
+  width: auto;
+  max-width: 200px;
+  object-fit: contain;
+  /* Entering slide starts blurred and scales up */
+  transition: filter 0.5s ease, transform 0.5s ease, opacity 0.5s ease;
+}
+
+/* Slick: slides that are animating in come from blurred state */
+.slick-slide {
+  opacity: 1;
+  filter: blur(0px);
+  transition: filter 0.5s ease, opacity 0.5s ease;
+}
+
+/* Class toggled by JS on slide change — outgoing slide */
+.slick-slide.brand-blur-out {
+  filter: blur(6px);
+  opacity: 0.4;
+}
+
+/* Incoming slide starts blurred, transitions to clear */
+.slick-slide.brand-blur-in {
+  animation: brandBlurIn 0.6s ease forwards;
+}
+
+@keyframes brandBlurIn {
+  0%   { filter: blur(8px); opacity: 0.3; transform: scale(0.96); }
+  100% { filter: blur(0px); opacity: 1;   transform: scale(1);    }
+}
+
+.brand-slide img:hover {
+  transform: scale(1.06);
+}
