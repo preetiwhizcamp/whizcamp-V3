@@ -1,6 +1,9 @@
 /**
- * Whizcamp Main Application Script
- * Single init path — no duplicate listeners / GSAP contexts.
+ * Whizcamp Main Application Script  (performance build)
+ * - Single init path: no duplicate listeners / GSAP contexts
+ * - Smooth scroll: Lenis driven by the GSAP ticker, synced with ScrollTrigger
+ * - Scroll work is rAF-throttled; layout reads are batched
+ * - Heavy images are prefetched in idle time so nothing pops in while scrolling
  */
 (function () {
   'use strict';
@@ -8,9 +11,14 @@
   window.__wcApp = true;
 
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var resizeFns = [];
-  var loadRefreshQueued = false;
+  var lenis = null;
+  var refreshQueued = false;
 
+  /* ------------------------------------------------------------------
+     Helpers
+     ------------------------------------------------------------------ */
   function onResize(fn) { resizeFns.push(fn); }
 
   function debounce(fn, ms) {
@@ -22,11 +30,28 @@
     };
   }
 
+  function rafThrottle(fn) {
+    var queued = false, lastArgs;
+    return function () {
+      lastArgs = arguments;
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(function () {
+        queued = false;
+        fn.apply(null, lastArgs);
+      });
+    };
+  }
+
+  var idle = window.requestIdleCallback
+    ? function (fn) { window.requestIdleCallback(fn, { timeout: 2500 }); }
+    : function (fn) { setTimeout(fn, 250); };
+
   function setupGsap() {
     if (!window.gsap) return false;
     if (!window.__wcGsap) {
-      gsap.config({ autoSleep: 60, nullTargetWarn: false, force3D: true });
-      gsap.ticker.lagSmoothing(1000, 16);
+      gsap.config({ autoSleep: 60, nullTargetWarn: false });
+      gsap.ticker.lagSmoothing(0);
       if (window.ScrollTrigger) {
         gsap.registerPlugin(ScrollTrigger);
         ScrollTrigger.config({
@@ -52,8 +77,75 @@
     }
   }
 
+  /* one coalesced ScrollTrigger refresh, no matter how many callers */
   function refreshST() {
-    if (window.ScrollTrigger) ScrollTrigger.refresh();
+    if (!window.ScrollTrigger || refreshQueued) return;
+    refreshQueued = true;
+    requestAnimationFrame(function () {
+      refreshQueued = false;
+      ScrollTrigger.refresh();
+    });
+  }
+
+  function scrollToY(y) {
+    if (lenis) lenis.scrollTo(y, { duration: 1.1 });
+    else window.scrollTo({ top: y, behavior: reduceMotion ? 'auto' : 'smooth' });
+  }
+
+  /* ------------------------------------------------------------------
+     Smooth scroll (Lenis on the GSAP ticker) — keeps native scrolling,
+     so position:sticky and the fixed case-study pin keep working.
+     ------------------------------------------------------------------ */
+  function initSmoothScroll() {
+    if (lenis || reduceMotion || !window.Lenis || !setupGsap()) return;
+
+    lenis = new Lenis({
+      duration: 1.15,
+      easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.4,
+      syncTouch: false
+    });
+    window.__wcLenis = lenis;
+
+    if (window.ScrollTrigger) lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var id = a.getAttribute('href');
+      if (!id || id.length < 2) return;
+      var el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      lenis.scrollTo(el, { offset: -80, duration: 1.2 });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+     Images: async decode + lazy-load everything that is well below the fold
+     ------------------------------------------------------------------ */
+  function initImages() {
+    var vh = window.innerHeight || 800;
+    var imgs = document.querySelectorAll('img[src]');
+    for (var i = 0; i < imgs.length; i++) {
+      var img = imgs[i];
+      if (!img.hasAttribute('decoding')) img.decoding = 'async';
+      if (!img.hasAttribute('loading')) {
+        if (img.getBoundingClientRect().top > vh * 1.5) img.loading = 'lazy';
+      }
+    }
+  }
+
+  function initBrandMedia() {
+    var slides = document.querySelectorAll('.brands-slider .brand-slide img');
+    for (var i = 0; i < slides.length; i++) {
+      slides[i].decoding = 'async';
+      if (i > 3) slides[i].loading = 'lazy';
+    }
   }
 
   /* ------------------------------------------------------------------
@@ -73,6 +165,7 @@
     var current = -1;
     var started = false;
     var inView = false;
+    var hydratedAll = false;
 
     function syncPlayState() {
       root.classList.toggle('is-paused', !inView || document.hidden);
@@ -102,6 +195,17 @@
 
     function next() {
       openItem((current + 1) % items.length);
+    }
+
+    function hydrateRest() {
+      if (hydratedAll) return;
+      hydratedAll = true;
+      var i = 0;
+      (function step() {
+        if (i >= items.length) return;
+        hydrateImgs(items[i++]);
+        idle(step);
+      })();
     }
 
     items.forEach(function (item, index) {
@@ -156,58 +260,27 @@
         started = true;
         openItem(0);
       }
+      hydrateRest();
     }
 
     if ('IntersectionObserver' in window) {
+      /* wake the autoplay only when the section is really on screen */
       new IntersectionObserver(function (entries) {
-        var entry = entries[0];
         var was = inView;
-        inView = entry.isIntersecting;
+        inView = entries[0].isIntersecting;
         syncPlayState();
         if (inView && !was) onEnter();
       }, { threshold: 0.15 }).observe(root);
+
+      /* start fetching the hidden panel images before the user arrives */
+      new IntersectionObserver(function (entries, io) {
+        if (entries[0].isIntersecting) { hydrateRest(); io.disconnect(); }
+      }, { rootMargin: '1200px 0px' }).observe(root);
     } else {
       inView = true;
       syncPlayState();
       onEnter();
     }
-  }
-
-  /* ------------------------------------------------------------------
-     AI Modernization — bidirectional scroll reveals (fromTo, not from)
-     ------------------------------------------------------------------ */
-  function initModernizationMotion() {
-    if (!setupGsap() || !window.ScrollTrigger || reduceMotion) return;
-    var section = document.querySelector('.ai-modernization-section');
-    if (!section || section.dataset.wcReady) return;
-    section.dataset.wcReady = '1';
-
-    function reveal(els, fromY) {
-      gsap.set(els, { y: fromY, opacity: 0, force3D: true });
-      ScrollTrigger.batch(els, {
-        start: 'top 88%',
-        end: 'bottom 8%',
-        interval: 0.08,
-        batchMax: 6,
-        onEnter: function (batch) {
-          gsap.to(batch, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.06, overwrite: 'auto' });
-        },
-        onLeave: function (batch) {
-          gsap.to(batch, { y: -18, opacity: 0, duration: 0.35, ease: 'power2.in', stagger: 0.03, overwrite: 'auto' });
-        },
-        onEnterBack: function (batch) {
-          gsap.to(batch, { y: 0, opacity: 1, duration: 0.55, ease: 'power3.out', stagger: 0.05, overwrite: 'auto' });
-        },
-        onLeaveBack: function (batch) {
-          gsap.to(batch, { y: fromY, opacity: 0, duration: 0.35, ease: 'power2.in', stagger: 0.03, overwrite: 'auto' });
-        }
-      });
-    }
-
-    var leftItems = gsap.utils.toArray('.ai-modernization__sticky-inner > *');
-    if (leftItems.length) reveal(leftItems, 24);
-    var cards = gsap.utils.toArray('.ai-modernization__right > div');
-    if (cards.length) reveal(cards, 40);
   }
 
   /* ------------------------------------------------------------------
@@ -245,7 +318,7 @@
             c.setAttribute('data-marquee-clone', '');
             c.setAttribute('aria-hidden', 'true');
             var imgs = c.querySelectorAll('img');
-            for (var i = 0; i < imgs.length; i++) imgs[i].loading = 'lazy';
+            for (var i = 0; i < imgs.length; i++) { imgs[i].loading = 'lazy'; imgs[i].decoding = 'async'; }
             track.appendChild(c);
           });
         }
@@ -268,12 +341,14 @@
         state.tween.paused(!state.visible);
       }
 
-      view.addEventListener('mouseenter', function () {
-        if (state.tween) gsap.to(state.tween, { timeScale: 0, duration: 0.6, ease: 'power2.out', overwrite: true });
-      });
-      view.addEventListener('mouseleave', function () {
-        if (state.tween) gsap.to(state.tween, { timeScale: 1, duration: 0.8, ease: 'power2.inOut', overwrite: true });
-      });
+      if (canHover) {
+        view.addEventListener('mouseenter', function () {
+          if (state.tween) gsap.to(state.tween, { timeScale: 0, duration: 0.6, ease: 'power2.out', overwrite: true });
+        });
+        view.addEventListener('mouseleave', function () {
+          if (state.tween) gsap.to(state.tween, { timeScale: 1, duration: 0.8, ease: 'power2.inOut', overwrite: true });
+        });
+      }
 
       if ('IntersectionObserver' in window) {
         new IntersectionObserver(function (entries) {
@@ -294,16 +369,14 @@
   }
 
   /* ------------------------------------------------------------------
-     Case study cursor follower
+     Case study cursor follower (one layout read per frame, not per event)
      ------------------------------------------------------------------ */
   function initCaseStudyCursor() {
-    if (!setupGsap()) return;
-    if (window.matchMedia('(hover: none)').matches) return;
+    if (!setupGsap() || !canHover) return;
     if (document.documentElement.dataset.wcCursor) return;
     document.documentElement.dataset.wcCursor = '1';
 
-    var SIZE = 134;
-    var HALF = SIZE / 2;
+    var HALF = 134 / 2;
 
     document.querySelectorAll('.cs-card__media').forEach(function (media) {
       var circle = media.querySelector('.group-42');
@@ -313,19 +386,23 @@
 
       var moveX = gsap.quickTo(circle, 'x', { duration: 0.45, ease: 'power3.out' });
       var moveY = gsap.quickTo(circle, 'y', { duration: 0.45, ease: 'power3.out' });
-      var inside = false;
+      var inside = false, cx = 0, cy = 0;
 
-      function local(e) {
+      var follow = rafThrottle(function () {
+        if (!inside) return;
         var r = media.getBoundingClientRect();
         var s = r.width / media.offsetWidth || 1;
-        return { x: (e.clientX - r.left) / s, y: (e.clientY - r.top) / s };
-      }
+        moveX((cx - r.left) / s - HALF);
+        moveY((cy - r.top) / s - HALF);
+      });
 
       function enter(e) {
-        var p = local(e);
+        cx = e.clientX; cy = e.clientY;
+        var r = media.getBoundingClientRect();
+        var s = r.width / media.offsetWidth || 1;
         inside = true;
         gsap.killTweensOf(circle, 'scale,opacity,visibility');
-        gsap.set(circle, { x: p.x - HALF, y: p.y - HALF });
+        gsap.set(circle, { x: (cx - r.left) / s - HALF, y: (cy - r.top) / s - HALF });
         gsap.to(circle, { scale: 1, autoAlpha: 1, duration: 0.5, ease: 'back.out(1.6)' });
       }
 
@@ -336,9 +413,8 @@
 
       media.addEventListener('pointermove', function (e) {
         if (!inside) { enter(e); return; }
-        var p = local(e);
-        moveX(p.x - HALF);
-        moveY(p.y - HALF);
+        cx = e.clientX; cy = e.clientY;
+        follow();
       }, { passive: true });
       media.addEventListener('pointerenter', enter);
       media.addEventListener('pointerleave', leave);
@@ -346,7 +422,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Featured projects pin / stack
+     Featured projects pin / stack  (scrubbed timeline = works both ways)
      ------------------------------------------------------------------ */
   function initCaseStudiesPin() {
     if (!setupGsap() || !window.ScrollTrigger) return;
@@ -371,6 +447,14 @@
     document.querySelectorAll('.cs-card__media, [data-cs-more]').forEach(function (a) {
       a.addEventListener('click', function (e) {
         if (a.getAttribute('href') === '#') e.preventDefault();
+      });
+    });
+
+    /* these images are scrubbed in from the side: load them early, not on demand */
+    idle(function () {
+      cards.forEach(function (c) {
+        var im = c.querySelector('img');
+        if (im) im.loading = 'eager';
       });
     });
 
@@ -512,7 +596,8 @@
           start: function () { return 'top ' + topOffset(); },
           end: function () { return '+=' + DIST * pageScale(); },
           animation: tl,
-          scrub: true,
+          /* Lenis already smooths the scroll, so scrub 1:1; fall back to a light lag without it */
+          scrub: lenis ? true : 0.4,
           anticipatePin: 0,
           fastScrollEnd: true,
           invalidateOnRefresh: true,
@@ -538,7 +623,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Industries: sticky image + list
+     Industries: sticky image + list (scroll-position driven, both directions)
      ------------------------------------------------------------------ */
   function initIndustries() {
     if (!setupGsap()) return;
@@ -588,6 +673,14 @@
     layout.appendChild(list);
     layout.appendChild(media);
 
+    function fallback(img) {
+      img.addEventListener('error', function () {
+        var png = (img.getAttribute('src') || '').replace(/\.webp$/i, '.png');
+        if (png && img.getAttribute('src') !== png) img.src = png;
+        else if (img.getAttribute('src') !== heroSrc) img.src = heroSrc;
+      });
+    }
+
     var layers = rows.map(function (row, i) {
       var img;
       if (i === 0) {
@@ -600,11 +693,7 @@
         img.decoding = 'async';
       }
       img.alt = rowTitle(row);
-      img.addEventListener('error', function () {
-        var png = (img.getAttribute('src') || '').replace(/\.webp$/i, '.png');
-        if (png && img.getAttribute('src') !== png) img.src = png;
-        else if (img.getAttribute('src') !== heroSrc) img.src = heroSrc;
-      });
+      fallback(img);
       media.appendChild(img);
       return img;
     });
@@ -617,17 +706,14 @@
       im.alt = rowTitle(row);
       im.loading = 'lazy';
       im.decoding = 'async';
-      im.addEventListener('error', function () {
-        var png = (im.getAttribute('src') || '').replace(/\.webp$/i, '.png');
-        if (png && im.getAttribute('src') !== png) im.src = png;
-        else if (im.getAttribute('src') !== heroSrc) im.src = heroSrc;
-      });
+      fallback(im);
       fig.appendChild(im);
       row.parentNode.insertBefore(fig, row.nextSibling);
       return fig;
     });
 
-    function ensureSrc(img) {
+    function ensureSrc(img, eager) {
+      if (eager) img.loading = 'eager';
       if (!img.getAttribute('src')) {
         img.src = img.getAttribute('data-src') || heroSrc;
       }
@@ -643,7 +729,7 @@
 
     function swapLayer(i) {
       if (i === shown) return;
-      ensureSrc(layers[i]);
+      ensureSrc(layers[i], true);
       var inEl = layers[i], outEl = layers[shown];
       shown = i;
       gsap.killTweensOf([inEl, outEl]);
@@ -665,7 +751,7 @@
       inlines.forEach(function (f, k) {
         var on = k === i;
         f.classList.toggle('is-open', on);
-        if (on) ensureSrc(f.querySelector('img'));
+        if (on) ensureSrc(f.querySelector('img'), true);
       });
       swapLayer(i);
     }
@@ -676,11 +762,9 @@
       function go() {
         if (isDesktop) {
           var b = row.getBoundingClientRect();
-          window.scrollTo({ top: window.pageYOffset + b.top + b.height / 2 - window.innerHeight / 2, behavior: 'smooth' });
-          setActive(i);
-        } else {
-          setActive(i);
+          scrollToY(window.pageYOffset + b.top + b.height / 2 - window.innerHeight / 2);
         }
+        setActive(i);
       }
       row.addEventListener('click', go);
       row.addEventListener('keydown', function (e) {
@@ -688,9 +772,11 @@
       });
     });
 
-    var rowObserver = null;
+    /* active row = the one closest to the viewport centre. Evaluated at most once per
+       frame, only while the list is on screen, so it is correct scrolling up AND down. */
+    var visible = false;
     function pickFromRects() {
-      if (!isDesktop) return;
+      if (!isDesktop || !visible) return;
       var mid = window.innerHeight / 2, best = 0, bestD = Infinity;
       for (var k = 0; k < rows.length; k++) {
         var b = rows[k].getBoundingClientRect();
@@ -699,20 +785,38 @@
       }
       setActive(best);
     }
+    var tick = rafThrottle(pickFromRects);
+    window.addEventListener('scroll', tick, { passive: true });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        visible = entries[0].isIntersecting;
+        if (visible) tick();
+      }, { rootMargin: '0px' }).observe(layout);
+
+      /* fetch every picture in idle time before the user reaches the list */
+      var prefetched = false;
+      new IntersectionObserver(function (entries, io) {
+        if (!entries[0].isIntersecting || prefetched) return;
+        prefetched = true;
+        io.disconnect();
+        var i = 0;
+        (function step() {
+          if (i >= rows.length) return;
+          ensureSrc(isDesktop ? layers[i] : inlines[i].querySelector('img'), true);
+          i++;
+          idle(step);
+        })();
+      }, { rootMargin: '1500px 0px' }).observe(layout);
+    } else {
+      visible = true;
+    }
 
     function applyMode() {
       isDesktop = window.matchMedia(DESKTOP).matches;
-      if (rowObserver) { rowObserver.disconnect(); rowObserver = null; }
-      if (isDesktop && 'IntersectionObserver' in window) {
-        rowObserver = new IntersectionObserver(function (entries) {
-          var hit = null;
-          for (var i = 0; i < entries.length; i++) {
-            if (entries[i].isIntersecting) hit = entries[i].target;
-          }
-          if (hit) setActive(rows.indexOf(hit));
-        }, { root: null, rootMargin: '-42% 0px -42% 0px', threshold: 0 });
-        rows.forEach(function (row) { rowObserver.observe(row); });
+      if (isDesktop) {
         pickFromRects();
+        if (current < 0) setActive(0);
       } else {
         var keep = current < 0 ? 0 : current;
         current = -1;
@@ -890,7 +994,7 @@
   }
 
   /* ------------------------------------------------------------------
-     Pause expensive paint (glows, orbit) while off-screen
+     Skip painting big decorative glows while they are far off-screen
      ------------------------------------------------------------------ */
   function initOffscreenPaint() {
     var nodes = document.querySelectorAll(
@@ -901,19 +1005,8 @@
       for (var i = 0; i < entries.length; i++) {
         entries[i].target.classList.toggle('wc-offpaint', !entries[i].isIntersecting);
       }
-    }, { rootMargin: '120px 0px' });
+    }, { rootMargin: '900px 0px' });
     for (var i = 0; i < nodes.length; i++) io.observe(nodes[i]);
-  }
-
-  /* ------------------------------------------------------------------
-     Brand logos — decode async; defer images after the first few
-     ------------------------------------------------------------------ */
-  function initBrandMedia() {
-    var slides = document.querySelectorAll('.brands-slider .brand-slide img');
-    for (var i = 0; i < slides.length; i++) {
-      slides[i].decoding = 'async';
-      if (i > 3) slides[i].loading = 'lazy';
-    }
   }
 
   /* ------------------------------------------------------------------
@@ -929,9 +1022,10 @@
   }, true);
 
   function init() {
+    try { initImages(); } catch (e) { console.error('[images]', e); }
+    try { initSmoothScroll(); } catch (e) { console.error('[smooth]', e); }
     try { initBrandMedia(); } catch (e) { console.error('[media]', e); }
     try { initAccordion(); } catch (e) { console.error('[accordion]', e); }
-    try { initModernizationMotion(); } catch (e) { console.error('[motion]', e); }
     try { initMarquees(); } catch (e) { console.error('[marquee]', e); }
     try { initCaseStudyCursor(); } catch (e) { console.error('[cursor]', e); }
     try { initCaseStudiesPin(); } catch (e) { console.error('[casestudies]', e); }
@@ -940,19 +1034,15 @@
     try { initTestimonials(); } catch (e) { console.error('[testimonials]', e); }
     try { initOffscreenPaint(); } catch (e) { console.error('[paint]', e); }
 
+    /* ScrollTrigger refreshes itself on resize; we only rebuild our own width-dependent bits */
     window.addEventListener('resize', debounce(function () {
       for (var i = 0; i < resizeFns.length; i++) resizeFns[i]();
-      refreshST();
-    }, 220), { passive: true });
+    }, 250), { passive: true });
 
-    if (!loadRefreshQueued) {
-      loadRefreshQueued = true;
-      if (document.readyState === 'complete') {
-        requestAnimationFrame(refreshST);
-      } else {
-        window.addEventListener('load', function () { refreshST(); }, { once: true });
-      }
-    }
+    /* layout settles after fonts + images: one coalesced refresh each */
+    if (document.readyState === 'complete') refreshST();
+    else window.addEventListener('load', refreshST, { once: true });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(refreshST);
   }
 
   if (document.readyState === 'loading') {

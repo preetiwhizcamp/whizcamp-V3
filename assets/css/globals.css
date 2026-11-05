@@ -30,3 +30,113 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+/* =====================================================================
+   PERFORMANCE PATCH — append at the VERY END of layout.css
+   No layout, colour or typography changes.
+   ===================================================================== */
+
+/* ---------- 1. Lenis smooth scroll (required CSS) ---------- */
+html.lenis,
+html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto !important}
+.lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+.lenis.lenis-stopped{overflow:hidden}
+.lenis.lenis-smooth iframe{pointer-events:none}
+html{overflow-anchor:none}                    /* no scroll jumps when lazy sections render */
+
+/* ---------- 2. Skip rendering of off-screen sections ----------
+   Big win on first load + scrolling. "auto" remembers each section's real
+   height after it has rendered once, so nothing jumps when scrolling back up.
+   NOT applied to hero, brands, case studies, AI modernization or industries
+   (they use sticky / pinned / measured layouts).
+   To disable: delete this whole block.                                    */
+.homepage.homepage .after-case-studies > .group-72 {content-visibility:auto;contain-intrinsic-size:auto 264px}
+.homepage.homepage .after-case-studies > .group-77 {content-visibility:auto;contain-intrinsic-size:auto 640px}
+.homepage.homepage .after-case-studies > .group-83 {content-visibility:auto;contain-intrinsic-size:auto 1500px}
+.homepage.homepage .after-case-studies > .group-99 {content-visibility:auto;contain-intrinsic-size:auto 530px}
+.homepage.homepage .after-case-studies > .group-110{content-visibility:auto;contain-intrinsic-size:auto 690px}
+.homepage.homepage .after-case-studies > .group-135{content-visibility:auto;contain-intrinsic-size:auto 860px}
+.homepage.homepage .after-case-studies > .group-148{content-visibility:auto;contain-intrinsic-size:auto 361px}
+.homepage.homepage .after-case-studies > .group-153{content-visibility:auto;contain-intrinsic-size:auto 960px}
+.homepage.homepage .after-case-studies > .group-173{content-visibility:auto;contain-intrinsic-size:auto 1100px}
+.homepage.homepage .after-case-studies > .group-188{content-visibility:auto;contain-intrinsic-size:auto 976px}
+.homepage.homepage .after-case-studies > .group-217{content-visibility:auto;contain-intrinsic-size:auto 830px}
+
+/* ---------- 3. Stop layout shift while images load ---------- */
+.homepage.homepage .rectangle-4{aspect-ratio:321/474}
+.homepage img{max-width:100%}
+
+/* ---------- 4. Backdrop blur only while hovered (it is very expensive to scroll) ---------- */
+.homepage .cs-card__media .rectangle-8{
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+@media (hover:hover){
+  .homepage .cs-card__media:hover .rectangle-8,
+  .homepage .cs-card__media:focus-visible .rectangle-8{
+    backdrop-filter:blur(3px);
+    -webkit-backdrop-filter:blur(3px);
+  }
+}
+
+/* ---------- 5. Decorative glows: radial gradients instead of filter:blur(200-250px) ----------
+   Six 1500px+ layers with a 250px gaussian blur cost a lot of GPU memory and
+   repaint time. The gradients below reproduce the same soft glow at ~zero cost.
+   If you prefer the original look, delete this section.                       */
+.homepage :is(.ellipse-2,.ellipse-3,.ellipse-4,.ellipse-5,.ellipse-7,.ellipse-8,.ellipse-9,.group-101,.group-102,.group-190){
+  filter:none !important;
+  background:none !important;
+  transform:none;
+}
+.homepage :is(.ellipse-2,.ellipse-3,.ellipse-4,.ellipse-5,.ellipse-7,.ellipse-8,.ellipse-9,.group-101,.group-102,.group-190)::before{
+  content:"";
+  position:absolute;
+  border-radius:50%;
+  pointer-events:none;
+}
+
+/* colours (same values as the original background-colors) */
+.homepage .ellipse-2{--g:#ffbb00b2}
+.homepage .ellipse-3{--g:#00baf5cc}
+.homepage .ellipse-4{--g:#ffbb0080}
+.homepage .ellipse-5{--g:#00baf5b2}
+.homepage .group-101,.homepage .group-190{--g:#0010c5}
+.homepage .ellipse-7{--g:#0029d0}
+.homepage .ellipse-8{--g:#747bff}
+.homepage .group-102{--g:#e9ab00}
+.homepage .ellipse-9{--g:#ffd54f}
+
+/* small 200px blobs (blur 200px => very faint, wide) */
+.homepage :is(.ellipse-2,.ellipse-3,.ellipse-4,.ellipse-5)::before{
+  inset:-200%;
+  background:radial-gradient(closest-side,
+    color-mix(in srgb,var(--g) 14%,transparent) 0%,
+    color-mix(in srgb,var(--g) 8%,transparent) 45%,
+    transparent 100%);
+}
+/* 1550px layers (blur 250px) */
+.homepage :is(.group-101,.group-102,.group-190)::before{
+  inset:-25%;
+  background:radial-gradient(closest-side,
+    var(--g) 0%,
+    color-mix(in srgb,var(--g) 95%,transparent) 40%,
+    color-mix(in srgb,var(--g) 50%,transparent) 67%,
+    color-mix(in srgb,var(--g) 16%,transparent) 88%,
+    transparent 100%);
+}
+/* 785-971px discs (blur 250px) */
+.homepage :is(.ellipse-7,.ellipse-8,.ellipse-9)::before{
+  inset:-30%;
+  background:radial-gradient(closest-side,
+    color-mix(in srgb,var(--g) 85%,transparent) 0%,
+    color-mix(in srgb,var(--g) 70%,transparent) 30%,
+    color-mix(in srgb,var(--g) 40%,transparent) 62%,
+    color-mix(in srgb,var(--g) 15%,transparent) 85%,
+    transparent 100%);
+}
+
+/* ---------- 6. Reduced motion ---------- */
+@media (prefers-reduced-motion:reduce){
+  .homepage .orbit-badge__ring{animation:none}
+}

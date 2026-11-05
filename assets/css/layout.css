@@ -691,3 +691,483 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
   backface-visibility:hidden;
   transform:translateZ(0)
 }
+
+/* =====================================================================
+   AI MODERNIZATION — FIX (match reference screenshot)
+   Append at the VERY END of layout.css (or load after it).
+   Reference geometry (1440 design): 1280px container, left column 588px,
+   right column 542px, cards 542 x 252, 24px gap, 24/30px card padding.
+   ===================================================================== */
+
+/* ---------- 1. Section + container (1280px, centred, grid) ---------- */
+html body .homepage .ai-modernization-section{
+  padding:100px 0 80px !important;
+}
+html body .homepage .ai-modernization-section .ai-modernization__container,
+html body .homepage .ai-modernization-section .ai-modernization__container.layout-container-lg{
+  display:grid !important;
+    grid-template-columns: minmax(0, 664px) minmax(0, 743px) !important;
+  justify-content:space-between !important;
+  align-items:start !important;
+  column-gap:48px !important;
+  row-gap:32px !important;
+  width:100% !important;
+  max-width:100% !important;          /* 1280 content + 2 x 80 padding */
+  margin:0 auto !important;
+    padding: 0 260px !important;
+  box-sizing:border-box !important;
+}
+
+/* ---------- 2. Left column ---------- */
+html body .homepage .ai-modernization-section .ai-modernization__left{
+  width:100% !important;
+  max-width:588px !important;
+  flex:none !important;
+  align-self:stretch !important;        /* full height so sticky has room */
+}
+html body .homepage .ai-modernization-section .ai-modernization__sticky-inner{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:16px !important;
+  position:sticky !important;
+  top:110px !important;
+  width:100% !important;
+}
+html body .homepage .ai-modernization__left .AI-modernization{
+  font:600 14px/normal "DM Sans",Helvetica,sans-serif !important;
+  color:#252525;
+  margin:0 !important;
+}
+html body .homepage .ai-modernization__left .don-t-rebuild-grow{
+  width:100% !important;
+  max-width:588px !important;
+  margin:0 !important;
+  font-size:40px !important;
+  line-height:46px !important;
+  white-space:normal !important;
+  text-align:left !important;
+}
+html body .homepage .ai-modernization__left .text-wrapper-34{
+  width:100% !important;
+  max-width:588px !important;
+  margin:8px 0 0 !important;
+  font-size:16px !important;
+  line-height:24px !important;
+  text-align:left !important;
+}
+
+/* feature list: tick BEFORE the label, 40px row pitch */
+html body .homepage .ai-modernization__left .frame-17{
+  margin-top:8px !important;
+  gap:16px !important;
+}
+html body .homepage .ai-modernization__left .group-47,
+html body .homepage .ai-modernization__left .group-48,
+html body .homepage .ai-modernization__left .group-49,
+html body .homepage .ai-modernization__left .group-50,
+html body .homepage .ai-modernization__left .group-51{
+  flex-direction:row-reverse !important;
+  justify-content:flex-end !important;
+  align-items:center !important;
+  gap:8px !important;
+  height:24px !important;
+}
+html body .homepage .ai-modernization__left .LLM-chatbots,
+html body .homepage .ai-modernization__left .text-wrapper-35,
+html body .homepage .ai-modernization__left .text-wrapper-36,
+html body .homepage .ai-modernization__left .voice-NLP-interfaces{
+  font-size:18px !important;
+  line-height:24px !important;
+  font-weight:600;
+  white-space:nowrap;
+  color:#252525;
+}
+html body .homepage .ai-modernization__left .frame-18{
+  width:24px !important;
+  height:24px !important;
+}
+
+/* CTA: label centred inside the gradient pill, arrow circle attached */
+html body .homepage .ai-modernization__left .group-69{
+  margin-top:18px !important;
+  gap:0 !important;
+  align-items:center !important;
+}
+html body .homepage .ai-modernization__left .group-70{
+  width:241px !important;
+  height:54px !important;
+  justify-content:center !important;
+  align-items:center !important;
+}
+html body .homepage .ai-modernization__left .group-70 .text-wrapper-12{
+  position:relative !important;
+  top:0 !important;
+  left:0 !important;
+  margin:0 !important;
+  line-height:1 !important;
+  white-space:nowrap;
+}
+html body .homepage .ai-modernization__left .group-71{
+  width:54px !important;
+  height:54px !important;
+  margin:0 !important;
+}
+
+/* ---------- 3. Right column (cards) ---------- */
+html body .homepage .ai-modernization-section .ai-modernization__right{
+  width:100% !important;
+  max-width:715px !important;
+  flex:none !important;
+  display:flex !important;
+  flex-direction:column !important;
+  gap:24px !important;
+  padding-top:34px;                      /* heading top aligns with first card top */
+  box-sizing:border-box;
+}
+
+/* card shell: identical size for all four */
+html body .homepage .ai-modernization__right .group-52,
+html body .homepage .ai-modernization__right .group-59,
+html body .homepage .ai-modernization__right .group-63,
+html body .homepage .ai-modernization__right .group-67{
+  width:100% !important;
+  min-height:252px !important;
+  height:auto !important;
+  display:flex !important;
+  flex-direction:column;
+  box-sizing:border-box;
+}
+html body .homepage .ai-modernization__right .group-53{
+  flex:1 1 auto;
+  display:flex !important;
+  flex-direction:column !important;
+  justify-content:flex-start !important;
+  align-items:stretch !important;
+  gap:16px !important;
+  padding:30px 24px !important;
+  position:relative !important;
+  z-index:1;
+}
+
+/* number (left) + icon (right) row */
+html body .homepage .ai-modernization__right .group-54{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  width:100% !important;
+  height:54px !important;
+}
+html body .homepage .ai-modernization__right .text-wrapper-37{
+  position:static !important;
+  margin:0 !important;
+  font-size:40px !important;
+  line-height:40px !important;
+  text-align:left;
+}
+html body .homepage .ai-modernization__right .group-55{
+  position:static !important;
+  flex:none;
+  width:54px !important;
+  height:54px !important;
+  margin:0 !important;
+}
+
+/* card body: everything LEFT aligned (kills the Figma centring + negative margins) */
+html body .homepage .ai-modernization__right .group-56,
+html body .homepage .ai-modernization__right .group-60,
+html body .homepage .ai-modernization__right .group-64{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:24px !important;
+  width:100% !important;
+  height:auto !important;
+  margin:0 !important;
+}
+html body .homepage .ai-modernization__right .group-57,
+html body .homepage .ai-modernization__right .group-61,
+html body .homepage .ai-modernization__right .group-65,
+html body .homepage .ai-modernization__right .group-68{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:flex-start !important;
+  gap:4px !important;
+  width:100% !important;
+  height:auto !important;
+  margin:0 !important;
+}
+
+/* titles */
+html body .homepage .ai-modernization__right .text-wrapper-38,
+html body .homepage .ai-modernization__right .customer-experience,
+html body .homepage .ai-modernization__right .business,
+html body .homepage .ai-modernization__right .text-wrapper-43{
+  width:100% !important;
+  height:auto !important;
+  margin:0 !important;
+  align-self:flex-start !important;
+  text-align:left !important;
+  font-size:24px;
+  line-height:30px;
+  white-space:normal;
+}
+/* subtitles */
+html body .homepage .ai-modernization__right .text-wrapper-39,
+html body .homepage .ai-modernization__right .text-wrapper-40,
+html body .homepage .ai-modernization__right .text-wrapper-41,
+html body .homepage .ai-modernization__right .text-wrapper-44{
+  width:100% !important;
+  height:auto !important;
+  margin:0 !important;
+  align-self:flex-start !important;
+  text-align:left !important;
+  font-size:16px;
+  line-height:21px;
+}
+
+/* benefit rows: icon + text, top aligned */
+html body .homepage .ai-modernization__right .group-58,
+html body .homepage .ai-modernization__right .group-62,
+html body .homepage .ai-modernization__right .group-66{
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:flex-start !important;
+  gap:4px !important;
+  width:100% !important;
+  height:auto !important;
+  margin:0 !important;
+}
+html body .homepage .ai-modernization__right .frame-19{
+  flex:none;
+  width:20px !important;
+  height:20px !important;
+  margin:0 !important;
+}
+html body .homepage .ai-modernization__right .more-leads-higher,
+html body .homepage .ai-modernization__right .personalized,
+html body .homepage .ai-modernization__right .text-wrapper-42{
+  flex:0 1 auto;
+  width:auto !important;
+  height:auto !important;
+  margin:0 !important;
+  text-align:left !important;
+  font-size:16px;
+  line-height:21px;
+}
+/* wrap points from the design */
+html body .homepage .ai-modernization__right .more-leads-higher{max-width:336px}
+html body .homepage .ai-modernization__right .personalized{max-width:419px}
+html body .homepage .ai-modernization__right .text-wrapper-42{max-width:386px}
+
+/* ---------- 4. Tablet 768–1023: keep 2 columns, tighter ---------- */
+@media (min-width:768px) and (max-width:1023px){
+  html body .homepage .ai-modernization-section .ai-modernization__container,
+  html body .homepage .ai-modernization-section .ai-modernization__container.layout-container-lg{
+    grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;
+    column-gap:28px !important;
+    padding:0 24px !important;
+  }
+  html body .homepage .ai-modernization-section .ai-modernization__left,
+  html body .homepage .ai-modernization-section .ai-modernization__right{max-width:none !important}
+  html body .homepage .ai-modernization-section .ai-modernization__sticky-inner{top:90px !important}
+  html body .homepage .ai-modernization__left .don-t-rebuild-grow{font-size:32px !important;line-height:38px !important}
+  html body .homepage .ai-modernization__right{gap:20px !important}
+  html body .homepage .ai-modernization__right .group-53{padding:24px 18px !important}
+  html body .homepage .ai-modernization__right .text-wrapper-38,
+  html body .homepage .ai-modernization__right .customer-experience,
+  html body .homepage .ai-modernization__right .business,
+  html body .homepage .ai-modernization__right .text-wrapper-43{font-size:20px;line-height:26px}
+  html body .homepage .ai-modernization__right .more-leads-higher,
+  html body .homepage .ai-modernization__right .personalized,
+  html body .homepage .ai-modernization__right .text-wrapper-42{max-width:none}
+}
+
+/* ---------- 5. Mobile <768: single column, no sticky ---------- */
+@media (max-width:767px){
+  html body .homepage .ai-modernization-section{padding:60px 0 48px !important}
+  html body .homepage .ai-modernization-section .ai-modernization__container,
+  html body .homepage .ai-modernization-section .ai-modernization__container.layout-container-lg{
+    grid-template-columns:minmax(0,1fr) !important;
+    row-gap:32px !important;
+    padding:0 16px !important;
+  }
+  html body .homepage .ai-modernization-section .ai-modernization__left,
+  html body .homepage .ai-modernization-section .ai-modernization__right{max-width:none !important}
+  html body .homepage .ai-modernization-section .ai-modernization__sticky-inner{
+    position:relative !important;
+    top:auto !important;
+  }
+  html body .homepage .ai-modernization-section .ai-modernization__right{padding-top:0;gap:16px !important}
+  html body .homepage .ai-modernization__left .don-t-rebuild-grow{font-size:30px !important;line-height:36px !important}
+  html body .homepage .ai-modernization__left .LLM-chatbots,
+  html body .homepage .ai-modernization__left .text-wrapper-35,
+  html body .homepage .ai-modernization__left .text-wrapper-36,
+  html body .homepage .ai-modernization__left .voice-NLP-interfaces{font-size:16px !important}
+  html body .homepage .ai-modernization__right .group-52,
+  html body .homepage .ai-modernization__right .group-59,
+  html body .homepage .ai-modernization__right .group-63,
+  html body .homepage .ai-modernization__right .group-67{min-height:0 !important}
+  html body .homepage .ai-modernization__right .group-53{padding:22px 16px !important;gap:12px !important}
+  html body .homepage .ai-modernization__right .group-56,
+  html body .homepage .ai-modernization__right .group-60,
+  html body .homepage .ai-modernization__right .group-64{gap:16px !important}
+  html body .homepage .ai-modernization__right .text-wrapper-37{font-size:32px !important;line-height:32px !important}
+  html body .homepage .ai-modernization__right .group-54,
+  html body .homepage .ai-modernization__right .group-55{height:44px !important}
+  html body .homepage .ai-modernization__right .group-55{width:44px !important}
+  html body .homepage .ai-modernization__right .text-wrapper-38,
+  html body .homepage .ai-modernization__right .customer-experience,
+  html body .homepage .ai-modernization__right .business,
+  html body .homepage .ai-modernization__right .text-wrapper-43{font-size:20px;line-height:26px}
+  html body .homepage .ai-modernization__right .more-leads-higher,
+  html body .homepage .ai-modernization__right .personalized,
+  html body .homepage .ai-modernization__right .text-wrapper-42{max-width:none;font-size:15px;line-height:20px}
+}
+
+html body .homepage .ai-modernization__sticky-inner > *,
+html body .homepage .ai-modernization__right > div{
+  opacity:1 !important;
+  transform:none !important;
+}
+
+/* =====================================================================
+   SERVICES ACCORDION — FIX (match reference)
+   Desktop layout (per row):
+     01 | Title                      [circle img][rect img]  (-)
+        | Summary (2 lines)
+        | [tag] [tag] [tag] [tag]
+   ===================================================================== */
+
+/* ---------- row: index | title + summary stacked | toggle ---------- */
+html body .homepage .services-accordion .services-accordion__row{
+  grid-template-columns:56px minmax(0,1fr) 54px;
+  grid-template-rows:auto auto;
+  column-gap:48px;
+  row-gap:8px;
+  align-items:start;
+  align-content:start;
+  min-height:0;
+  padding:24px 0;
+}
+html body .homepage .services-accordion .services-accordion__index{
+  grid-column:1;
+  grid-row:1;
+  align-self:start;
+  font-size:24px;
+  line-height:30px;
+  text-align:left;
+}
+html body .homepage .services-accordion .services-accordion__title{
+  grid-column:2;
+  grid-row:1;
+  margin:0;
+  font-size:24px;
+  font-weight:700;
+  line-height:30px;
+  text-align:left;
+}
+html body .homepage .services-accordion .services-accordion__summary{
+  grid-column:2;
+  grid-row:2;
+  max-width:522px;
+  margin:0;
+  text-align:left;
+  font-size:16px;
+  line-height:24px;
+}
+html body .homepage .services-accordion .services-accordion__toggle{
+  grid-column:3;
+  grid-row:1 / span 2;
+  align-self:start;
+  justify-self:end;
+}
+
+/* ---------- panel: tags sit under the summary, in the title column ---------- */
+html body .homepage .services-accordion .services-accordion__panel-inner{
+  display:block;
+  padding:0 0 0 104px;             /* 56 index + 48 gap = title column */
+}
+html body .homepage .services-accordion .services-accordion__tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin:5px 0 24px;
+  justify-content:flex-start;
+}
+
+/* ---------- desktop: images sit between the text and the toggle ---------- */
+@media (min-width:1101px){
+  html body .homepage .services-accordion .services-accordion__media{
+    position:absolute;               /* item is position:relative */
+    top:24px;
+    right:102px;                     /* 54 toggle + 48 gap */
+    width:391px;
+    min-width:391px;
+    margin:0;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    pointer-events:none;
+  }
+  html body .homepage .services-accordion .services-media-circle{
+    flex:none;
+    width:155px;
+    height:155px;
+  }
+  html body .homepage .services-accordion .services-media-rect{
+    flex:none;
+    width:224px;
+    height:155px;
+  }
+}
+
+/* ---------- tablet / small laptop (<=1100): images drop below the tags ---------- */
+@media (max-width:1100px){
+  html body .homepage .services-accordion .services-accordion__row{
+    grid-template-columns:40px minmax(0,1fr) 54px;
+    column-gap:24px;
+  }
+  html body .homepage .services-accordion .services-accordion__panel-inner{
+    padding-left:64px;               /* 40 + 24 */
+  }
+  html body .homepage .services-accordion .services-accordion__media{
+    position:static;
+    width:100%;
+    min-width:0;
+    margin:0 0 24px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  html body .homepage .services-accordion .services-media-circle{
+    flex:none;
+    width:120px;
+    height:120px;
+  }
+  html body .homepage .services-accordion .services-media-rect{
+    flex:1;
+    min-width:0;
+    max-width:224px;
+    width:auto;
+    height:120px;
+  }
+}
+
+/* ---------- mobile (<=640) ---------- */
+@media (max-width:640px){
+  html body .homepage .services-accordion .services-accordion__row{
+    grid-template-columns:32px minmax(0,1fr) 40px;
+    column-gap:12px;
+    padding:18px 0;
+  }
+  html body .homepage .services-accordion .services-accordion__index{font-size:18px;line-height:26px}
+  html body .homepage .services-accordion .services-accordion__title{font-size:20px;line-height:26px}
+  html body .homepage .services-accordion .services-accordion__summary{font-size:14px;line-height:21px;max-width:none}
+  html body .homepage .services-accordion .services-accordion__toggle{width:40px;height:40px}
+  html body .homepage .services-accordion .services-accordion__panel-inner{padding-left:0}
+  html body .homepage .services-accordion .services-accordion__tags{margin:4px 0 16px}
+  html body .homepage .services-accordion .services-media-circle{width:96px;height:96px}
+  html body .homepage .services-accordion .services-media-rect{height:96px}
+}
