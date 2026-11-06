@@ -628,6 +628,8 @@
 
   /* ------------------------------------------------------------------
      Industries: sticky image + list (scroll-position driven, both directions)
+     Fast-scroll safe: every row between the current one and the target
+     is activated in turn, so no point is ever skipped.
      ------------------------------------------------------------------ */
   function initIndustries() {
     if (!setupGsap()) return;
@@ -736,6 +738,15 @@
       ensureSrc(layers[i], true);
       var inEl = layers[i], outEl = layers[shown];
       shown = i;
+
+      /* clean up any layer still mid-fade from a previous quick swap */
+      layers.forEach(function (l) {
+        if (l !== inEl && l !== outEl) {
+          gsap.killTweensOf(l);
+          gsap.set(l, { opacity: 0, scale: 1.08, zIndex: 0 });
+        }
+      });
+
       gsap.killTweensOf([inEl, outEl]);
       gsap.set(inEl, { zIndex: 2 });
       gsap.set(outEl, { zIndex: 1 });
@@ -760,6 +771,24 @@
       swapLayer(i);
     }
 
+    /* step through EVERY row between the current one and the target,
+       so fast scrolling never skips a point */
+    var STEP_MS = 230;          /* time each row stays active while catching up */
+    var target = 0;
+    var stepping = false;
+
+    function stepTo(i) {
+      target = i;
+      if (stepping) return;
+      if (current < 0) { setActive(i); return; }
+      stepping = true;
+      (function run() {
+        if (current === target) { stepping = false; return; }
+        setActive(current + (target > current ? 1 : -1));
+        setTimeout(run, STEP_MS);
+      })();
+    }
+
     rows.forEach(function (row, i) {
       row.setAttribute('tabindex', '0');
       row.setAttribute('role', 'button');
@@ -768,7 +797,7 @@
           var b = row.getBoundingClientRect();
           scrollToY(window.pageYOffset + b.top + b.height / 2 - window.innerHeight / 2);
         }
-        setActive(i);
+        stepTo(i);
       }
       row.addEventListener('click', go);
       row.addEventListener('keydown', function (e) {
@@ -787,7 +816,7 @@
         var d = Math.abs(b.top + b.height / 2 - mid);
         if (d < bestD) { bestD = d; best = k; }
       }
-      setActive(best);
+      stepTo(best);
     }
     var tick = rafThrottle(pickFromRects);
     window.addEventListener('scroll', tick, { passive: true });

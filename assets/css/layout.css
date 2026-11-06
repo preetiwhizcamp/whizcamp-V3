@@ -18,7 +18,7 @@ html body .responsive-stage,
 .homepage.homepage .announcement-ticker__viewport .announcement-ticker__track{white-space:nowrap;width:max-content}
 
 /* ---------- hero (bg is in flow; loose items hang off the gutter) ---------- */
-.homepage.homepage .group{position:relative!important;top:auto!important;height:830px!important}
+.homepage.homepage .group{position:relative!important;top:auto!important;height:998px!important}
 .homepage.homepage .AI-powered-digital,
 .homepage.homepage .text-wrapper-6,
 .homepage.homepage .technology-solutions{left:var(--gutter)!important;right:var(--gutter);width:auto;max-width:640px}
@@ -46,11 +46,31 @@ html body .responsive-stage,
 
 /* ---------- brands band ---------- */
 .homepage.homepage .group-wrapper.trusted-brands-section{position:relative!important;top:auto!important;width:100%!important}
-.homepage.homepage .trusted-brands-section .group-7{padding:0 var(--gutter);max-width:none}
-.homepage.homepage .trusted-brands-section .vector-2,.homepage.homepage .trusted-brands-section .vector-3{width:calc(50% - 190px);max-width:333px}
-.homepage.homepage .trusted-brands-section .vector-3{left:var(--gutter)}
-.homepage.homepage .trusted-brands-section .vector-2{left:auto;right:var(--gutter)}
-@media(max-width:900px){.homepage.homepage .trusted-brands-section .vector-2,.homepage.homepage .trusted-brands-section .vector-3{display:none}.homepage.homepage .trusted-by-industry{left:var(--gutter)}}
+.homepage.homepage .trusted-brands-section .group-7{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:0 var(--gutter);
+  max-width:none;
+}
+.homepage.homepage .trusted-brands-section .trusted-by-industry{
+  position:static;
+  flex:none;
+}
+.homepage.homepage .trusted-brands-section .vector-2,
+.homepage.homepage .trusted-brands-section .vector-3{
+  position:static;
+  flex:1 1 0;
+  width:auto;
+  min-width:0;
+  max-width:none;
+  height:1px;
+}
+@media(max-width:767px){
+  .homepage.homepage .trusted-brands-section .vector-2,
+  .homepage.homepage .trusted-brands-section .vector-3{display:none}
+  .homepage.homepage .trusted-brands-section .group-7{justify-content:center}
+}
 
 /* ---------- WHO WE ARE ---------- */
 .homepage.homepage .group-9{position:relative;left:auto!important;top:auto;width:100%!important;height:auto;padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:minmax(0,321px) minmax(0,1fr);gap:32px 70px}
@@ -98,7 +118,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .group-72 .group-73{width:100%!important;margin:0!important;gap:34px}
 .homepage.homepage .frame-20{width:100%;display:flex}
 .homepage.homepage .frame-20 .vector-8{flex:1;min-width:0;width:auto}
-.homepage.homepage .group-74,.homepage.homepage .group-75,.homepage.homepage .group-76{width:100%;height:auto;margin:0;display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.homepage.homepage .group-74,.homepage.homepage .group-75,.homepage.homepage .group-76{width:100%;height:auto;margin:0;display:flex;flex-wrap:wrap;justify-content:center;gap:21px}
 .homepage.homepage .group-75 > *,.homepage.homepage .group-76 > *{position:relative!important;left:auto!important;margin:0!important;width:auto!important;max-width:100%}
 .homepage.homepage .frame-24 .text-wrapper-46{width:auto}
 @media(max-width:900px){.homepage.homepage .frame-20 .vector-8{display:none}.homepage.homepage .frame-20{justify-content:center}}
@@ -111,7 +131,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .rectangle-14{width:calc(100% - 48px);margin:0 24px 24px;height:251px}
 
 /* shared section-header pattern */
-.homepage.homepage .group-111,.homepage.homepage .group-137,.homepage.homepage .group-154,.homepage.homepage .group-85{width:100%;height:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:16px 48px;position:relative}
+.homepage.homepage .group-111,.homepage.homepage .group-137,.homepage.homepage .group-154,.homepage.homepage .group-85{width:100%;height:auto;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px 48px;position:relative}
 .homepage.homepage .group-111 > *,.homepage.homepage .group-137 > *,.homepage.homepage .group-154 > *,.homepage.homepage .group-85 > *,.homepage.homepage .group-86 > *{position:static!important;margin:0!important;width:auto;height:auto;left:auto;top:auto}
 .homepage.homepage .group-111 > .our-foundation,.homepage.homepage .group-137 > .text-wrapper-93,.homepage.homepage .group-154 > .testimonials{flex-basis:100%}
 .homepage.homepage .a-trusted-technology,.homepage.homepage .see-how-we-ve-made,.homepage.homepage .insights-ideas,.homepage.homepage .transforming{width:auto;max-width:600px;white-space:normal}
@@ -153,7 +173,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .vector-13{order:1;margin:80px 0 0}
 .homepage.homepage .industries-we-serve{grid-column:2/4;margin-top:100px}
 .homepage.homepage .supporting-all{grid-column:2/3;margin-top:16px;font-size:clamp(30px,3vw,40px)}
-.homepage.homepage .from-healthcare-to{grid-column:3/4;margin-top:16px;padding-left:40px}
+.homepage.homepage .from-healthcare-to{grid-column:3/4;margin-top:16px;padding-left:40px;    display: flex;     justify-content: end;}
 .homepage.homepage .industry-feature-image{grid-column:3/4;grid-row:span 2;width:100%!important;max-width:520px;height:600px!important;margin:50px 0 0 40px;justify-self:end;object-fit:cover}
 .homepage.homepage .industry-list{grid-column:2/3;width:100%!important;margin-top:50px;gap:34px}
 .homepage.homepage .industry-list .industry-list__item,.homepage.homepage .industry-list .vector-14{width:100%}
@@ -374,6 +394,8 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
   line-height:24px;
   letter-spacing:0;
   color:#646464;
+  width: 86%;
+
 }
 @keyframes faqPanelIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){
@@ -487,7 +509,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
    ===================================================================== */
 
 /* ---------- CONTACT ---------- */
-.homepage.homepage .group-188 .group-191{display:grid;grid-template-columns:minmax(0,593px) minmax(0,527px);justify-content:space-between;align-items:center;gap:60px}
+.homepage.homepage .group-188 .group-191{display:grid;    grid-template-columns: minmax(0, 754px) minmax(0, 709px);justify-content:space-between;align-items:center;gap:60px}
 .homepage.homepage .group-192{width:100%;max-width:593px;flex:none}
 .homepage.homepage .group-209{display:flex;flex-direction:column;gap:34px;width:100%;max-width:527px;justify-self:end;margin:0;height:auto}
 .homepage.homepage .group-209 .frame-64{display:flex;flex-direction:column;gap:24px;width:100%;height:auto;margin:0}
@@ -550,7 +572,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
    ===================================================================== */
 /* ticker: viewport clips, track slides */
 .homepage.homepage .announcement-ticker{overflow:hidden}
-.homepage.homepage .announcement-ticker__viewport{padding:0!important;overflow:hidden!important;margin:13px 0 0!important;
+.homepage.homepage .announcement-ticker__viewport{padding:0!important;overflow:hidden!important;margin:0px 0 0!important;
   -webkit-mask-image:linear-gradient(to right,transparent 0,#000 3%,#000 97%,transparent 100%);
   mask-image:linear-gradient(to right,transparent 0,#000 3%,#000 97%,transparent 100%)}
 .homepage.homepage .announcement-ticker__viewport .announcement-ticker__track{width:max-content!important;max-width:none;flex:none;gap:16px;will-change:transform;backface-visibility:hidden}
@@ -1186,7 +1208,7 @@ html body .homepage.homepage .testimonials-section.wc-testimonials{
   max-width:none !important;
   margin:0 !important;
   padding-top:100px !important;
-  padding-bottom:100px !important;
+  padding-bottom:2px !important;
   padding-left:var(--gutter,120px) !important;
   padding-right:var(--gutter,120px) !important;
   gap:40px;
@@ -1242,12 +1264,12 @@ html body .homepage.homepage .testimonials-section.wc-testimonials > .wc-testimo
   color:#00baf5;
 }
 .wc-testimonials__lead{
-  grid-column:2;
-  grid-row:2;
-  margin:0;
-  width:min(41vw,420px);
-  font:400 14px/1.55 "DM Sans",Helvetica,sans-serif;
-  color:#646464;
+ grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    width: min(41vw, 576px);
+    font: 400 17px / 1.55 "DM Sans", Helvetica, sans-serif;
+    color: #646464;
 }
 
 /* ---------- row: dark card + sliding viewport (design ratio 286 : 650) ---------- */
@@ -1265,7 +1287,7 @@ html body .homepage.homepage .testimonials-section.wc-testimonials > .wc-testimo
   position:relative;
   display:flex;
   flex-direction:column;
-  min-height:clamp(440px,41.8cqw,560px);
+  min-height:clamp(440px,41.8cqw,607px);
   padding:2cqw 2cqw 2.2cqw;
   border-radius:12px;
   color:#fff;
@@ -1287,7 +1309,7 @@ html body .homepage.homepage .testimonials-section.wc-testimonials > .wc-testimo
 }
 .wc-testimonials__score{
   margin-top:2.6cqw;
-  font:400 clamp(34px,3.8cqw,50px)/1 "DM Sans",Helvetica,sans-serif;
+  font:600 clamp(34px,3.8cqw,50px)/1 "DM Sans",Helvetica,sans-serif;
   color:#fff;
 }
 .wc-testimonials__score span{
@@ -1433,8 +1455,8 @@ html body .homepage.homepage .testimonials-section.wc-testimonials > .wc-testimo
 }
 .wc-testimonials__button{
   appearance:none;
-  width:41px;
-  height:41px;
+  width:55px;
+  height:55px;
   border:0;
   border-radius:50%;
   display:inline-flex;
@@ -1787,4 +1809,388 @@ html body .homepage .services-accordion .services-accordion__progress{
   top:0;
   bottom:auto;
 }
- 
+ /* ---------- TRUSTED BRANDS heading: line — TITLE — line ---------- */
+.homepage.homepage .trusted-brands-section .group-7{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  width:100%;
+  height:auto;
+  margin:0;
+  padding:0 var(--gutter);
+  box-sizing:border-box;
+}
+
+/* title in the middle */
+.homepage.homepage .trusted-brands-section .trusted-by-industry{
+  position:static;
+  order:2;
+  flex:none;
+  white-space:nowrap;
+}
+
+/* both lines share the remaining space equally */
+.homepage.homepage .trusted-brands-section .vector-3{
+  position:static;
+  order:1;
+  flex:1 1 0;
+  width:auto;
+  min-width:0;
+  max-width:none;
+  height:1px;
+}
+.homepage.homepage .trusted-brands-section .vector-2{
+  position:static;
+  order:3;
+  flex:1 1 0;
+  width:auto;
+  min-width:0;
+  max-width:none;
+  height:1px;
+}
+
+/* mobile: keep only the centred title */
+@media(max-width:767px){
+  .homepage.homepage .trusted-brands-section .vector-2,
+  .homepage.homepage .trusted-brands-section .vector-3{display:none}
+}
+/* ---------- WHO WE ARE: vertical dividers between the 4 stats ---------- */
+.homepage.homepage .group-20{
+  justify-content:flex-start;
+  gap:24px 0;
+}
+
+/* 4 equal columns */
+.homepage.homepage .group-20 > div{
+  flex:1 1 0;
+  min-width:0;
+  position:relative;
+}
+
+/* the divider line sits on the left edge of stats 2, 3 and 4 */
+.homepage.homepage .group-22,
+.homepage.homepage .group-23,
+.homepage.homepage .group-24{
+  padding-left:40px;
+}
+.homepage.homepage .group-22::before,
+.homepage.homepage .group-23::before,
+.homepage.homepage .group-24::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:-6px;
+  bottom:-6px;
+  width:1px;
+  background:rgba(37,37,37,.18);
+}
+
+/* tablet / mobile: 2 per row, no dividers */
+@media(max-width:767px){
+  .homepage.homepage .group-20 > div{flex:1 1 40%}
+  .homepage.homepage .group-22,
+  .homepage.homepage .group-23,
+  .homepage.homepage .group-24{padding-left:0}
+  .homepage.homepage .group-22::before,
+  .homepage.homepage .group-23::before,
+  .homepage.homepage .group-24::before{display:none}
+}
+/* =====================================================================
+   BLOGS — match the design
+   header: [BLOGS] / "Insights" + "Ideas & Innovation" | paragraph | button
+   cards : 3 equal cards, text pinned to the bottom, 3rd card = full image
+   ===================================================================== */
+
+/* ---------- header ---------- */
+html body .homepage.homepage .group-137{
+  display:grid;
+  grid-template-columns:39.5% minmax(0,407px) minmax(0,1fr); /* paragraph starts at ~39.5% like the design */
+  grid-template-rows:auto auto;
+  column-gap:0;
+  row-gap:16px;
+  align-items:end;            /* paragraph + button sit on the bottom line of the heading */
+  width:100%;
+  height:auto;
+}
+html body .homepage.homepage .group-137 > .text-wrapper-93{
+  grid-column:1 / -1;
+  grid-row:1;
+}
+
+/* "Insights" (gold italic) on line 1, "Ideas & Innovation" on line 2 */
+html body .homepage.homepage .group-137 > .insights-ideas{
+  grid-column:1;
+  grid-row:2;
+  max-width:none;
+  font-size:40px;
+  line-height:50px;
+  white-space:normal;
+}
+html body .homepage.homepage .insights-ideas span{display:block}
+
+html body .homepage.homepage .group-137 > .text-wrapper-94{
+  grid-column:2;
+  grid-row:2;
+  flex:none;
+  max-width:407px;
+  padding-bottom:4px;
+}
+html body .homepage.homepage .group-137 > .group-138{
+  grid-column:3;
+  grid-row:2;
+  justify-self:end;
+}
+
+/* ---------- cards ---------- */
+html body .homepage.homepage .group-141{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:24px;
+  align-items:stretch;
+}
+
+/* cards 1 + 2: image on top, date + title pinned to the bottom */
+html body .homepage.homepage .group-141 > .group-142{
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  height:auto;
+  min-height:497px;
+  padding-bottom:34px;
+  box-sizing:border-box;
+}
+html body .homepage.homepage .group-142 .rectangle-23{
+  flex:none;
+  margin:16px 16px 0;
+  width:calc(100% - 32px);
+  height:261px;
+}
+html body .homepage.homepage .group-142 > .group-143,
+html body .homepage.homepage .group-142 > .group-144{
+  margin:auto 20px 0;         /* auto top = push to the bottom */
+  width:auto;
+  height:auto;
+  gap:8px;
+  align-items:flex-start;
+}
+
+/* kill the leftover Figma negative margins on date + titles */
+html body .homepage.homepage .text-wrapper-96,
+html body .homepage.homepage .text-wrapper-97,
+html body .homepage.homepage .text-wrapper-98,
+html body .homepage.homepage .why-cybersecurity,
+html body .homepage.homepage .why-choosing-the,
+html body .homepage.homepage .machine-learning{
+  margin-left:0 !important;
+  width:auto;
+  height:auto;
+}
+
+/* card 3: full-bleed image, text overlaid at the bottom */
+html body .homepage.homepage .group-145 .group-147{
+  position:absolute;
+  top:auto;
+  left:20px;
+  right:20px;
+  bottom:25px;
+  width:auto;
+  height:auto;
+  gap:8px;
+  align-items:flex-start;
+}
+
+/* ---------- responsive ---------- */
+@media(max-width:1100px){
+  html body .homepage.homepage .group-137{grid-template-columns:minmax(0,1fr) auto}
+  html body .homepage.homepage .group-137 > .insights-ideas{grid-column:1 / -1}
+  html body .homepage.homepage .group-137 > .text-wrapper-94{grid-column:1;grid-row:3;padding-top:8px}
+  html body .homepage.homepage .group-137 > .group-138{grid-column:2;grid-row:3}
+  html body .homepage.homepage .group-141{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){
+  html body .homepage.homepage .group-137{grid-template-columns:minmax(0,1fr)}
+  html body .homepage.homepage .group-137 > .text-wrapper-94,
+  html body .homepage.homepage .group-137 > .group-138{grid-column:1}
+  html body .homepage.homepage .group-137 > .text-wrapper-94{grid-row:3}
+  html body .homepage.homepage .group-137 > .group-138{grid-row:4;justify-self:start;margin:8px 0 0 !important}
+  html body .homepage.homepage .group-141{grid-template-columns:minmax(0,1fr)}
+}
+/* =====================================================================
+   TESTIMONIAL ARROWS — colour swap on hover
+   prev: gradient -> dark     next: dark -> gradient
+   (a gradient can't be transitioned directly, so an overlay layer fades in)
+   ===================================================================== */
+html body .homepage .wc-testimonials__button{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  transition:transform .25s ease, box-shadow .3s ease;
+}
+
+/* overlay layer that fades in with the "other" colour */
+html body .homepage .wc-testimonials__button::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:inherit;
+  opacity:0;
+  z-index:-1;
+  transition:opacity .35s ease;
+}
+html body .homepage .wc-testimonials__button--prev::before{background:#232323}
+html body .homepage .wc-testimonials__button--next::before{
+  background:linear-gradient(135deg,#17a6d1 0%,#86b85a 100%);
+}
+
+/* arrow icon slides a little in its own direction */
+html body .homepage .wc-testimonials__button svg{
+  position:relative;
+  z-index:1;
+  transition:transform .3s cubic-bezier(.22,1,.36,1);
+}
+
+@media (hover:hover){
+  html body .homepage .wc-testimonials__button:not(:disabled):hover::before{opacity:1}
+
+  html body .homepage .wc-testimonials__button--prev:not(:disabled):hover{
+    box-shadow:0 6px 16px rgba(0,0,0,.28);
+  }
+  html body .homepage .wc-testimonials__button--next:not(:disabled):hover{
+    box-shadow:0 6px 16px rgba(0,186,245,.35);
+  }
+
+  html body .homepage .wc-testimonials__button--prev:not(:disabled):hover svg{transform:translateX(-3px)}
+  html body .homepage .wc-testimonials__button--next:not(:disabled):hover svg{transform:translateX(3px)}
+}
+
+/* keyboard focus gets the same colour change */
+html body .homepage .wc-testimonials__button:focus-visible::before{opacity:1}
+
+@media (prefers-reduced-motion:reduce){
+  html body .homepage .wc-testimonials__button,
+  html body .homepage .wc-testimonials__button::before,
+  html body .homepage .wc-testimonials__button svg{transition:none}
+}
+/* ---------- FOOTER glows: lighter ---------- */
+html body .homepage .homepage-footer .ellipse-4::before{opacity:.22 !important}   /* gold, left  */
+html body .homepage .homepage-footer .ellipse-5::before{opacity:.28 !important}   /* cyan, right */
+
+/* =====================================================================
+   FOOTER links — slide slightly right on hover (slow, smooth)
+   ===================================================================== */
+
+/* base state: sets the transition so it eases in AND back out */
+html body .homepage .homepage-footer :is(.text-wrapper-136,.text-wrapper-139,.text-wrapper-140,.text-wrapper-142){
+  display:inline-block;
+  transition:transform .6s cubic-bezier(.22,1,.36,1), color .6s ease, text-decoration-color .6s ease;
+  will-change:transform;
+}
+
+@media (hover:hover){
+  /* Services / Industries: hovering the whole row (bullet + text) triggers it,
+     so the text never flickers as it moves away from the cursor */
+  html body .homepage .homepage-footer :is(.frame-69,.frame-70):hover .text-wrapper-136,
+  html body .homepage .homepage-footer .text-wrapper-136:hover{
+    transform:translateX(8px);
+    color:#FFC107;
+   
+    transition:transform .6s cubic-bezier(.22,1,.36,1), color .6s ease;
+  }
+
+  /* Our Location: address, email, phone, hours */
+  html body .homepage .homepage-footer :is(.group-226,.group-228,.group-229):hover :is(.text-wrapper-139,.text-wrapper-140){
+    transform:translateX(8px);
+    color:#FFC107;
+   
+    transition:transform .6s cubic-bezier(.22,1,.36,1), color .6s ease;
+  }
+
+  /* Privacy Policy / Term & Conditions */
+  html body .homepage .homepage-footer .text-wrapper-142:hover{
+    transform:translateX(6px);
+    color:#FFC107;
+    cursor:pointer;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  html body .homepage .homepage-footer :is(.text-wrapper-136,.text-wrapper-139,.text-wrapper-140,.text-wrapper-142){
+    transition:none;
+  }
+}
+/* =====================================================================
+   VIEW MORE CASE STUDIES — same style as the other buttons
+   outline pill + separate arrow circle, gradient fill + arrow turn on hover
+   ===================================================================== */
+
+/* wrapper: remove the old dark pill, gradient border and fill */
+html body .homepage .cs-more .cs-more__btn{
+  display:inline-flex;
+  align-items:center;
+  gap:0;
+  height:54px;
+  padding:0;
+  border-radius:0;
+  background:none;
+  box-shadow:none;
+  transform:none;
+}
+html body .homepage .cs-more .cs-more__btn::before,
+html body .homepage .cs-more .cs-more__btn::after{display:none}
+html body .homepage .cs-more .cs-more__btn:hover{
+  transform:none;
+  box-shadow:none;
+}
+
+/* the pill */
+html body .homepage .cs-more .cs-more__label{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  height:54px;
+  padding:0 28px;
+  box-sizing:border-box;
+  border:1px solid #fff;
+  border-radius:50px;
+  overflow:hidden;
+  z-index:0;
+  font-family:"DM Sans",Helvetica,sans-serif;
+  font-weight:600;
+  font-size:16px;
+  line-height:1;
+  color:#fff;
+  white-space:nowrap;
+}
+
+/* gradient that fades in on hover */
+html body .homepage .cs-more .cs-more__label::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  background:linear-gradient(131deg,#00baf5 0%,#eaab00 100%);
+  opacity:0;
+  z-index:-1;
+  transition:opacity .4s ease;
+}
+
+/* the arrow circle */
+html body .homepage .cs-more .cs-more__circle{
+  flex:none;
+  width:54px;
+  height:54px;
+  display:block;
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+  transform-origin:50% 50%;
+}
+
+@media (hover:hover){
+  html body .homepage .cs-more .cs-more__btn:hover .cs-more__label::before{opacity:1}
+  html body .homepage .cs-more .cs-more__btn:hover .cs-more__circle{transform:rotate(45deg)}
+}
+
+@media (prefers-reduced-motion:reduce){
+  html body .homepage .cs-more .cs-more__label::before,
+  html body .homepage .cs-more .cs-more__circle{transition:none}
+}
