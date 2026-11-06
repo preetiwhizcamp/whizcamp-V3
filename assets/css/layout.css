@@ -70,7 +70,7 @@ html body .responsive-stage,
 .homepage.homepage .group-19{display:flex;flex-wrap:wrap;gap:12px;width:100%;height:auto}
 .homepage.homepage .group-19 > *{position:static!important}
 .homepage.homepage .group-17 .vector-6{width:100%}
-.homepage.homepage .group-20{width:100%;display:flex;flex-wrap:wrap;gap:24px 46px}
+.homepage.homepage .group-20{width:100%;display:flex;flex-wrap:wrap;gap:24px 46px;justify-content: space-between;}
 .homepage.homepage .group-20 > div{width:auto;height:auto;display:flex;flex-direction:column-reverse}
 .homepage.homepage .group-20 > div > div{position:static!important}
 @media(max-width:900px){
@@ -441,7 +441,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
    FIXES v2 — gutter applied directly (no HTML class required) + bug fixes
    ===================================================================== */
 .homepage.homepage :is(.group-9,.group-73,.group-77,.group-84,.group-103,.group-110,.group-136,.group-150,.group-153,.group-173,.group-191,.group-218,.ai-modernization__container){
-  max-width:100%;margin-left:auto;margin-right:auto;padding-left:var(--gutter);padding-right:var(--gutter);width:100%;position:relative;z-index:2;box-sizing:border-box}
+  max-width:100%;padding-left:var(--gutter);padding-right:var(--gutter);width:100%;position:relative;z-index:2;box-sizing:border-box}
 
 /* nav bar: let the inner row fill the glass bar */
 .homepage.homepage .group-25{display:flex}
@@ -518,7 +518,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .we-custom-develop{text-transform:capitalize}
 /* brand column + three link columns on one grid */
 .homepage.homepage .group-217 .group-218{display:grid;grid-template-columns:1.9fr 1fr 1fr 1fr;gap:48px 24px;align-items:start}
-.homepage.homepage .group-218 > .group-219{grid-column:1;flex-direction:column;align-items:flex-start;gap:24px;width:100%!important}
+.homepage.homepage .group-218 > .group-219{grid-column:1;flex-direction:column;align-items:flex-start;gap:42px;width:100%!important}
 .homepage.homepage .group-218 > .group-223{display:contents}
 .homepage.homepage .group-218 .group-224{grid-column:2}
 .homepage.homepage .group-218 .group-225{grid-column:3}
@@ -1171,3 +1171,620 @@ html body .homepage .services-accordion .services-accordion__tags{
   html body .homepage .services-accordion .services-media-circle{width:96px;height:96px}
   html body .homepage .services-accordion .services-media-rect{height:96px}
 }
+/* =====================================================================
+   TESTIMONIALS — exact match to the design (v3, sliding animation)
+   REPLACE the previous "TESTIMONIALS" block at the end of layout.css with this.
+   Sizes scale with the card row width (container query units).
+   Needs: <div class="group-153 wc-testy"> markup + assets/js/testimonials.js
+   ===================================================================== */
+
+/* section shell (strong selector + !important so padding is never lost) */
+html body .homepage.homepage .group-153.wc-testy{
+  background:#f6f6f6;
+  /* FULL WIDTH: fills the whole section, only the site gutter on each side */
+  width:100% !important;
+  max-width:none !important;
+  margin:0 !important;
+  padding-top:100px !important;
+  padding-bottom:100px !important;
+  padding-left:var(--gutter,120px) !important;
+  padding-right:var(--gutter,120px) !important;
+  gap:40px;
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  box-sizing:border-box;
+}
+/* inner blocks always take the full width of the section */
+html body .homepage.homepage .group-153.wc-testy > *{
+  width:100% !important;
+  max-width:none !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  box-sizing:border-box;
+}
+html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !important}
+/* narrower gutter on very wide screens so the cards really open up */
+@media(min-width:1600px){
+  html body .homepage.homepage .group-153.wc-testy{
+    padding-left:clamp(48px,5vw,96px) !important;
+    padding-right:clamp(48px,5vw,96px) !important;
+  }
+}
+
+/* ---------- header: eyebrow on top, title + description on one row ---------- */
+.wc-testy__head{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,max-content);
+  align-items:center;
+  gap:14px 48px;
+  width:100%;
+}
+.wc-testy__titles{display:contents}
+.wc-testy__eyebrow{
+  grid-column:1/-1;
+  grid-row:1;
+  margin:0;
+  font:500 12px/1.2 "DM Sans",Helvetica,sans-serif;
+  color:#252525;
+}
+.wc-testy__title{
+  grid-column:1;
+  grid-row:2;
+  margin:0;
+  font:400 clamp(30px,3vw,40px)/1.15 "DM Sans",Helvetica,sans-serif;
+  color:#252525;
+  letter-spacing:-.01em;
+}
+.wc-testy__title em{
+  font-style:italic;
+  font-weight:700;
+  color:#00baf5;
+}
+.wc-testy__lead{
+  grid-column:2;
+  grid-row:2;
+  margin:0;
+  width:min(41vw,420px);
+  font:400 14px/1.55 "DM Sans",Helvetica,sans-serif;
+  color:#646464;
+}
+
+/* ---------- row: dark card + sliding viewport (design ratio 286 : 650) ---------- */
+.wc-testy__row{
+  container-type:inline-size;
+  display:grid;
+  grid-template-columns:minmax(0,.88fr) minmax(0,2fr);
+  gap:18px;
+  align-items:stretch;
+  width:100%;
+}
+
+/* ---------- dark stats card ---------- */
+.wc-testy__stats{
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  min-height:clamp(440px,41.8cqw,560px);
+  padding:2cqw 2cqw 2.2cqw;
+  border-radius:12px;
+  color:#fff;
+  background:
+    radial-gradient(130% 60% at 0% 100%,rgba(176,122,38,.42) 0%,rgba(176,122,38,0) 62%),
+    linear-gradient(165deg,#161616 0%,#1a1a1a 55%,#25201a 100%);
+  overflow:hidden;
+}
+.wc-testy__stats-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+}
+.wc-testy__stats-label{
+  margin-top:.9cqw;
+  font:400 clamp(12px,1.35cqw,17px)/1.2 "DM Sans",Helvetica,sans-serif;
+  color:#dcdcdc;
+}
+.wc-testy__score{
+  margin-top:2.6cqw;
+  font:400 clamp(34px,3.8cqw,50px)/1 "DM Sans",Helvetica,sans-serif;
+  color:#fff;
+}
+.wc-testy__score span{
+  font-size:.38em;
+  color:#d0d0d0;
+  margin-left:2px;
+}
+.wc-testy__badge{
+  width:clamp(60px,6.9cqw,88px);
+  height:clamp(60px,6.9cqw,88px);
+  flex:none;
+  object-fit:contain;
+}
+.wc-testy__stats-copy{
+  margin:2.9cqw 0 0;
+  max-width:90%;
+  font:400 clamp(12px,1.3cqw,16px)/1.5 "DM Sans",Helvetica,sans-serif;
+  color:#d6d6d6;
+}
+.wc-testy__stats-foot{margin-top:auto;padding-top:32px}
+.wc-testy__avatars{display:flex}
+.wc-testy__avatars img{
+  width:clamp(34px,3.8cqw,48px);
+  height:clamp(34px,3.8cqw,48px);
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+  background:#333;
+  margin-left:-.5cqw;
+}
+.wc-testy__avatars img:first-child{margin-left:0}
+.wc-testy__trusted{
+  margin-top:1.2cqw;
+  font:400 clamp(12px,1.3cqw,16px)/1.2 "DM Sans",Helvetica,sans-serif;
+  color:#e4e4e4;
+}
+.wc-testy__stars{display:flex;gap:.4cqw;margin-top:.7cqw}
+.wc-testy__stars svg{
+  width:clamp(13px,1.45cqw,18px);
+  height:clamp(13px,1.45cqw,18px);
+  fill:#ffbb00;
+  display:block;
+}
+
+/* ---------- sliding viewport + stages (built by testimonials.js) ---------- */
+.wc-testy__viewport{
+  position:relative;
+  min-width:0;
+  overflow:hidden;            /* clips the sliding cards */
+  border-radius:12px;
+}
+.wc-testy__stage{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  height:100%;
+}
+.wc-testy__stage.is-incoming{
+  position:absolute;
+  inset:0;
+  width:100%;
+}
+.wc-testy__col{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  min-width:0;
+  will-change:transform,opacity;
+}
+
+.wc-testy__quote,
+.wc-testy__author{
+  background:#ededed;
+  border-radius:12px;
+}
+.wc-testy__quote{
+  flex:1 1 auto;
+  padding:2.5cqw 1.9cqw 2.4cqw;
+}
+.wc-testy__qicon{
+  display:block;
+  width:clamp(26px,3.1cqw,40px);
+  height:auto;
+  margin-bottom:2.1cqw;
+}
+.wc-testy__text{
+  margin:0;
+  font-family:"DM Sans",Helvetica,sans-serif;
+  font-weight:400;
+  font-size:clamp(16px,2.02cqw,27px);
+  line-height:1.28;
+  color:#252525;
+}
+.wc-testy__text.is-indent{text-indent:1.7em}
+.wc-testy__more{
+  appearance:none;
+  border:0;
+  background:none;
+  padding:0;
+  margin:0 0 0 .2em;
+  cursor:pointer;
+  font-family:inherit;
+  font-size:inherit;
+  line-height:inherit;
+  font-weight:700;
+  color:#00baf5;
+}
+.wc-testy__more:hover{text-decoration:underline}
+.wc-testy__more:focus-visible{outline:2px solid #00baf5;outline-offset:3px;border-radius:4px}
+
+.wc-testy__author{
+  flex:none;
+  display:flex;
+  align-items:center;
+  gap:1.4cqw;
+  min-height:clamp(64px,8.2cqw,100px);
+  padding:0 1.9cqw;
+}
+.wc-testy__author img{
+  width:clamp(44px,5.2cqw,64px);
+  height:clamp(44px,5.2cqw,64px);
+  flex:none;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+  background:#d8d8d8;
+}
+.wc-testy__name{
+  font:700 clamp(15px,1.85cqw,24px)/1.25 "DM Sans",Helvetica,sans-serif;
+  color:#252525;
+}
+.wc-testy__role{
+  margin-top:2px;
+  font:400 clamp(11px,1.3cqw,16px)/1.3 "DM Sans",Helvetica,sans-serif;
+  color:#646464;
+}
+
+/* ---------- nav arrows ---------- */
+.wc-testy__nav{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+.wc-testy__btn{
+  appearance:none;
+  width:41px;
+  height:41px;
+  border:0;
+  border-radius:50%;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  color:#fff;
+  transition:transform .25s ease,box-shadow .25s ease;
+}
+.wc-testy__btn svg{width:18px;height:18px}
+.wc-testy__btn--prev{background:linear-gradient(135deg,#17a6d1 0%,#86b85a 100%)}
+.wc-testy__btn--next{background:#232323}
+.wc-testy__btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.wc-testy__btn:active{transform:scale(.94)}
+.wc-testy__btn:focus-visible{outline:2px solid #00baf5;outline-offset:3px}
+.wc-testy__btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
+
+/* ---------- responsive ---------- */
+@media(max-width:1100px){
+  .wc-testy__row{grid-template-columns:minmax(0,1fr)}
+  .wc-testy__stats{min-height:0;padding:24px}
+  .wc-testy__stats-copy{max-width:460px}
+  .wc-testy__text{font-size:clamp(16px,2.4vw,22px)}
+}
+@media(max-width:767px){
+  html body .homepage.homepage .group-153.wc-testy{padding-top:64px !important;padding-bottom:64px !important;gap:32px}
+  .wc-testy__head{grid-template-columns:minmax(0,1fr)}
+  .wc-testy__title,.wc-testy__lead{grid-column:1}
+  .wc-testy__lead{grid-row:3;width:auto}
+  .wc-testy__stage{grid-template-columns:minmax(0,1fr)}
+  .wc-testy__stage .wc-testy__col:nth-child(2){display:none}   /* one testimonial at a time on phones */
+  .wc-testy__quote{padding:22px 18px 24px}
+  .wc-testy__text{font-size:17px}
+  .wc-testy__author{padding:12px 18px}
+}
+/* =====================================================================
+   FAQ — list width matches the design (2nd screenshot)
+   Paste at the very END of layout.css (after the TESTIMONIALS block).
+   Only the width changes: heading, tabs, accordion rows and the
+   "Schedule an Appointment" button stay exactly as they are.
+   ===================================================================== */
+
+/* list container: centred, capped at 1428px (≈75% of a 1905px screen) */
+html body .homepage.homepage .group-173 .faq-panels,
+html body .homepage.homepage .group-173 > .group-175{
+  width:100%;
+  max-width:1428px;
+  margin-left:auto;
+  margin-right:auto;
+  box-sizing:border-box;
+}
+
+/* every tab panel / list inside it follows the same width */
+html body .homepage.homepage .group-173 .faq-panels .faq-tabpanel,
+html body .homepage.homepage .group-173 .faq-panels .faq-clip,
+html body .homepage.homepage .group-173 .faq-panels .faq-list{
+  width:100%;
+  max-width:100%;
+}
+
+/* heading block + tabs stay centred above the narrower list */
+html body .homepage.homepage .group-173 .group-174,
+html body .homepage.homepage .group-173 .frame-52{
+  margin-left:auto;
+  margin-right:auto;
+}
+
+/* subtitle wraps over two lines like the design */
+html body .homepage.homepage .group-173 .text-wrapper-109{
+  max-width:600px;
+}
+/* =====================================================================
+   PERFORMANCE — smooth scrolling for the CONTACT + FOOTER sections
+   Paste at the very END of layout.css (after everything else).
+
+   Why they lagged: these two sections draw big glow circles with
+   filter:blur(250px) / blur(200px) on 1550px, 971px and 785px elements, and
+   layout.css also promoted each one to its own giant GPU layer
+   (transform:translateZ(0)). The browser re-blurs/re-composites that on every
+   scroll frame. Here the same glows are drawn with soft radial gradients
+   instead — they look the same but cost almost nothing to paint.
+   ===================================================================== */
+
+/* 1) switch off the blur + the forced GPU layers on the glow circles */
+html body .homepage .group-188 :is(.group-190,.group-102,.ellipse-7,.ellipse-8,.ellipse-9),
+html body .homepage .group-217 :is(.ellipse-4,.ellipse-5){
+  filter:none !important;
+  background:none !important;
+  transform:none !important;
+  backface-visibility:visible !important;
+  will-change:auto !important;
+  pointer-events:none;
+}
+
+/* 2) draw each glow as a soft radial gradient (extends past the circle like the blur did) */
+html body .homepage .group-188 :is(.group-190,.group-102,.ellipse-7,.ellipse-8,.ellipse-9)::before,
+html body .homepage .group-217 :is(.ellipse-4,.ellipse-5)::before{
+  content:"";
+  position:absolute;
+  inset:-30%;
+  border-radius:50%;
+  background:radial-gradient(closest-side,
+    rgb(var(--glow) / 1) 0%,
+    rgb(var(--glow) / .6) 45%,
+    rgb(var(--glow) / 0) 100%);
+  pointer-events:none;
+}
+
+/* 3) the original colours of each glow (R G B) */
+html body .homepage .group-188 .group-190{--glow:0 16 197}      /* big blue   #0010c5 */
+html body .homepage .group-188 .group-102{--glow:233 171 0}     /* big gold   #e9ab00 */
+html body .homepage .group-188 .ellipse-7{--glow:0 41 208}      /* blue       #0029d0 */
+html body .homepage .group-188 .ellipse-8{--glow:116 123 255}   /* light blue #747bff */
+html body .homepage .group-188 .ellipse-9{--glow:255 213 79}    /* yellow     #ffd54f */
+html body .homepage .group-217 .ellipse-4{--glow:255 187 0}     /* footer gold */
+html body .homepage .group-217 .ellipse-5{--glow:0 186 245}     /* footer cyan */
+html body .homepage .group-217 .ellipse-4::before{opacity:.5}
+html body .homepage .group-217 .ellipse-5::before{opacity:.7}
+
+/* 4) keep the glows clipped to their section and out of the scroll/paint path */
+html body .homepage .group-188 .frame-55,
+html body .homepage .group-217 .frame-65{
+  contain:paint;
+}
+/* =====================================================================
+   BUTTON HOVER EFFECTS — all CTA buttons (pill + arrow circle)
+   Paste at the very END of layout.css.
+
+   1) OUTLINE buttons (transparent, white border): on hover the pill fills
+      with the cyan -> gold gradient.
+   2) WHITE buttons: on hover the white background becomes the gradient and
+      the label turns white.
+   3) GRADIENT buttons: on hover the gradient flips (gold -> cyan), the pill
+      gets a soft glow.
+   4) In every button the arrow circle turns 45deg on hover, so the arrow goes
+      from pointing up-right (↗) to pointing straight right (→).
+
+   Only for devices that can really hover (mouse / trackpad).
+   ===================================================================== */
+
+/* the arrow circle image: smooth turn (also needed outside :hover so it eases back) */
+.homepage :is(.group-2,.group-4,.group-10,.group-28,.group-69,.group-95,.group-98,
+              .group-109,.group-116,.group-132,.group-138,.group-152,.group-185,
+              .group-206,.group-216) > img{
+  transition:transform .45s cubic-bezier(.22,1,.36,1);
+  transform-origin:50% 50%;
+}
+.homepage :is(.group-2,.group-4,.group-10,.group-28,.group-69,.group-95,.group-98,
+              .group-109,.group-116,.group-132,.group-138,.group-152,.group-185,
+              .group-206,.group-216){
+  cursor:pointer;
+}
+
+/* overlay layer that carries the gradient (fades in on hover) */
+.homepage :is(.rectangle-2,.rectangle-6,.rectangle-16,.rectangle-22,   /* white pills   */
+              .rectangle-3,.rectangle-25,                              /* outline pills */
+              .rectangle-5,.rectangle-13,.rectangle-19,.rectangle-21,
+              .rectangle-29,.rectangle-33){                            /* gradient pills */
+  overflow:visible;
+}
+.homepage :is(.rectangle-2,.rectangle-6,.rectangle-16,.rectangle-22,
+              .rectangle-3,.rectangle-25,
+              .rectangle-5,.rectangle-13,.rectangle-19,.rectangle-21,
+              .rectangle-29,.rectangle-33)::before{
+  content:"";
+  position:absolute;
+  inset:-1px;
+  border-radius:inherit;
+  background:linear-gradient(131deg,#00baf5 0%,#eaab00 100%);
+  opacity:0;
+  transition:opacity .4s ease;
+  pointer-events:none;
+}
+/* gradient pills flip their colours instead */
+.homepage :is(.rectangle-5,.rectangle-13,.rectangle-19,.rectangle-21,.rectangle-29,.rectangle-33)::before{
+  background:linear-gradient(131deg,#eaab00 0%,#00baf5 100%);
+}
+
+/* labels change colour smoothly (white buttons turn white on hover) */
+.homepage :is(.text-wrapper-10,.text-wrapper-57,.text-wrapper-95){
+  transition:color .35s ease;
+}
+/* soft glow on the gradient pills */
+.homepage :is(.rectangle-5,.rectangle-13,.rectangle-19,.rectangle-21,.rectangle-29,.rectangle-33){
+  transition:box-shadow .4s ease;
+}
+
+@media (hover:hover){
+  /* hover anywhere on the button (pill OR arrow circle) */
+  .homepage :is(.group-2,.group-4,.group-10,.group-28,.group-69,.group-95,.group-98,
+                .group-109,.group-116,.group-132,.group-138,.group-152,.group-185,
+                .group-206,.group-216):hover{
+    --on:1;
+  }
+
+  /* 1+2) fill the pill with the gradient */
+  .homepage :is(.group-2,.group-4,.group-10,.group-28,.group-69,.group-95,.group-98,
+                .group-109,.group-116,.group-132,.group-138,.group-152,.group-185,
+                .group-206,.group-216):hover
+    :is(.rectangle-2,.rectangle-6,.rectangle-16,.rectangle-22,
+        .rectangle-3,.rectangle-25,
+        .rectangle-5,.rectangle-13,.rectangle-19,.rectangle-21,.rectangle-29,.rectangle-33)::before{
+    opacity:1;
+  }
+
+  /* white buttons: label turns white on the gradient */
+  .homepage :is(.group-2,.group-4,.group-10,.group-28,.group-69,.group-95,.group-98,
+                .group-109,.group-116,.group-132,.group-138,.group-152,.group-185,
+                .group-206,.group-216):hover
+    :is(.text-wrapper-10,.text-wrapper-57,.text-wrapper-95){
+    color:#fff;
+  }
+
+  /* 3) glow for the gradient pills */
+  .homepage :is(.group-10,.group-69,.group-116,.group-132,.group-185,.group-206):hover
+    :is(.rectangle-5,.rectangle-13,.rectangle-19,.rectangle-21,.rectangle-29,.rectangle-33){
+    box-shadow:0 8px 22px rgba(0,186,245,.35);
+  }
+
+  /* 4) arrow goes straight: ↗ turned 45deg clockwise = → */
+  .homepage :is(.group-2,.group-4,.group-10,.group-28,.group-69,.group-95,.group-98,
+                .group-109,.group-116,.group-132,.group-138,.group-152,.group-185,
+                .group-206,.group-216):hover > img{
+    transform:rotate(45deg);
+  }
+}
+
+/* keyboard / touch users: no hover, but keep the focus ring usable */
+@media (prefers-reduced-motion:reduce){
+  .homepage :is(.group-2,.group-4,.group-10,.group-28,.group-69,.group-95,.group-98,
+                .group-109,.group-116,.group-132,.group-138,.group-152,.group-185,
+                .group-206,.group-216) > img,
+  .homepage :is(.rectangle-2,.rectangle-6,.rectangle-16,.rectangle-22,.rectangle-3,.rectangle-25,
+                .rectangle-5,.rectangle-13,.rectangle-19,.rectangle-21,.rectangle-29,.rectangle-33)::before{
+    transition:none;
+  }
+}
+
+/* =====================================================================
+   CARD HOVER ANIMATIONS
+   Paste at the very END of layout.css.
+   Covers: Mission / Vision / Values · "Faster Delivery / Trust / Quality" cards ·
+           "Reliable Solutions…" 4 foundation cards · 3 blog cards.
+   Only transform / opacity / shadow are animated (cheap to paint), and only
+   on devices that can really hover.
+   ===================================================================== */
+
+/* ---------- base: smooth easing back and forth ---------- */
+.homepage.homepage :is(.group-11 > div,
+                       .group-77 > div,
+                       .group-112 > div,
+                       .group-141 > div){
+  transition:transform .5s cubic-bezier(.22,1,.36,1),
+             box-shadow .5s ease,
+             background-color .4s ease,
+             border-color .4s ease;
+}
+.homepage.homepage :is(.group-11,.group-112) .group-13{
+  transition:transform .55s cubic-bezier(.34,1.56,.64,1);   /* little overshoot = playful pop */
+}
+.homepage.homepage :is(.rectangle-14,.rectangle-23,.group-146){
+  transition:transform .7s cubic-bezier(.22,1,.36,1);
+}
+.homepage.homepage :is(.group-77 .frame-29){
+  transition:transform .35s cubic-bezier(.22,1,.36,1);
+}
+.homepage.homepage :is(.text-wrapper-13,.text-wrapper-15,.text-wrapper-16,
+                       .faster-delivery-real,.built-on-trust,.text-wrapper-48,
+                       .reliable-solutions,.designed-around-your,.purpose-driven,.transparent-every,
+                       .why-cybersecurity,.why-choosing-the,.machine-learning){
+  transition:color .35s ease;
+}
+/* the full-image blog card clips its zoom */
+.homepage.homepage .group-141 > .group-145{overflow:hidden;border-radius:15px}
+
+@media (hover:hover){
+
+  /* ---------- Mission / Vision / Values ---------- */
+  .homepage.homepage .group-11 > div:hover{
+    transform:translateY(-8px);
+    background-color:#fff;
+    border-color:#00baf533;
+    box-shadow:0 16px 34px rgba(0,186,245,.16),0 4px 10px rgba(0,0,0,.04);
+  }
+  .homepage.homepage .group-11 > div:hover .group-13{
+    transform:scale(1.12) rotate(-6deg);
+  }
+  .homepage.homepage .group-11 > div:hover :is(.text-wrapper-13,.text-wrapper-15,.text-wrapper-16){
+    color:#00a0d6;
+  }
+
+  /* ---------- Faster Delivery / Built On Trust / Quality ---------- */
+  .homepage.homepage .group-77 > div:hover{
+    transform:translateY(-8px);
+    border-color:#00baf533;
+    box-shadow:0 18px 38px rgba(0,186,245,.16),0 4px 10px rgba(0,0,0,.04);
+  }
+  .homepage.homepage .group-77 > div:hover .rectangle-14{
+    transform:translateY(-4px) scale(1.025);
+  }
+  .homepage.homepage .group-77 > div:hover :is(.faster-delivery-real,.built-on-trust,.text-wrapper-48){
+    color:#00a0d6;
+  }
+  .homepage.homepage .group-77 > div:hover .frame-29{
+    transform:translate(4px,-4px);          /* the little ↗ arrow nudges out */
+  }
+
+  /* ---------- Reliable / Designed / Purpose / Transparent ---------- */
+  .homepage.homepage .group-112 > div:hover{
+    transform:translateY(-8px);
+    background-color:#fff;
+    border-color:#00baf533;
+    box-shadow:0 16px 34px rgba(0,186,245,.16),0 4px 10px rgba(0,0,0,.04);
+  }
+  .homepage.homepage .group-112 > div:hover .group-13{
+    transform:scale(1.12) rotate(-6deg);
+  }
+  .homepage.homepage .group-112 > div:hover :is(.reliable-solutions,.designed-around-your,.purpose-driven,.transparent-every){
+    color:#00a0d6;
+  }
+
+  /* ---------- Blog cards (dark) ---------- */
+  .homepage.homepage .group-141 > div:hover{
+    transform:translateY(-10px);
+    box-shadow:0 22px 44px rgba(0,186,245,.18),0 6px 14px rgba(0,0,0,.35);
+  }
+  .homepage.homepage .group-141 > .group-142:hover{
+    background-color:#ffffff1f;
+  }
+  .homepage.homepage .group-141 > .group-142:hover .rectangle-23{
+    transform:scale(1.035);
+  }
+  .homepage.homepage .group-141 > .group-145:hover .group-146{
+    transform:scale(1.07);
+  }
+  .homepage.homepage .group-141 > div:hover :is(.why-cybersecurity,.why-choosing-the,.machine-learning){
+    color:#00baf5;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .homepage.homepage :is(.group-11 > div,.group-77 > div,.group-112 > div,.group-141 > div,
+                         .group-13,.rectangle-14,.rectangle-23,.group-146,.frame-29){
+    transition:none;
+  }
+}
+html body .homepage .services-accordion .services-accordion__progress{
+  height:1px;
+  background:#ffffff;
+  top:0;
+  bottom:auto;
+}
+ 

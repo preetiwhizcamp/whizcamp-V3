@@ -1051,3 +1051,349 @@
     init();
   }
 })();
+
+/* WHIZCAMP — testimonials carousel (v3: smooth sliding animation).
+   - Reads #testy-data, shows two testimonials at a time
+     (col A: quote above author, col B: author above quote)
+   - Cards slide sideways with an ease; the two columns lag slightly (stagger)
+   - Auto-rotates every AUTOPLAY_MS; prev/next arrows slide back/forward
+   - Autoplay pauses only on keyboard focus / expanded "Read More" / hidden tab
+     (hover pause is optional: PAUSE_ON_HOVER)
+   Load with: <script src="assets/js/testimonials.js" defer></script> */
+(function () {
+  "use strict";
+
+  var AUTOPLAY_MS = 5500;
+  var DURATION = 850;                           // slide time (ms)
+  var EASE = "cubic-bezier(.65,0,.25,1)";       // smooth in/out
+  var STAGGER = 110;                            // delay between the 2 columns (ms)
+  var PAUSE_ON_HOVER = false;                   // true = stop while the mouse is over the section
+
+  var root = document.getElementById("testimonials");
+  if (!root) return;
+
+  var dataEl = document.getElementById("testy-data");
+  var items = [];
+  try { items = JSON.parse(dataEl.textContent) || []; } catch (e) { items = []; }
+  if (!items.length) return;
+
+  var row = root.querySelector(".wc-testy__row");
+  var oldA = root.querySelector('[data-testy-col="a"]');
+  var oldB = root.querySelector('[data-testy-col="b"]');
+  var prev = root.querySelector("[data-testy-prev]");
+  var next = root.querySelector("[data-testy-next]");
+
+  /* replace the two placeholder columns with one clipping viewport */
+  var viewport = document.createElement("div");
+  viewport.className = "wc-testy__viewport";
+  viewport.setAttribute("aria-live", "polite");
+  row.insertBefore(viewport, oldA);
+  oldA.remove();
+  oldB.remove();
+
+  var n = items.length;
+  var index = 0;
+  var busy = false;
+  var timer = null;
+  var hovering = false;
+  var focusing = false;
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var canAnimate = typeof Element.prototype.animate === "function";
+
+  function esc(s) {
+    return String(s == null ? "" : s)
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function quoteHTML(t, indent) {
+    var hasMore = !!t.full && t.full !== t.text;
+    var short = hasMore ? esc(t.text) + "\u2026" : esc(t.text);
+    return (
+      '<div class="wc-testy__quote">' +
+        '<img class="wc-testy__qicon" src="assets/icons/frame-32.svg" alt="" />' +
+        '<p class="wc-testy__text' + (indent ? " is-indent" : "") + '"' +
+          ' data-short="' + esc(t.text) + (hasMore ? "\u2026" : "") + '"' +
+          ' data-full="' + esc(t.full || t.text) + '">' +
+          short +
+          (hasMore ? ' <button type="button" class="wc-testy__more" aria-expanded="false">Read More</button>' : "") +
+        "</p>" +
+      "</div>"
+    );
+  }
+
+  function authorHTML(t) {
+    return (
+      '<div class="wc-testy__author">' +
+        '<img loading="lazy" decoding="async" src="' + esc(t.photo) + '" alt="' + esc(t.name) + '" />' +
+        "<div>" +
+          '<div class="wc-testy__name">' + esc(t.name) + "</div>" +
+          '<div class="wc-testy__role">' + esc(t.role) + "</div>" +
+        "</div>" +
+      "</div>"
+    );
+  }
+
+  /* one "stage" = the two columns for a given start index */
+  function makeStage(i) {
+    var a = items[((i % n) + n) % n];
+    var stage = document.createElement("div");
+    stage.className = "wc-testy__stage";
+
+    var colA = document.createElement("div");
+    colA.className = "wc-testy__col";
+    colA.innerHTML = quoteHTML(a, true) + authorHTML(a);
+    stage.appendChild(colA);
+
+    if (n > 1) {
+      var b = items[(((i + 1) % n) + n) % n];
+      var colB = document.createElement("div");
+      colB.className = "wc-testy__col";
+      colB.innerHTML = authorHTML(b) + quoteHTML(b, false);
+      stage.appendChild(colB);
+    }
+    return stage;
+  }
+
+  var current = makeStage(index);
+  viewport.appendChild(current);
+
+  function go(dir) {
+    if (busy || n < 2) return;
+    busy = true;
+    index = (((index + dir) % n) + n) % n;
+
+    var incoming = makeStage(index);
+    var outgoing = current;
+
+    if (reduce || !canAnimate) {
+      viewport.replaceChild(incoming, outgoing);
+      current = incoming;
+      busy = false;
+      return;
+    }
+
+    incoming.classList.add("is-incoming");
+    viewport.appendChild(incoming);
+
+    var out = outgoing.children;
+    var inn = incoming.children;
+    var anims = [];
+    var opts = function (delay) {
+      return { duration: DURATION, easing: EASE, delay: delay, fill: "both" };
+    };
+
+    // outgoing columns glide away (second column trails the first)
+    for (var i = 0; i < out.length; i++) {
+      anims.push(out[i].animate(
+        [
+          { transform: "translateX(0)", opacity: 1 },
+          { transform: "translateX(" + (-dir * 110) + "%)", opacity: 0 }
+        ],
+        opts(i * STAGGER)
+      ));
+    }
+    // incoming columns glide in from the opposite side, slightly staggered
+    for (var j = 0; j < inn.length; j++) {
+      anims.push(inn[j].animate(
+        [
+          { transform: "translateX(" + (dir * 110) + "%)", opacity: 0 },
+          { transform: "translateX(0)", opacity: 1 }
+        ],
+        opts(j * STAGGER)
+      ));
+    }
+
+    Promise.all(anims.map(function (a) { return a.finished; })).then(function () {
+      anims.forEach(function (a) { a.cancel(); });
+      incoming.classList.remove("is-incoming");
+      if (outgoing.parentNode) outgoing.parentNode.removeChild(outgoing);
+      current = incoming;
+      busy = false;
+    }).catch(function () {
+      if (outgoing.parentNode) outgoing.parentNode.removeChild(outgoing);
+      incoming.classList.remove("is-incoming");
+      current = incoming;
+      busy = false;
+    });
+  }
+
+  /* ---------- autoplay ---------- */
+  function expanded() {
+    return !!root.querySelector('.wc-testy__more[aria-expanded="true"]');
+  }
+  function stop() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+  function start() {
+    stop();
+    if (n < 2 || reduce) return;
+    timer = setInterval(function () {
+      if (hovering || focusing || document.hidden || expanded()) return;
+      go(1);
+    }, AUTOPLAY_MS);
+  }
+
+  if (PAUSE_ON_HOVER) {
+    root.addEventListener("mouseenter", function () { hovering = true; });
+    root.addEventListener("mouseleave", function () { hovering = false; });
+  }
+  /* only pause for real keyboard focus, never after a mouse click on an arrow */
+  root.addEventListener("focusin", function (e) {
+    try { focusing = e.target.matches(":focus-visible"); } catch (err) { focusing = false; }
+  });
+  root.addEventListener("focusout", function () { focusing = false; });
+  document.addEventListener("visibilitychange", function () { if (!document.hidden) start(); });
+
+  /* ---------- Read More / Read Less ---------- */
+  root.addEventListener("click", function (e) {
+    var btn = e.target.closest(".wc-testy__more");
+    if (!btn) return;
+    var p = btn.closest(".wc-testy__text");
+    var open = btn.getAttribute("aria-expanded") === "true";
+    if (p.firstChild && p.firstChild.nodeType === 3) {
+      p.firstChild.nodeValue = (open ? p.dataset.short : p.dataset.full) + " ";
+    }
+    btn.textContent = open ? "Read More" : "Read Less";
+    btn.setAttribute("aria-expanded", open ? "false" : "true");
+  });
+
+  /* ---------- arrows / keyboard / swipe ---------- */
+  prev && prev.addEventListener("click", function () { go(-1); start(); });
+  next && next.addEventListener("click", function () { go(1); start(); });
+
+  root.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") { go(-1); start(); }
+    else if (e.key === "ArrowRight") { go(1); start(); }
+  });
+
+  var x0 = null;
+  root.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  root.addEventListener("touchend", function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    x0 = null;
+    if (Math.abs(dx) > 50) { go(dx < 0 ? 1 : -1); start(); }
+  }, { passive: true });
+
+  if (n < 2) {
+    if (prev) prev.disabled = true;
+    if (next) next.disabled = true;
+  }
+
+  start();
+})();
+
+/* WHIZCAMP — footer pills: smooth gravity drop + soft bounce (GSAP).
+   When the footer scrolls into view the 7 blue/yellow pills fall one after
+   another (bottom ones first, so the top ones land on top of them), hit the
+   floor with a tiny squash, bounce twice with shrinking height and settle in
+   their original tilted positions. Replays when you come back to the footer.
+   Needs GSAP (already on the page). Load AFTER main.js:
+   <script src="assets/js/footer-pills.js" defer></script> */
+(function () {
+  "use strict";
+
+  var footer = document.querySelector(".group-217");
+  if (!footer || !window.gsap) return;
+
+  var pills = [].slice.call(
+    footer.querySelectorAll(".frame-75,.frame-76,.frame-77,.frame-78,.frame-79,.frame-80,.frame-81")
+  );
+  if (!pills.length) return;
+
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduce) return;
+
+  /* ---------- tuning ---------- */
+  var GAP = 0.2;            // seconds between one pill and the next
+  var BOUNCE_1 = 34;        // px height of the first bounce
+  var BOUNCE_2 = 12;        // px height of the second bounce
+  var THRESHOLD = 0.35;     // how much of the footer must be visible to start
+
+  // original (CSS) tilt of every pill, so they land exactly where the design puts them
+  var finals = pills.map(function (p) { return gsap.getProperty(p, "rotation") || 0; });
+
+  // fall order: lowest pill first, so higher pills land on top (looks natural + neat)
+  var order = pills
+    .map(function (p, i) { return { i: i, top: p.offsetTop }; })
+    .sort(function (a, b) { return b.top - a.top; })
+    .map(function (o) { return o.i; });
+
+  gsap.set(pills, { force3D: true, transformOrigin: "50% 100%" });
+
+  var master = null;
+  var playing = false;
+
+  function hideAll() {
+    if (master) { master.kill(); master = null; }
+    playing = false;
+    pills.forEach(function (p, i) {
+      gsap.set(p, { opacity: 0, y: 0, scaleX: 1, scaleY: 1, rotation: finals[i] });
+    });
+  }
+
+  function pillTimeline(i) {
+    var p = pills[i];
+    var rot = finals[i];
+    var dir = rot >= 0 ? 1 : -1;                         // lean direction follows the pill's own tilt
+    var dist = p.offsetTop + p.offsetHeight + 60;        // start just above the footer top (clipped)
+    var fall = Math.max(0.5, Math.sqrt(dist) / 26);      // longer drop = slightly longer fall (gravity feel)
+
+    var t = gsap.timeline();
+
+    // 1) fall (accelerating) + gentle lean while falling
+    t.fromTo(p, { y: -dist, opacity: 0, rotation: rot - dir * 22, scaleX: 1, scaleY: 1 },
+                { y: 0, opacity: 1, duration: fall, ease: "power2.in" }, 0);
+    t.to(p, { opacity: 1, duration: 0.01 }, 0);
+    t.to(p, { rotation: rot + dir * 7, duration: fall, ease: "sine.inOut" }, 0);
+
+    // 2) impact: tiny squash
+    t.to(p, { scaleY: 0.9, scaleX: 1.05, duration: 0.07, ease: "power1.out" }, fall);
+    t.to(p, { scaleY: 1, scaleX: 1, duration: 0.14, ease: "power2.out" }, fall + 0.07);
+
+    // 3) first bounce (up decelerating, down accelerating)
+    var b1 = fall + 0.07;
+    t.to(p, { y: -BOUNCE_1, duration: 0.24, ease: "power2.out" }, b1);
+    t.to(p, { rotation: rot - dir * 4, duration: 0.48, ease: "sine.inOut" }, b1);
+    t.to(p, { y: 0, duration: 0.24, ease: "power2.in" }, b1 + 0.24);
+    t.to(p, { scaleY: 0.96, scaleX: 1.025, duration: 0.05, ease: "power1.out" }, b1 + 0.48);
+    t.to(p, { scaleY: 1, scaleX: 1, duration: 0.1, ease: "power2.out" }, b1 + 0.53);
+
+    // 4) second, smaller bounce
+    var b2 = b1 + 0.48;
+    t.to(p, { y: -BOUNCE_2, duration: 0.15, ease: "power2.out" }, b2);
+    t.to(p, { rotation: rot + dir * 1.5, duration: 0.3, ease: "sine.inOut" }, b2);
+    t.to(p, { y: 0, duration: 0.15, ease: "power2.in" }, b2 + 0.15);
+
+    // 5) settle into the exact design tilt
+    t.to(p, { rotation: rot, duration: 0.35, ease: "power3.out" }, b2 + 0.3);
+
+    return t;
+  }
+
+  function drop() {
+    // pills are hidden on small screens (CSS) — nothing to animate there
+    if (playing || !pills[0].offsetParent) return;
+    playing = true;
+    if (master) master.kill();
+
+    master = gsap.timeline({ onComplete: function () { playing = false; } });
+    order.forEach(function (idx, n) {
+      master.add(pillTimeline(idx), n * GAP);
+    });
+  }
+
+  hideAll();
+
+  var io = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) drop();
+        else hideAll();            // reset when the footer is out of view, so it can fall again
+      });
+    },
+    { threshold: THRESHOLD }
+  );
+  io.observe(footer);
+})();
