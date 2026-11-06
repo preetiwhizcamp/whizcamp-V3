@@ -58,10 +58,10 @@ html{overflow-anchor:none}                    /* no scroll jumps when lazy secti
 .homepage.homepage .after-case-studies > .group-110{content-visibility:auto;contain-intrinsic-size:auto 690px}
 .homepage.homepage .after-case-studies > .group-135{content-visibility:auto;contain-intrinsic-size:auto 860px}
 .homepage.homepage .after-case-studies > .group-148{content-visibility:auto;contain-intrinsic-size:auto 361px}
-.homepage.homepage .after-case-studies > .group-153{content-visibility:auto;contain-intrinsic-size:auto 960px}
-.homepage.homepage .after-case-studies > .group-173{content-visibility:auto;contain-intrinsic-size:auto 1100px}
+.homepage.homepage .after-case-studies > .testimonials-section{content-visibility:auto;contain-intrinsic-size:auto 960px}
+.homepage.homepage .after-case-studies > .faq-section{content-visibility:auto;contain-intrinsic-size:auto 1100px}
 .homepage.homepage .after-case-studies > .group-188{content-visibility:auto;contain-intrinsic-size:auto 976px}
-.homepage.homepage .after-case-studies > .group-217{content-visibility:auto;contain-intrinsic-size:auto 830px}
+.homepage.homepage .after-case-studies > .homepage-footer{content-visibility:auto;contain-intrinsic-size:auto 830px}
 
 /* ---------- 3. Stop layout shift while images load ---------- */
 .homepage.homepage .rectangle-4{aspect-ratio:321/474}

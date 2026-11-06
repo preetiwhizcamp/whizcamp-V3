@@ -364,7 +364,11 @@
       init();
     }
 
-    setupMarquee({ view: '.frame-wrapper .frame', track: '.frame-wrapper .frame .div', speed: 55 });
+    setupMarquee({
+      view: '.announcement-ticker .announcement-ticker__viewport',
+      track: '.announcement-ticker .announcement-ticker__viewport .announcement-ticker__track',
+      speed: 55
+    });
     setupMarquee({ view: '.brands-slider-wrap', track: '.brands-slider', speed: 70 });
   }
 
@@ -379,7 +383,7 @@
     var HALF = 134 / 2;
 
     document.querySelectorAll('.cs-card__media').forEach(function (media) {
-      var circle = media.querySelector('.group-42');
+      var circle = media.querySelector('.case-study-cursor');
       if (!circle) return;
 
       gsap.set(circle, { x: 0, y: 0, scale: 0, autoAlpha: 0, transformOrigin: '50% 50%' });
@@ -460,7 +464,7 @@
 
     var qt = [];
     for (var q = 1; q < N; q++) {
-      var parts = heads[q].querySelector('.PROJECT').textContent.split(' - ');
+      var parts = heads[q].querySelector('.cs-card__category').textContent.split(' - ');
       var el = document.createElement('p');
       el.className = 'cs-qtitle';
       el.appendChild(document.createTextNode(parts[0] + ' -'));
@@ -627,9 +631,9 @@
      ------------------------------------------------------------------ */
   function initIndustries() {
     if (!setupGsap()) return;
-    var list = document.querySelector('.after-case-studies .frame-42');
-    var hero = document.querySelector('.after-case-studies .rectangle-20');
-    if (!list || !hero || list.closest('.ind-layout') || list.dataset.wcReady) return;
+    var list = document.querySelector('.after-case-studies .industry-list');
+    var hero = document.querySelector('.after-case-studies .industry-feature-image');
+    if (!list || !hero || list.closest('.industry-layout') || list.dataset.wcReady) return;
     list.dataset.wcReady = '1';
 
     var IMAGES = [
@@ -650,7 +654,7 @@
     var DESKTOP = '(min-width: 901px)';
     var DUR = 0.55;
 
-    var rows = Array.prototype.slice.call(list.querySelectorAll('.group-119'));
+    var rows = Array.prototype.slice.call(list.querySelectorAll('.industry-list__item'));
     if (!rows.length) return;
 
     var heroSrc = hero.getAttribute('src');
@@ -666,9 +670,9 @@
     }
 
     var layout = document.createElement('div');
-    layout.className = 'ind-layout';
+    layout.className = 'industry-layout';
     var media = document.createElement('div');
-    media.className = 'ind-media';
+    media.className = 'industry-media';
     list.parentNode.insertBefore(layout, list);
     layout.appendChild(list);
     layout.appendChild(media);
@@ -700,7 +704,7 @@
 
     var inlines = rows.map(function (row, i) {
       var fig = document.createElement('div');
-      fig.className = 'ind-inline';
+      fig.className = 'industry-inline-image';
       var im = document.createElement('img');
       im.setAttribute('data-src', IMAGES[i] || heroSrc);
       im.alt = rowTitle(row);
@@ -835,8 +839,8 @@
      FAQ
      ------------------------------------------------------------------ */
   function initFaq() {
-    var wrap = document.querySelector('.group-173 .group-175');
-    var tabsBar = document.querySelector('.group-173 .frame-52');
+    var wrap = document.querySelector('.faq-section .faq-panel-container');
+    var tabsBar = document.querySelector('.faq-section .faq-tabs');
     if (!wrap || !tabsBar || wrap.dataset.wcReady) return;
     wrap.dataset.wcReady = '1';
 
@@ -899,11 +903,11 @@
           var open = i === 0;
           var n = (i < 9 ? '0' : '') + (i + 1) + '.';
           return '<div class="faq-item' + (open ? ' is-open' : '') + '">' +
-            '<button class="faq-item__head" type="button" aria-expanded="' + open + '" id="faq-q-' + p + '-' + i + '" aria-controls="faq-a-' + p + '-' + i + '">' +
+            '<button class="faq-item__head" type="button" aria-expanded="' + open + '" id="faq-question-' + p + '-' + i + '" aria-controls="faq-answer-' + p + '-' + i + '">' +
               '<span class="faq-item__q"><span class="faq-item__n">' + n + '</span> ' + esc(f.q) + '</span>' +
               '<span class="faq-item__icon">' + CHEVRON + '</span>' +
             '</button>' +
-            '<div class="faq-item__panel" id="faq-a-' + p + '-' + i + '" role="region" aria-labelledby="faq-q-' + p + '-' + i + '">' +
+            '<div class="faq-item__panel" id="faq-answer-' + p + '-' + i + '" role="region" aria-labelledby="faq-question-' + p + '-' + i + '">' +
               '<div class="faq-item__panel-inner"><p class="faq-item__a">' + esc(f.a) + '</p></div>' +
             '</div></div>';
         }).join('') +
@@ -928,11 +932,11 @@
     function select(i, focus) {
       tabs.forEach(function (t, k) {
         var on = k === i, label = t.firstElementChild;
-        t.classList.toggle('frame-53', on);
-        t.classList.toggle('frame-54', !on);
+        t.classList.toggle('faq-tabs__button--active', on);
+        t.classList.toggle('faq-tabs__button', !on);
         if (label) {
-          label.classList.toggle('text-wrapper-110', on);
-          label.classList.toggle('text-wrapper-111', !on);
+          label.classList.toggle('faq-tabs__label--active', on);
+          label.classList.toggle('faq-tabs__label', !on);
         }
         t.setAttribute('aria-selected', on ? 'true' : 'false');
         t.setAttribute('tabindex', on ? '0' : '-1');
@@ -973,21 +977,23 @@
      Testimonials nav — swap the two quote columns
      ------------------------------------------------------------------ */
   function initTestimonials() {
-    var root = document.querySelector('.group-153');
+    var root = document.querySelector('.testimonials-section');
     if (!root || root.dataset.wcReady) return;
-    var prev = root.querySelector('.testy-nav__prev');
-    var next = root.querySelector('.testy-nav__next');
-    var a = root.querySelector('.group-162');
-    var b = root.querySelector('.group-167');
-    if (!prev || !next || !a || !b) return;
+    var prev = root.querySelector('.testimonials-nav__prev');
+    var next = root.querySelector('.testimonials-nav__next');
+    var quoteFirstColumn = root.querySelector('.testimonials__column--quote-first');
+    var authorFirstColumn = root.querySelector('.testimonials__column--author-first');
+    if (!prev || !next || !quoteFirstColumn || !authorFirstColumn) return;
     root.dataset.wcReady = '1';
 
     function swap() {
-      var parent = a.parentNode;
-      var afterB = b.nextSibling;
-      parent.insertBefore(b, a);
-      parent.insertBefore(a, afterB);
-      var tmp = a; a = b; b = tmp;
+      var parent = quoteFirstColumn.parentNode;
+      var afterAuthorFirst = authorFirstColumn.nextSibling;
+      parent.insertBefore(authorFirstColumn, quoteFirstColumn);
+      parent.insertBefore(quoteFirstColumn, afterAuthorFirst);
+      var previousColumn = quoteFirstColumn;
+      quoteFirstColumn = authorFirstColumn;
+      authorFirstColumn = previousColumn;
     }
     prev.addEventListener('click', swap);
     next.addEventListener('click', swap);
@@ -1053,7 +1059,7 @@
 })();
 
 /* WHIZCAMP — testimonials carousel (v3: smooth sliding animation).
-   - Reads #testy-data, shows two testimonials at a time
+   - Reads #testimonials-data, shows two testimonials at a time
      (col A: quote above author, col B: author above quote)
    - Cards slide sideways with an ease; the two columns lag slightly (stagger)
    - Auto-rotates every AUTOPLAY_MS; prev/next arrows slide back/forward
@@ -1072,24 +1078,24 @@
   var root = document.getElementById("testimonials");
   if (!root) return;
 
-  var dataEl = document.getElementById("testy-data");
+  var dataEl = document.getElementById("testimonials-data");
   var items = [];
   try { items = JSON.parse(dataEl.textContent) || []; } catch (e) { items = []; }
   if (!items.length) return;
 
-  var row = root.querySelector(".wc-testy__row");
-  var oldA = root.querySelector('[data-testy-col="a"]');
-  var oldB = root.querySelector('[data-testy-col="b"]');
-  var prev = root.querySelector("[data-testy-prev]");
-  var next = root.querySelector("[data-testy-next]");
+  var row = root.querySelector(".wc-testimonials__row");
+  var primaryColumn = root.querySelector('[data-testimonial-column="primary"]');
+  var secondaryColumn = root.querySelector('[data-testimonial-column="secondary"]');
+  var prev = root.querySelector("[data-testimonial-prev]");
+  var next = root.querySelector("[data-testimonial-next]");
 
   /* replace the two placeholder columns with one clipping viewport */
   var viewport = document.createElement("div");
-  viewport.className = "wc-testy__viewport";
+  viewport.className = "wc-testimonials__viewport";
   viewport.setAttribute("aria-live", "polite");
-  row.insertBefore(viewport, oldA);
-  oldA.remove();
-  oldB.remove();
+  row.insertBefore(viewport, primaryColumn);
+  primaryColumn.remove();
+  secondaryColumn.remove();
 
   var n = items.length;
   var index = 0;
@@ -1110,13 +1116,13 @@
     var hasMore = !!t.full && t.full !== t.text;
     var short = hasMore ? esc(t.text) + "\u2026" : esc(t.text);
     return (
-      '<div class="wc-testy__quote">' +
-        '<img class="wc-testy__qicon" src="assets/icons/frame-32.svg" alt="" />' +
-        '<p class="wc-testy__text' + (indent ? " is-indent" : "") + '"' +
+      '<div class="wc-testimonials__quote">' +
+        '<img class="wc-testimonials__quote-icon" src="assets/icons/frame-32.svg" alt="" />' +
+        '<p class="wc-testimonials__text' + (indent ? " is-indent" : "") + '"' +
           ' data-short="' + esc(t.text) + (hasMore ? "\u2026" : "") + '"' +
           ' data-full="' + esc(t.full || t.text) + '">' +
           short +
-          (hasMore ? ' <button type="button" class="wc-testy__more" aria-expanded="false">Read More</button>' : "") +
+          (hasMore ? ' <button type="button" class="wc-testimonials__more" aria-expanded="false">Read More</button>' : "") +
         "</p>" +
       "</div>"
     );
@@ -1124,11 +1130,11 @@
 
   function authorHTML(t) {
     return (
-      '<div class="wc-testy__author">' +
+      '<div class="wc-testimonials__author">' +
         '<img loading="lazy" decoding="async" src="' + esc(t.photo) + '" alt="' + esc(t.name) + '" />' +
         "<div>" +
-          '<div class="wc-testy__name">' + esc(t.name) + "</div>" +
-          '<div class="wc-testy__role">' + esc(t.role) + "</div>" +
+          '<div class="wc-testimonials__name">' + esc(t.name) + "</div>" +
+          '<div class="wc-testimonials__role">' + esc(t.role) + "</div>" +
         "</div>" +
       "</div>"
     );
@@ -1138,17 +1144,17 @@
   function makeStage(i) {
     var a = items[((i % n) + n) % n];
     var stage = document.createElement("div");
-    stage.className = "wc-testy__stage";
+    stage.className = "wc-testimonials__stage";
 
     var colA = document.createElement("div");
-    colA.className = "wc-testy__col";
+    colA.className = "wc-testimonials__column";
     colA.innerHTML = quoteHTML(a, true) + authorHTML(a);
     stage.appendChild(colA);
 
     if (n > 1) {
       var b = items[(((i + 1) % n) + n) % n];
       var colB = document.createElement("div");
-      colB.className = "wc-testy__col";
+      colB.className = "wc-testimonials__column";
       colB.innerHTML = authorHTML(b) + quoteHTML(b, false);
       stage.appendChild(colB);
     }
@@ -1220,7 +1226,7 @@
 
   /* ---------- autoplay ---------- */
   function expanded() {
-    return !!root.querySelector('.wc-testy__more[aria-expanded="true"]');
+    return !!root.querySelector('.wc-testimonials__more[aria-expanded="true"]');
   }
   function stop() {
     if (timer) { clearInterval(timer); timer = null; }
@@ -1247,9 +1253,9 @@
 
   /* ---------- Read More / Read Less ---------- */
   root.addEventListener("click", function (e) {
-    var btn = e.target.closest(".wc-testy__more");
+    var btn = e.target.closest(".wc-testimonials__more");
     if (!btn) return;
-    var p = btn.closest(".wc-testy__text");
+    var p = btn.closest(".wc-testimonials__text");
     var open = btn.getAttribute("aria-expanded") === "true";
     if (p.firstChild && p.firstChild.nodeType === 3) {
       p.firstChild.nodeValue = (open ? p.dataset.short : p.dataset.full) + " ";
@@ -1294,11 +1300,16 @@
 (function () {
   "use strict";
 
-  var footer = document.querySelector(".group-217");
+  var footer = document.querySelector(".homepage-footer");
   if (!footer || !window.gsap) return;
 
   var pills = [].slice.call(
-    footer.querySelectorAll(".frame-75,.frame-76,.frame-77,.frame-78,.frame-79,.frame-80,.frame-81")
+    footer.querySelectorAll(
+      ".footer-pill--data-intelligence,.footer-pill--growth-strategy," +
+      ".footer-pill--experience-design,.footer-pill--ai-engineering," +
+      ".footer-pill--cloud-architecture,.footer-pill--digital-transformation," +
+      ".footer-pill--product-strategy"
+    )
   );
   if (!pills.length) return;
 

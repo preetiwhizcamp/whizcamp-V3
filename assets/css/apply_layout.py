@@ -9,7 +9,7 @@ html = open(path, encoding="utf-8").read()
 
 targets = [
     "group-9", "group-73", "group-77", "group-84", "group-103", "group-110",
-    "group-136", "group-150", "group-153", "group-173", "group-191", "group-218",
+    "group-136", "group-150", "testimonials-section", "faq-section", "group-191", "group-218",
     "ai-modernization__container",
 ]
 for cls in targets:

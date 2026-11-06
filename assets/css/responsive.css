@@ -65,7 +65,7 @@ body {
 /* --------------------------------------------------------------------------
    2. ANNOUNCEMENT TICKER — full-width band
    -------------------------------------------------------------------------- */
-.homepage .frame-wrapper {
+.homepage .announcement-ticker {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -292,12 +292,12 @@ body {
   width: 1280px !important;
 }
 
-.homepage .frame-42 {
+.homepage .industry-list {
   left: calc(50% - 640px) !important;
   width: 586px !important;
 }
 
-.homepage .rectangle-20 {
+.homepage .industry-feature-image {
   left: calc(50% + 120px) !important;
   width: 520px !important;
 }
@@ -380,7 +380,7 @@ body {
 /* --------------------------------------------------------------------------
    16. TESTIMONIALS — fluid, full-width with 80px padding
    -------------------------------------------------------------------------- */
-.homepage .group-153 {
+.homepage .testimonials-section {
   left: 0 !important;
   width: 100% !important;
   padding: 0 80px !important;
@@ -390,7 +390,7 @@ body {
 /* --------------------------------------------------------------------------
    17. FAQ — centred 1280px grid
    -------------------------------------------------------------------------- */
-.homepage .group-173 {
+.homepage .faq-section {
   left: calc(50% - 640px) !important;
   width: 1280px !important;
 }
@@ -453,7 +453,7 @@ body {
 /* --------------------------------------------------------------------------
    19. FOOTER — full-width black background
    -------------------------------------------------------------------------- */
-.homepage .group-217 {
+.homepage .homepage-footer {
   position: absolute !important;
   top: 14000px !important;
   left: 0 !important;
@@ -462,7 +462,7 @@ body {
   overflow: hidden !important;
 }
 
-.homepage .group-217 .frame-65 {
+.homepage .homepage-footer .frame-65 {
   position: absolute !important;
   top: 0 !important;
   left: 0 !important;
@@ -471,20 +471,20 @@ body {
   padding: 0 !important;
 }
 
-.homepage .group-217 .we-custom-develop {
+.homepage .homepage-footer .we-custom-develop {
   position: absolute !important;
   top: 140px !important;
   left: calc(50% - 640px) !important;
 }
 
-.homepage .group-217 .vector-17 {
+.homepage .homepage-footer .vector-17 {
   position: absolute !important;
   top: 346px !important;
   left: calc(50% - 640px) !important;
   width: 1280px !important;
 }
 
-.homepage .group-217 .group-218 {
+.homepage .homepage-footer .group-218 {
   position: absolute !important;
   top: 396px !important;
   left: calc(50% - 640px) !important;
@@ -492,13 +492,13 @@ body {
 }
 
 /* Footer decorative pills */
-.homepage .group-217 .frame-75 { left: calc(50% - 640px + 1059px) !important; }
-.homepage .group-217 .frame-76 { left: calc(50% - 640px + 956px) !important; }
-.homepage .group-217 .frame-77 { left: calc(50% - 640px + 1075px) !important; }
-.homepage .group-217 .frame-78 { left: calc(50% - 640px + 803px) !important; }
-.homepage .group-217 .frame-79 { left: calc(50% - 640px + 829px) !important; }
-.homepage .group-217 .frame-80 { left: calc(50% - 640px + 681px) !important; }
-.homepage .group-217 .frame-81 { left: calc(50% - 640px + 775px) !important; }
+.homepage .homepage-footer .footer-pill--data-intelligence { left: calc(50% - 640px + 1059px) !important; }
+.homepage .homepage-footer .footer-pill--growth-strategy { left: calc(50% - 640px + 956px) !important; }
+.homepage .homepage-footer .footer-pill--experience-design { left: calc(50% - 640px + 1075px) !important; }
+.homepage .homepage-footer .footer-pill--ai-engineering { left: calc(50% - 640px + 803px) !important; }
+.homepage .homepage-footer .footer-pill--cloud-architecture { left: calc(50% - 640px + 829px) !important; }
+.homepage .homepage-footer .footer-pill--digital-transformation { left: calc(50% - 640px + 681px) !important; }
+.homepage .homepage-footer .footer-pill--product-strategy { left: calc(50% - 640px + 775px) !important; }
 
 /* --------------------------------------------------------------------------
    20. TABLET & SMALL DESKTOP (768px – 1439px)
@@ -514,9 +514,9 @@ body {
   .homepage .group-110,
   .homepage .group-136,
   .homepage .group-148 .group-150,
-  .homepage .group-173,
+  .homepage .faq-section,
   .homepage .group-188 .group-191,
-  .homepage .group-217 .group-218 {
+  .homepage .homepage-footer .group-218 {
     left: 5% !important;
     width: 90% !important;
   }
@@ -526,10 +526,10 @@ body {
   .homepage .technology-solutions,
   .homepage .industries-we-serve,
   .homepage .supporting-all,
-  .homepage .frame-42,
+  .homepage .industry-list,
   .homepage .vector-12,
-  .homepage .group-217 .vector-17,
-  .homepage .group-217 .we-custom-develop {
+  .homepage .homepage-footer .vector-17,
+  .homepage .homepage-footer .we-custom-develop {
     left: 5% !important;
     width: 90% !important;
   }
@@ -568,9 +568,9 @@ body {
   .homepage .group-110,
   .homepage .group-136,
   .homepage .group-148 .group-150,
-  .homepage .group-173,
+  .homepage .faq-section,
   .homepage .group-188 .group-191,
-  .homepage .group-217 .group-218 {
+  .homepage .homepage-footer .group-218 {
     left: 4% !important;
     width: 92% !important;
   }

@@ -12,10 +12,10 @@ html body .responsive-stage,
 .homepage.homepage{display:block}
 
 /* ---------- ticker ---------- */
-.homepage.homepage .frame-wrapper{overflow:hidden}
-.homepage.homepage .frame{margin:13px 0 0;padding:0 var(--gutter);overflow-x:auto;scrollbar-width:none}
-.homepage.homepage .frame::-webkit-scrollbar{display:none}
-.homepage.homepage .frame .div{white-space:nowrap;width:max-content}
+.homepage.homepage .announcement-ticker{overflow:hidden}
+.homepage.homepage .announcement-ticker__viewport{margin:13px 0 0;padding:0 var(--gutter);overflow-x:auto;scrollbar-width:none}
+.homepage.homepage .announcement-ticker__viewport::-webkit-scrollbar{display:none}
+.homepage.homepage .announcement-ticker__viewport .announcement-ticker__track{white-space:nowrap;width:max-content}
 
 /* ---------- hero (bg is in flow; loose items hang off the gutter) ---------- */
 .homepage.homepage .group{position:relative!important;top:auto!important;height:830px!important}
@@ -154,20 +154,20 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .industries-we-serve{grid-column:2/4;margin-top:100px}
 .homepage.homepage .supporting-all{grid-column:2/3;margin-top:16px;font-size:clamp(30px,3vw,40px)}
 .homepage.homepage .from-healthcare-to{grid-column:3/4;margin-top:16px;padding-left:40px}
-.homepage.homepage .rectangle-20{grid-column:3/4;grid-row:span 2;width:100%!important;max-width:520px;height:600px!important;margin:50px 0 0 40px;justify-self:end;object-fit:cover}
-.homepage.homepage .frame-42{grid-column:2/3;width:100%!important;margin-top:50px;gap:34px}
-.homepage.homepage .frame-42 .group-119,.homepage.homepage .frame-42 .vector-14{width:100%}
-.homepage.homepage .frame-42 .group-119 > div{width:auto}
-.homepage.homepage .frame-42 .group-119 > div > div{position:static!important}
-.homepage.homepage .frame-42 .group-119 > div{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:24px}
-.homepage.homepage .frame-42 .frame-43{left:auto;right:0}
+.homepage.homepage .industry-feature-image{grid-column:3/4;grid-row:span 2;width:100%!important;max-width:520px;height:600px!important;margin:50px 0 0 40px;justify-self:end;object-fit:cover}
+.homepage.homepage .industry-list{grid-column:2/3;width:100%!important;margin-top:50px;gap:34px}
+.homepage.homepage .industry-list .industry-list__item,.homepage.homepage .industry-list .vector-14{width:100%}
+.homepage.homepage .industry-list .industry-list__item > div{width:auto}
+.homepage.homepage .industry-list .industry-list__item > div > div{position:static!important}
+.homepage.homepage .industry-list .industry-list__item > div{display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:24px}
+.homepage.homepage .industry-list .frame-43{left:auto;right:0}
 .homepage.homepage .group-132{grid-column:2/4;width:234px!important;height:54px!important;margin:50px 0 100px 0}
 @media(max-width:900px){
   .homepage.homepage .after-case-studies{grid-template-columns:var(--gutter) minmax(0,1fr) var(--gutter)}
-  .homepage.homepage .vector-12,.homepage.homepage .vector-13,.homepage.homepage .industries-we-serve,.homepage.homepage .supporting-all,.homepage.homepage .from-healthcare-to,.homepage.homepage .rectangle-20,.homepage.homepage .frame-42,.homepage.homepage .group-132{grid-column:2/3}
+  .homepage.homepage .vector-12,.homepage.homepage .vector-13,.homepage.homepage .industries-we-serve,.homepage.homepage .supporting-all,.homepage.homepage .from-healthcare-to,.homepage.homepage .industry-feature-image,.homepage.homepage .industry-list,.homepage.homepage .group-132{grid-column:2/3}
   .homepage.homepage .from-healthcare-to{padding-left:0}
-  .homepage.homepage .rectangle-20{grid-row:auto;margin:40px 0 0;max-width:none;height:360px!important;justify-self:stretch}
-  .homepage.homepage .frame-42{order:0}
+  .homepage.homepage .industry-feature-image{grid-row:auto;margin:40px 0 0;max-width:none;height:360px!important;justify-self:stretch}
+  .homepage.homepage .industry-list{order:0}
   .homepage.homepage .from-healthcare-to br{display:none}
 }
 
@@ -189,16 +189,16 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .text-wrapper-100{width:auto;height:auto;margin:0;max-width:604px}
 
 /* testimonials */
-.homepage.homepage .group-153{padding-top:100px;padding-bottom:100px;gap:50px;display:flex;flex-direction:column}
+.homepage.homepage .testimonials-section{padding-top:100px;padding-bottom:100px;gap:50px;display:flex;flex-direction:column}
 .homepage.homepage .group-155{width:100%;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;align-items:start}
-.homepage.homepage .group-156,.homepage.homepage .group-162,.homepage.homepage .group-167{width:100%;margin:0}
+.homepage.homepage .group-156,.homepage.homepage .testimonials__column--quote-first,.homepage.homepage .testimonials__column--author-first{width:100%;margin:0}
 .homepage.homepage .frame-48{width:100%}
 .homepage.homepage .frame-51{display:none}
 .homepage.homepage .group-163,.homepage.homepage .group-172{width:calc(100% - 48px);height:auto}
 .homepage.homepage .deep-sleep-has,.homepage.homepage .with-over-two-years{width:auto;height:auto;margin:0;font-size:clamp(18px,1.7vw,24px)}
 
 /* FAQ */
-.homepage.homepage .group-173{
+.homepage.homepage .faq-section{
   height:auto!important;
   padding-top:100px;
   padding-bottom:100px;
@@ -213,7 +213,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .q-a{align-self:center;margin:0;text-align:center}
 .homepage.homepage .frequently-asked{white-space:normal;height:auto;width:100%;font-size:clamp(30px,3vw,40px);line-height:1.15;text-align:center}
 .homepage.homepage .text-wrapper-109{max-width:661px;width:100%;height:auto;margin-top:12px;text-align:center}
-.homepage.homepage .frame-52{
+.homepage.homepage .faq-tabs{
   width:100%;
   max-width:100%;
   height:auto;
@@ -222,8 +222,8 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
   gap:16px;
   margin-top:50px;
 }
-.homepage.homepage .frame-53,
-.homepage.homepage .frame-54{
+.homepage.homepage .faq-tabs__button--active,
+.homepage.homepage .faq-tabs__button{
   appearance:none;
   -webkit-appearance:none;
   border:0;
@@ -241,29 +241,29 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
   flex:0 0 auto;
   transition:background-color .28s ease,color .28s ease,box-shadow .28s ease,transform .28s ease;
 }
-.homepage.homepage .frame-53{
+.homepage.homepage .faq-tabs__button--active{
   background-color:#ffbb00;
   box-shadow:0 4px 12px rgba(255,187,0,.22);
 }
-.homepage.homepage .frame-54{
+.homepage.homepage .faq-tabs__button{
   background-color:#e7e7e7;
   box-shadow:none;
 }
-.homepage.homepage .frame-53:hover{background-color:#f0b100}
-.homepage.homepage .frame-54:hover{background-color:#dddddd}
-.homepage.homepage .frame-53:focus-visible,
-.homepage.homepage .frame-54:focus-visible{
+.homepage.homepage .faq-tabs__button--active:hover{background-color:#f0b100}
+.homepage.homepage .faq-tabs__button:hover{background-color:#dddddd}
+.homepage.homepage .faq-tabs__button--active:focus-visible,
+.homepage.homepage .faq-tabs__button:focus-visible{
   outline:2px solid #00baf5;
   outline-offset:3px;
 }
-.homepage.homepage .text-wrapper-110,
-.homepage.homepage .text-wrapper-111{
+.homepage.homepage .faq-tabs__label--active,
+.homepage.homepage .faq-tabs__label{
   pointer-events:none;
   transition:color .28s ease;
 }
-.homepage.homepage .text-wrapper-110{font-weight:700;color:#252525}
-.homepage.homepage .text-wrapper-111{font-weight:500;color:#25252599}
-.homepage.homepage .group-175,
+.homepage.homepage .faq-tabs__label--active{font-weight:700;color:#252525}
+.homepage.homepage .faq-tabs__label{font-weight:500;color:#25252599}
+.homepage.homepage .faq-panel-container,
 .homepage.homepage .group-179{width:100%;height:auto}
 .homepage.homepage .group-176,
 .homepage.homepage .group-180{width:100%;height:auto;min-height:82px}
@@ -381,15 +381,15 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
   .homepage.homepage .faq-item__panel,
   .homepage.homepage .faq-item__icon,
   .homepage.homepage .faq-item__icon svg,
-  .homepage.homepage .frame-53,
-  .homepage.homepage .frame-54{transition:none}
+  .homepage.homepage .faq-tabs__button--active,
+  .homepage.homepage .faq-tabs__button{transition:none}
   .homepage.homepage .faq-tabpanel.is-active{animation:none}
 }
 @media(max-width:900px){
-  .homepage.homepage .group-173{padding-top:72px;padding-bottom:72px}
-  .homepage.homepage .frame-52{margin-top:32px;gap:12px}
-  .homepage.homepage .frame-53,
-  .homepage.homepage .frame-54{padding:11px 20px}
+  .homepage.homepage .faq-section{padding-top:72px;padding-bottom:72px}
+  .homepage.homepage .faq-tabs{margin-top:32px;gap:12px}
+  .homepage.homepage .faq-tabs__button--active,
+  .homepage.homepage .faq-tabs__button{padding:11px 20px}
   .homepage.homepage .faq-item{padding:20px 20px}
   .homepage.homepage .faq-item__q{font-size:17px}
   .homepage.homepage .faq-item__a{padding:0 0 0 0;font-size:15px}
@@ -397,7 +397,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
   .homepage.homepage .group-185{margin-top:36px}
 }
 @media(max-width:600px){
-  .homepage.homepage .frame-52{justify-content:center}
+  .homepage.homepage .faq-tabs{justify-content:center}
   .homepage.homepage .faq-item__head{align-items:flex-start;gap:12px}
   .homepage.homepage .faq-item__q{font-size:16px}
 }
@@ -417,12 +417,12 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .group-213 > div{position:static!important;width:auto}
 
 /* footer */
-.homepage.homepage .group-217{overflow:hidden;padding-top:396px;padding-bottom:40px}
-.homepage.homepage .group-217 .frame-65{height:100%!important}
-.homepage.homepage .group-217 .whizcamp{left:var(--gutter)!important;font-size:clamp(64px,13.9vw,200px)}
-.homepage.homepage .group-217 .we-custom-develop{left:var(--gutter)!important;font-size:clamp(26px,2.8vw,40px)}
-.homepage.homepage .group-217 .vector-17{left:var(--gutter)!important;width:calc(100% - 2*var(--gutter))!important}
-.homepage.homepage .group-217 .group-218{position:relative!important;top:auto!important;left:auto!important;width:100%!important;height:auto;display:flex;flex-direction:column;gap:48px;padding-top:0}
+.homepage.homepage .homepage-footer{overflow:hidden;padding-top:396px;padding-bottom:40px}
+.homepage.homepage .homepage-footer .frame-65{height:100%!important}
+.homepage.homepage .homepage-footer .whizcamp{left:var(--gutter)!important;font-size:clamp(64px,13.9vw,200px)}
+.homepage.homepage .homepage-footer .we-custom-develop{left:var(--gutter)!important;font-size:clamp(26px,2.8vw,40px)}
+.homepage.homepage .homepage-footer .vector-17{left:var(--gutter)!important;width:calc(100% - 2*var(--gutter))!important}
+.homepage.homepage .homepage-footer .group-218{position:relative!important;top:auto!important;left:auto!important;width:100%!important;height:auto;display:flex;flex-direction:column;gap:48px;padding-top:0}
 .homepage.homepage .group-218 .vector-18{display:none}
 .homepage.homepage .group-218 > .group-219,.homepage.homepage .group-218 > .group-223,.homepage.homepage .group-218 > .group-230{position:relative!important;top:auto!important;left:auto!important;width:100%!important}
 .homepage.homepage .group-223{height:auto;flex-wrap:wrap;gap:40px 48px}
@@ -432,15 +432,15 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .text-wrapper-134{margin:0;width:auto;max-width:381px;height:auto}
 .homepage.homepage .group-230{height:auto;flex-wrap:wrap;justify-content:space-between;gap:16px 48px;padding-top:24px;border-top:1px solid #ffffff1f}
 .homepage.homepage .group-230 .text-wrapper-141{width:auto;height:auto}
-@media(max-width:1100px){.homepage.homepage .group-217 .frame-75,.homepage.homepage .group-217 .frame-76,.homepage.homepage .group-217 .frame-77,.homepage.homepage .group-217 .frame-78,.homepage.homepage .group-217 .frame-79,.homepage.homepage .group-217 .frame-80,.homepage.homepage .group-217 .frame-81{display:none}}
+@media(max-width:1100px){.homepage.homepage .homepage-footer .footer-pill--data-intelligence,.homepage.homepage .homepage-footer .footer-pill--growth-strategy,.homepage.homepage .homepage-footer .footer-pill--experience-design,.homepage.homepage .homepage-footer .footer-pill--ai-engineering,.homepage.homepage .homepage-footer .footer-pill--cloud-architecture,.homepage.homepage .homepage-footer .footer-pill--digital-transformation,.homepage.homepage .homepage-footer .footer-pill--product-strategy{display:none}}
 
 /* order: divider before FAQ must follow testimonials */
-.homepage.homepage .group-173{order:2}.homepage.homepage .group-188{order:3}.homepage.homepage .group-217{order:4}
+.homepage.homepage .faq-section{order:2}.homepage.homepage .group-188{order:3}.homepage.homepage .homepage-footer{order:4}
 
 /* =====================================================================
    FIXES v2 — gutter applied directly (no HTML class required) + bug fixes
    ===================================================================== */
-.homepage.homepage :is(.group-9,.group-73,.group-77,.group-84,.group-103,.group-110,.group-136,.group-150,.group-153,.group-173,.group-191,.group-218,.ai-modernization__container){
+.homepage.homepage :is(.group-9,.group-73,.group-77,.group-84,.group-103,.group-110,.group-136,.group-150,.testimonials-section,.faq-section,.group-191,.group-218,.ai-modernization__container){
   max-width:100%;padding-left:var(--gutter);padding-right:var(--gutter);width:100%;position:relative;z-index:2;box-sizing:border-box}
 
 /* nav bar: let the inner row fill the glass bar */
@@ -461,23 +461,23 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .group-155{grid-template-columns:381px minmax(0,1fr) minmax(0,1fr);gap:24px}
 .homepage.homepage .group-156{max-width:381px}
 .homepage.homepage .rectangle-26,.homepage.homepage .group-164,.homepage.homepage .group-168,.homepage.homepage .group-171{width:100%}
-.homepage.homepage .group-162,.homepage.homepage .group-167{max-width:none}
+.homepage.homepage .testimonials__column--quote-first,.homepage.homepage .testimonials__column--author-first{max-width:none}
 @media(max-width:1100px){.homepage.homepage .group-155{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.homepage.homepage .group-156{max-width:none;width:100%;max-width:381px}}
 
 /* footer: remove the Figma negative offsets so bullets are not cut off */
 .homepage.homepage .group-224,.homepage.homepage .group-225,.homepage.homepage .frame-72{margin-left:0}
 .homepage.homepage .group-224 > *,.homepage.homepage .group-225 > *{margin-left:0!important;width:auto;align-self:flex-start}
-.homepage.homepage .group-217 :is(.frame-68,.frame-69,.frame-70,.frame-71,.frame-72,.frame-73,.frame-74){left:auto!important;right:auto!important}
+.homepage.homepage .homepage-footer :is(.frame-68,.frame-69,.frame-70,.frame-71,.frame-72,.frame-73,.frame-74){left:auto!important;right:auto!important}
 .homepage.homepage .group-218 .frame-73{width:100%}
 .homepage.homepage .group-226,.homepage.homepage .group-228,.homepage.homepage .group-229{margin-right:0}
 /* footer pills: anchored to the right gutter, same arrangement as the design */
-.homepage.homepage .group-217 .frame-75{left:calc(100% - var(--gutter) - 1280px + 1059px)!important}
-.homepage.homepage .group-217 .frame-76{left:calc(100% - var(--gutter) - 1280px + 956px)!important}
-.homepage.homepage .group-217 .frame-77{left:calc(100% - var(--gutter) - 1280px + 1075px)!important}
-.homepage.homepage .group-217 .frame-78{left:calc(100% - var(--gutter) - 1280px + 803px)!important}
-.homepage.homepage .group-217 .frame-79{left:calc(100% - var(--gutter) - 1280px + 829px)!important}
-.homepage.homepage .group-217 .frame-80{left:calc(100% - var(--gutter) - 1280px + 681px)!important}
-.homepage.homepage .group-217 .frame-81{left:calc(100% - var(--gutter) - 1280px + 775px)!important}
+.homepage.homepage .homepage-footer .footer-pill--data-intelligence{left:calc(100% - var(--gutter) - 1280px + 1059px)!important}
+.homepage.homepage .homepage-footer .footer-pill--growth-strategy{left:calc(100% - var(--gutter) - 1280px + 956px)!important}
+.homepage.homepage .homepage-footer .footer-pill--experience-design{left:calc(100% - var(--gutter) - 1280px + 1075px)!important}
+.homepage.homepage .homepage-footer .footer-pill--ai-engineering{left:calc(100% - var(--gutter) - 1280px + 803px)!important}
+.homepage.homepage .homepage-footer .footer-pill--cloud-architecture{left:calc(100% - var(--gutter) - 1280px + 829px)!important}
+.homepage.homepage .homepage-footer .footer-pill--digital-transformation{left:calc(100% - var(--gutter) - 1280px + 681px)!important}
+.homepage.homepage .homepage-footer .footer-pill--product-strategy{left:calc(100% - var(--gutter) - 1280px + 775px)!important}
 
 /* contact: keep the right column clear of the form */
 .homepage.homepage .group-188 .group-191{align-items:flex-start}
@@ -496,7 +496,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .let-s-dive-into-your{text-transform:capitalize;font-size:clamp(32px,2.8vw,40px)}
 /* dividers: plain CSS lines instead of the letter-boxed svg */
 .homepage.homepage .vector-16,
-.homepage.homepage .group-217 .vector-17{display:block;height:0!important;border-top:1px solid rgba(255,255,255,.14);object-fit:fill;margin:0;padding:0}
+.homepage.homepage .homepage-footer .vector-17{display:block;height:0!important;border-top:1px solid rgba(255,255,255,.14);object-fit:fill;margin:0;padding:0}
 .homepage.homepage .vector-16{width:100%!important}
 /* photo + name row: round photo, name beside it */
 .homepage.homepage .group-211{display:flex;align-items:center;gap:24px;width:100%;height:auto;position:relative}
@@ -514,10 +514,10 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 }
 
 /* ---------- FOOTER ---------- */
-.homepage.homepage .group-217 .whizcamp{font-size:clamp(64px,calc((100vw - 2*var(--gutter))/5.9),380px);letter-spacing:.1em}
+.homepage.homepage .homepage-footer .whizcamp{font-size:clamp(64px,calc((100vw - 2*var(--gutter))/5.9),380px);letter-spacing:.1em}
 .homepage.homepage .we-custom-develop{text-transform:capitalize}
 /* brand column + three link columns on one grid */
-.homepage.homepage .group-217 .group-218{display:grid;grid-template-columns:1.9fr 1fr 1fr 1fr;gap:48px 24px;align-items:start}
+.homepage.homepage .homepage-footer .group-218{display:grid;grid-template-columns:1.9fr 1fr 1fr 1fr;gap:48px 24px;align-items:start}
 .homepage.homepage .group-218 > .group-219{grid-column:1;flex-direction:column;align-items:flex-start;gap:42px;width:100%!important}
 .homepage.homepage .group-218 > .group-223{display:contents}
 .homepage.homepage .group-218 .group-224{grid-column:2}
@@ -527,13 +527,13 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
 .homepage.homepage .group-218 .text-wrapper-134{max-width:381px;width:auto}
 .homepage.homepage .group-218 > .group-230{grid-column:1/-1;margin-top:8px}
 @media(max-width:900px){
-  .homepage.homepage .group-217 .group-218{grid-template-columns:1fr 1fr}
+  .homepage.homepage .homepage-footer .group-218{grid-template-columns:1fr 1fr}
   .homepage.homepage .group-218 > .group-219{grid-column:1/-1}
   .homepage.homepage .group-218 .group-224{grid-column:1}.homepage.homepage .group-218 .group-225{grid-column:2}
   .homepage.homepage .group-218 .frame-72{grid-column:1/-1}
 }
 @media(max-width:560px){
-  .homepage.homepage .group-217 .group-218{grid-template-columns:1fr}
+  .homepage.homepage .homepage-footer .group-218{grid-template-columns:1fr}
   .homepage.homepage .group-218 .group-224,.homepage.homepage .group-218 .group-225,.homepage.homepage .group-218 .frame-72{grid-column:1}
 }
 
@@ -549,13 +549,13 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
    MARQUEES (GSAP) — announcement ticker + brand logo strip
    ===================================================================== */
 /* ticker: viewport clips, track slides */
-.homepage.homepage .frame-wrapper{overflow:hidden}
-.homepage.homepage .frame{padding:0!important;overflow:hidden!important;margin:13px 0 0!important;
+.homepage.homepage .announcement-ticker{overflow:hidden}
+.homepage.homepage .announcement-ticker__viewport{padding:0!important;overflow:hidden!important;margin:13px 0 0!important;
   -webkit-mask-image:linear-gradient(to right,transparent 0,#000 3%,#000 97%,transparent 100%);
   mask-image:linear-gradient(to right,transparent 0,#000 3%,#000 97%,transparent 100%)}
-.homepage.homepage .frame .div{width:max-content!important;max-width:none;flex:none;gap:16px;will-change:transform;backface-visibility:hidden}
-.homepage.homepage .frame .div > *{flex:none}
-.homepage.homepage .frame .div p{white-space:nowrap}
+.homepage.homepage .announcement-ticker__viewport .announcement-ticker__track{width:max-content!important;max-width:none;flex:none;gap:16px;will-change:transform;backface-visibility:hidden}
+.homepage.homepage .announcement-ticker__viewport .announcement-ticker__track > *{flex:none}
+.homepage.homepage .announcement-ticker__viewport .announcement-ticker__track p{white-space:nowrap}
 
 /* brand strip: plain flex track (Slick is removed by marquee.js) */
 .homepage.homepage .brands-slider-wrap{overflow:hidden}
@@ -568,7 +568,7 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
    ===================================================================== */
 @media (hover:hover){
   .homepage.homepage .cs-card .cs-card__media{cursor:none}
-  .homepage.homepage .cs-card .cs-card__media .group-42{
+  .homepage.homepage .cs-card .cs-card__media .case-study-cursor{
     top:0;left:0;                 /* JS positions it with transforms */
     transition:none!important;    /* CSS transitions would fight GSAP */
     will-change:transform,opacity;
@@ -579,90 +579,90 @@ html body .homepage .ai-modernization-section .ai-modernization__container.layou
    INDUSTRIES — list scrolls, image is sticky and changes (industries-scroll.js)
    ===================================================================== */
 /* more room between rows so the image has distance to stay pinned over */
-.homepage.homepage .frame-42{gap:52px}
-.homepage.homepage .frame-42 .group-119{cursor:pointer;transition:opacity .45s ease}
-.homepage.homepage .frame-42 .group-119:not(.is-active){opacity:.45}
-.homepage.homepage .frame-42 .group-119.is-active [class^="text-wrapper-"]{font-weight:600!important}
+.homepage.homepage .industry-list{gap:52px}
+.homepage.homepage .industry-list .industry-list__item{cursor:pointer;transition:opacity .45s ease}
+.homepage.homepage .industry-list .industry-list__item:not(.is-active){opacity:.45}
+.homepage.homepage .industry-list .industry-list__item.is-active [class^="text-wrapper-"]{font-weight:600!important}
 
 /* the sticky picture (wrapper is created by the script) */
-.homepage.homepage .after-case-studies > .ind-media{
+.homepage.homepage .after-case-studies > .industry-media{
   position:sticky!important;top:110px!important;align-self:start;
   grid-column:3/4;grid-row:span 2;justify-self:end;
   width:100%!important;max-width:520px;height:600px!important;margin:50px 0 0 40px;
   border-radius:12px;overflow:hidden;background:#e9e9e9}
-.homepage.homepage .ind-media .rectangle-20{
+.homepage.homepage .industry-media .industry-feature-image{
   position:absolute!important;left:0!important;top:0!important;
   width:100%!important;height:100%!important;max-width:none;margin:0!important;
   border-radius:0;object-fit:cover;will-change:transform,opacity}
 @media(max-width:900px){
-  .homepage.homepage .after-case-studies > .ind-media{
+  .homepage.homepage .after-case-studies > .industry-media{
     position:relative!important;top:auto!important;grid-column:2/3;grid-row:auto;
     justify-self:stretch;max-width:none;height:360px!important;margin:40px 0 0}
 }
 
 /* =====================================================================
-   INDUSTRIES v2 — list + sticky image live in one wrapper (.ind-layout)
+   INDUSTRIES v2 — list + sticky image live in one wrapper (.industry-layout)
    so the image is pinned only while the list is on screen.
    ===================================================================== */
-.homepage.homepage .after-case-studies > .ind-layout{
+.homepage.homepage .after-case-studies > .industry-layout{
   grid-column:2/4;margin:50px 0 0;width:auto!important;height:auto!important;
   display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:40px;align-items:start;position:relative!important}
-.homepage.homepage .ind-layout > .frame-42{
+.homepage.homepage .industry-layout > .industry-list{
   position:relative!important;top:auto!important;left:auto!important;
   width:100%!important;margin:0!important;grid-column:1;gap:52px}
-.homepage.homepage .ind-layout > .ind-media{
+.homepage.homepage .industry-layout > .industry-media{
   position:sticky;top:110px;align-self:start;justify-self:end;grid-column:2;
   width:100%;max-width:520px;height:600px;margin:0;
   border-radius:12px;overflow:hidden;background:#e9e9e9}
 /* tidy list rows: aligned numbers/titles, plain CSS dividers */
-.homepage.homepage .frame-42 .vector-14{display:block;width:100%!important;height:0!important;border-top:1px solid rgba(37,37,37,.12);object-fit:fill}
-.homepage.homepage .frame-42 .group-119 > div > div:last-child{min-width:56px}
+.homepage.homepage .industry-list .vector-14{display:block;width:100%!important;height:0!important;border-top:1px solid rgba(37,37,37,.12);object-fit:fill}
+.homepage.homepage .industry-list .industry-list__item > div > div:last-child{min-width:56px}
 @media(max-width:900px){
-  .homepage.homepage .after-case-studies > .ind-layout{grid-column:2/3;grid-template-columns:minmax(0,1fr)}
-  .homepage.homepage .ind-layout > .frame-42,.homepage.homepage .ind-layout > .ind-media{grid-column:1}
-  .homepage.homepage .ind-layout > .ind-media{position:relative;top:auto;justify-self:stretch;max-width:none;height:360px;margin-top:40px}
+  .homepage.homepage .after-case-studies > .industry-layout{grid-column:2/3;grid-template-columns:minmax(0,1fr)}
+  .homepage.homepage .industry-layout > .industry-list,.homepage.homepage .industry-layout > .industry-media{grid-column:1}
+  .homepage.homepage .industry-layout > .industry-media{position:relative;top:auto;justify-self:stretch;max-width:none;height:360px;margin-top:40px}
 }
 /* =====================================================================
    INDUSTRIES v3 — fade/scale gallery + stacked (tablet/mobile) mode
-   Add AFTER layout.css. Existing .ind-layout / .ind-media rules stay.
+   Add AFTER layout.css. Existing .industry-layout / .industry-media rules stay.
    ===================================================================== */
 
 /* sticky image: vertically centred in the viewport while the list scrolls */
-.homepage.homepage .ind-layout > .ind-media{
+.homepage.homepage .industry-layout > .industry-media{
   top:max(24px, calc(50vh - 300px));
   height:min(600px, calc(100vh - 48px));
   isolation:isolate;
 }
-.homepage.homepage .ind-media .rectangle-20{
+.homepage.homepage .industry-media .industry-feature-image{
   backface-visibility:hidden;
   transform-origin:50% 50%;
 }
 
 /* active row (supplements the existing .is-active rules) */
-.homepage.homepage .frame-42 .group-119{outline:none}
-.homepage.homepage .frame-42 .group-119:focus-visible{outline:2px solid #00baf5;outline-offset:6px;border-radius:6px}
+.homepage.homepage .industry-list .industry-list__item{outline:none}
+.homepage.homepage .industry-list .industry-list__item:focus-visible{outline:2px solid #00baf5;outline-offset:6px;border-radius:6px}
 
 /* mobile inline images: hidden on desktop */
-.homepage.homepage .ind-inline{display:none}
+.homepage.homepage .industry-inline-image{display:none}
 
 /* ---------- tablet / mobile: no sticky, image under each row ---------- */
 @media(max-width:900px){
-  .homepage.homepage .ind-layout > .ind-media{display:none}
-  .homepage.homepage .frame-42{gap:20px}
-  .homepage.homepage .frame-42 .group-119{opacity:1!important}
-  .homepage.homepage .frame-42 .group-119:not(.is-active){opacity:.6!important}
-  .homepage.homepage .ind-inline{
+  .homepage.homepage .industry-layout > .industry-media{display:none}
+  .homepage.homepage .industry-list{gap:20px}
+  .homepage.homepage .industry-list .industry-list__item{opacity:1!important}
+  .homepage.homepage .industry-list .industry-list__item:not(.is-active){opacity:.6!important}
+  .homepage.homepage .industry-inline-image{
     display:block;overflow:hidden;border-radius:12px;
     max-height:0;opacity:0;margin:0;
     transition:max-height .6s cubic-bezier(.22,1,.36,1),opacity .4s ease,margin .4s ease}
-  .homepage.homepage .ind-inline.is-open{max-height:420px;opacity:1;margin:4px 0 8px}
-  .homepage.homepage .ind-inline img{
+  .homepage.homepage .industry-inline-image.is-open{max-height:420px;opacity:1;margin:4px 0 8px}
+  .homepage.homepage .industry-inline-image img{
     display:block;width:100%;height:clamp(220px,52vw,380px);object-fit:cover;
     transform:scale(1.06);transition:transform .9s cubic-bezier(.22,1,.36,1)}
-  .homepage.homepage .ind-inline.is-open img{transform:scale(1)}
+  .homepage.homepage .industry-inline-image.is-open img{transform:scale(1)}
 }
 @media(prefers-reduced-motion:reduce){
-  .homepage.homepage .ind-inline,.homepage.homepage .ind-inline img{transition:none}
+  .homepage.homepage .industry-inline-image,.homepage.homepage .industry-inline-image img{transition:none}
 }
 
 /* Performance: isolate decorative glows on their own GPU layer (visuals unchanged). */
@@ -1175,11 +1175,11 @@ html body .homepage .services-accordion .services-accordion__tags{
    TESTIMONIALS — exact match to the design (v3, sliding animation)
    REPLACE the previous "TESTIMONIALS" block at the end of layout.css with this.
    Sizes scale with the card row width (container query units).
-   Needs: <div class="group-153 wc-testy"> markup + assets/js/testimonials.js
+   Needs: <div class="testimonials-section wc-testimonials"> markup + assets/js/testimonials.js
    ===================================================================== */
 
 /* section shell (strong selector + !important so padding is never lost) */
-html body .homepage.homepage .group-153.wc-testy{
+html body .homepage.homepage .testimonials-section.wc-testimonials{
   background:#f6f6f6;
   /* FULL WIDTH: fills the whole section, only the site gutter on each side */
   width:100% !important;
@@ -1196,39 +1196,39 @@ html body .homepage.homepage .group-153.wc-testy{
   box-sizing:border-box;
 }
 /* inner blocks always take the full width of the section */
-html body .homepage.homepage .group-153.wc-testy > *{
+html body .homepage.homepage .testimonials-section.wc-testimonials > *{
   width:100% !important;
   max-width:none !important;
   margin-left:0 !important;
   margin-right:0 !important;
   box-sizing:border-box;
 }
-html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !important}
+html body .homepage.homepage .testimonials-section.wc-testimonials > .wc-testimonials__nav{width:auto !important}
 /* narrower gutter on very wide screens so the cards really open up */
 @media(min-width:1600px){
-  html body .homepage.homepage .group-153.wc-testy{
+  html body .homepage.homepage .testimonials-section.wc-testimonials{
     padding-left:clamp(48px,5vw,96px) !important;
     padding-right:clamp(48px,5vw,96px) !important;
   }
 }
 
 /* ---------- header: eyebrow on top, title + description on one row ---------- */
-.wc-testy__head{
+.wc-testimonials__head{
   display:grid;
   grid-template-columns:minmax(0,1fr) minmax(0,max-content);
   align-items:center;
   gap:14px 48px;
   width:100%;
 }
-.wc-testy__titles{display:contents}
-.wc-testy__eyebrow{
+.wc-testimonials__titles{display:contents}
+.wc-testimonials__eyebrow{
   grid-column:1/-1;
   grid-row:1;
   margin:0;
   font:500 12px/1.2 "DM Sans",Helvetica,sans-serif;
   color:#252525;
 }
-.wc-testy__title{
+.wc-testimonials__title{
   grid-column:1;
   grid-row:2;
   margin:0;
@@ -1236,12 +1236,12 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
   color:#252525;
   letter-spacing:-.01em;
 }
-.wc-testy__title em{
+.wc-testimonials__title em{
   font-style:italic;
   font-weight:700;
   color:#00baf5;
 }
-.wc-testy__lead{
+.wc-testimonials__lead{
   grid-column:2;
   grid-row:2;
   margin:0;
@@ -1251,7 +1251,7 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
 }
 
 /* ---------- row: dark card + sliding viewport (design ratio 286 : 650) ---------- */
-.wc-testy__row{
+.wc-testimonials__row{
   container-type:inline-size;
   display:grid;
   grid-template-columns:minmax(0,.88fr) minmax(0,2fr);
@@ -1261,7 +1261,7 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
 }
 
 /* ---------- dark stats card ---------- */
-.wc-testy__stats{
+.wc-testimonials__stats{
   position:relative;
   display:flex;
   flex-direction:column;
@@ -1274,42 +1274,42 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
     linear-gradient(165deg,#161616 0%,#1a1a1a 55%,#25201a 100%);
   overflow:hidden;
 }
-.wc-testy__stats-top{
+.wc-testimonials__stats-top{
   display:flex;
   justify-content:space-between;
   align-items:flex-start;
   gap:16px;
 }
-.wc-testy__stats-label{
+.wc-testimonials__stats-label{
   margin-top:.9cqw;
   font:400 clamp(12px,1.35cqw,17px)/1.2 "DM Sans",Helvetica,sans-serif;
   color:#dcdcdc;
 }
-.wc-testy__score{
+.wc-testimonials__score{
   margin-top:2.6cqw;
   font:400 clamp(34px,3.8cqw,50px)/1 "DM Sans",Helvetica,sans-serif;
   color:#fff;
 }
-.wc-testy__score span{
+.wc-testimonials__score span{
   font-size:.38em;
   color:#d0d0d0;
   margin-left:2px;
 }
-.wc-testy__badge{
+.wc-testimonials__badge{
   width:clamp(60px,6.9cqw,88px);
   height:clamp(60px,6.9cqw,88px);
   flex:none;
   object-fit:contain;
 }
-.wc-testy__stats-copy{
+.wc-testimonials__stats-copy{
   margin:2.9cqw 0 0;
   max-width:90%;
   font:400 clamp(12px,1.3cqw,16px)/1.5 "DM Sans",Helvetica,sans-serif;
   color:#d6d6d6;
 }
-.wc-testy__stats-foot{margin-top:auto;padding-top:32px}
-.wc-testy__avatars{display:flex}
-.wc-testy__avatars img{
+.wc-testimonials__stats-foot{margin-top:auto;padding-top:32px}
+.wc-testimonials__avatars{display:flex}
+.wc-testimonials__avatars img{
   width:clamp(34px,3.8cqw,48px);
   height:clamp(34px,3.8cqw,48px);
   border-radius:50%;
@@ -1318,14 +1318,14 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
   background:#333;
   margin-left:-.5cqw;
 }
-.wc-testy__avatars img:first-child{margin-left:0}
-.wc-testy__trusted{
+.wc-testimonials__avatars img:first-child{margin-left:0}
+.wc-testimonials__trusted{
   margin-top:1.2cqw;
   font:400 clamp(12px,1.3cqw,16px)/1.2 "DM Sans",Helvetica,sans-serif;
   color:#e4e4e4;
 }
-.wc-testy__stars{display:flex;gap:.4cqw;margin-top:.7cqw}
-.wc-testy__stars svg{
+.wc-testimonials__stars{display:flex;gap:.4cqw;margin-top:.7cqw}
+.wc-testimonials__stars svg{
   width:clamp(13px,1.45cqw,18px);
   height:clamp(13px,1.45cqw,18px);
   fill:#ffbb00;
@@ -1333,24 +1333,24 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
 }
 
 /* ---------- sliding viewport + stages (built by testimonials.js) ---------- */
-.wc-testy__viewport{
+.wc-testimonials__viewport{
   position:relative;
   min-width:0;
   overflow:hidden;            /* clips the sliding cards */
   border-radius:12px;
 }
-.wc-testy__stage{
+.wc-testimonials__stage{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:18px;
   height:100%;
 }
-.wc-testy__stage.is-incoming{
+.wc-testimonials__stage.is-incoming{
   position:absolute;
   inset:0;
   width:100%;
 }
-.wc-testy__col{
+.wc-testimonials__column{
   display:flex;
   flex-direction:column;
   gap:12px;
@@ -1358,22 +1358,22 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
   will-change:transform,opacity;
 }
 
-.wc-testy__quote,
-.wc-testy__author{
+.wc-testimonials__quote,
+.wc-testimonials__author{
   background:#ededed;
   border-radius:12px;
 }
-.wc-testy__quote{
+.wc-testimonials__quote{
   flex:1 1 auto;
   padding:2.5cqw 1.9cqw 2.4cqw;
 }
-.wc-testy__qicon{
+.wc-testimonials__quote-icon{
   display:block;
   width:clamp(26px,3.1cqw,40px);
   height:auto;
   margin-bottom:2.1cqw;
 }
-.wc-testy__text{
+.wc-testimonials__text{
   margin:0;
   font-family:"DM Sans",Helvetica,sans-serif;
   font-weight:400;
@@ -1381,8 +1381,8 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
   line-height:1.28;
   color:#252525;
 }
-.wc-testy__text.is-indent{text-indent:1.7em}
-.wc-testy__more{
+.wc-testimonials__text.is-indent{text-indent:1.7em}
+.wc-testimonials__more{
   appearance:none;
   border:0;
   background:none;
@@ -1395,10 +1395,10 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
   font-weight:700;
   color:#00baf5;
 }
-.wc-testy__more:hover{text-decoration:underline}
-.wc-testy__more:focus-visible{outline:2px solid #00baf5;outline-offset:3px;border-radius:4px}
+.wc-testimonials__more:hover{text-decoration:underline}
+.wc-testimonials__more:focus-visible{outline:2px solid #00baf5;outline-offset:3px;border-radius:4px}
 
-.wc-testy__author{
+.wc-testimonials__author{
   flex:none;
   display:flex;
   align-items:center;
@@ -1406,7 +1406,7 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
   min-height:clamp(64px,8.2cqw,100px);
   padding:0 1.9cqw;
 }
-.wc-testy__author img{
+.wc-testimonials__author img{
   width:clamp(44px,5.2cqw,64px);
   height:clamp(44px,5.2cqw,64px);
   flex:none;
@@ -1415,23 +1415,23 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
   border:2px solid #fff;
   background:#d8d8d8;
 }
-.wc-testy__name{
+.wc-testimonials__name{
   font:700 clamp(15px,1.85cqw,24px)/1.25 "DM Sans",Helvetica,sans-serif;
   color:#252525;
 }
-.wc-testy__role{
+.wc-testimonials__role{
   margin-top:2px;
   font:400 clamp(11px,1.3cqw,16px)/1.3 "DM Sans",Helvetica,sans-serif;
   color:#646464;
 }
 
 /* ---------- nav arrows ---------- */
-.wc-testy__nav{
+.wc-testimonials__nav{
   display:flex;
   justify-content:center;
   gap:12px;
 }
-.wc-testy__btn{
+.wc-testimonials__button{
   appearance:none;
   width:41px;
   height:41px;
@@ -1444,31 +1444,31 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
   color:#fff;
   transition:transform .25s ease,box-shadow .25s ease;
 }
-.wc-testy__btn svg{width:18px;height:18px}
-.wc-testy__btn--prev{background:linear-gradient(135deg,#17a6d1 0%,#86b85a 100%)}
-.wc-testy__btn--next{background:#232323}
-.wc-testy__btn:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.18)}
-.wc-testy__btn:active{transform:scale(.94)}
-.wc-testy__btn:focus-visible{outline:2px solid #00baf5;outline-offset:3px}
-.wc-testy__btn:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
+.wc-testimonials__button svg{width:18px;height:18px}
+.wc-testimonials__button--prev{background:linear-gradient(135deg,#17a6d1 0%,#86b85a 100%)}
+.wc-testimonials__button--next{background:#232323}
+.wc-testimonials__button:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,.18)}
+.wc-testimonials__button:active{transform:scale(.94)}
+.wc-testimonials__button:focus-visible{outline:2px solid #00baf5;outline-offset:3px}
+.wc-testimonials__button:disabled{opacity:.4;cursor:default;transform:none;box-shadow:none}
 
 /* ---------- responsive ---------- */
 @media(max-width:1100px){
-  .wc-testy__row{grid-template-columns:minmax(0,1fr)}
-  .wc-testy__stats{min-height:0;padding:24px}
-  .wc-testy__stats-copy{max-width:460px}
-  .wc-testy__text{font-size:clamp(16px,2.4vw,22px)}
+  .wc-testimonials__row{grid-template-columns:minmax(0,1fr)}
+  .wc-testimonials__stats{min-height:0;padding:24px}
+  .wc-testimonials__stats-copy{max-width:460px}
+  .wc-testimonials__text{font-size:clamp(16px,2.4vw,22px)}
 }
 @media(max-width:767px){
-  html body .homepage.homepage .group-153.wc-testy{padding-top:64px !important;padding-bottom:64px !important;gap:32px}
-  .wc-testy__head{grid-template-columns:minmax(0,1fr)}
-  .wc-testy__title,.wc-testy__lead{grid-column:1}
-  .wc-testy__lead{grid-row:3;width:auto}
-  .wc-testy__stage{grid-template-columns:minmax(0,1fr)}
-  .wc-testy__stage .wc-testy__col:nth-child(2){display:none}   /* one testimonial at a time on phones */
-  .wc-testy__quote{padding:22px 18px 24px}
-  .wc-testy__text{font-size:17px}
-  .wc-testy__author{padding:12px 18px}
+  html body .homepage.homepage .testimonials-section.wc-testimonials{padding-top:64px !important;padding-bottom:64px !important;gap:32px}
+  .wc-testimonials__head{grid-template-columns:minmax(0,1fr)}
+  .wc-testimonials__title,.wc-testimonials__lead{grid-column:1}
+  .wc-testimonials__lead{grid-row:3;width:auto}
+  .wc-testimonials__stage{grid-template-columns:minmax(0,1fr)}
+  .wc-testimonials__stage .wc-testimonials__column:nth-child(2){display:none}   /* one testimonial at a time on phones */
+  .wc-testimonials__quote{padding:22px 18px 24px}
+  .wc-testimonials__text{font-size:17px}
+  .wc-testimonials__author{padding:12px 18px}
 }
 /* =====================================================================
    FAQ — list width matches the design (2nd screenshot)
@@ -1478,8 +1478,8 @@ html body .homepage.homepage .group-153.wc-testy > .wc-testy__nav{width:auto !im
    ===================================================================== */
 
 /* list container: centred, capped at 1428px (≈75% of a 1905px screen) */
-html body .homepage.homepage .group-173 .faq-panels,
-html body .homepage.homepage .group-173 > .group-175{
+html body .homepage.homepage .faq-section .faq-panels,
+html body .homepage.homepage .faq-section > .faq-panel-container{
   width:100%;
   max-width:1428px;
   margin-left:auto;
@@ -1488,22 +1488,22 @@ html body .homepage.homepage .group-173 > .group-175{
 }
 
 /* every tab panel / list inside it follows the same width */
-html body .homepage.homepage .group-173 .faq-panels .faq-tabpanel,
-html body .homepage.homepage .group-173 .faq-panels .faq-clip,
-html body .homepage.homepage .group-173 .faq-panels .faq-list{
+html body .homepage.homepage .faq-section .faq-panels .faq-tabpanel,
+html body .homepage.homepage .faq-section .faq-panels .faq-clip,
+html body .homepage.homepage .faq-section .faq-panels .faq-list{
   width:100%;
   max-width:100%;
 }
 
 /* heading block + tabs stay centred above the narrower list */
-html body .homepage.homepage .group-173 .group-174,
-html body .homepage.homepage .group-173 .frame-52{
+html body .homepage.homepage .faq-section .group-174,
+html body .homepage.homepage .faq-section .faq-tabs{
   margin-left:auto;
   margin-right:auto;
 }
 
 /* subtitle wraps over two lines like the design */
-html body .homepage.homepage .group-173 .text-wrapper-109{
+html body .homepage.homepage .faq-section .text-wrapper-109{
   max-width:600px;
 }
 /* =====================================================================
@@ -1520,7 +1520,7 @@ html body .homepage.homepage .group-173 .text-wrapper-109{
 
 /* 1) switch off the blur + the forced GPU layers on the glow circles */
 html body .homepage .group-188 :is(.group-190,.group-102,.ellipse-7,.ellipse-8,.ellipse-9),
-html body .homepage .group-217 :is(.ellipse-4,.ellipse-5){
+html body .homepage .homepage-footer :is(.ellipse-4,.ellipse-5){
   filter:none !important;
   background:none !important;
   transform:none !important;
@@ -1531,7 +1531,7 @@ html body .homepage .group-217 :is(.ellipse-4,.ellipse-5){
 
 /* 2) draw each glow as a soft radial gradient (extends past the circle like the blur did) */
 html body .homepage .group-188 :is(.group-190,.group-102,.ellipse-7,.ellipse-8,.ellipse-9)::before,
-html body .homepage .group-217 :is(.ellipse-4,.ellipse-5)::before{
+html body .homepage .homepage-footer :is(.ellipse-4,.ellipse-5)::before{
   content:"";
   position:absolute;
   inset:-30%;
@@ -1549,14 +1549,14 @@ html body .homepage .group-188 .group-102{--glow:233 171 0}     /* big gold   #e
 html body .homepage .group-188 .ellipse-7{--glow:0 41 208}      /* blue       #0029d0 */
 html body .homepage .group-188 .ellipse-8{--glow:116 123 255}   /* light blue #747bff */
 html body .homepage .group-188 .ellipse-9{--glow:255 213 79}    /* yellow     #ffd54f */
-html body .homepage .group-217 .ellipse-4{--glow:255 187 0}     /* footer gold */
-html body .homepage .group-217 .ellipse-5{--glow:0 186 245}     /* footer cyan */
-html body .homepage .group-217 .ellipse-4::before{opacity:.5}
-html body .homepage .group-217 .ellipse-5::before{opacity:.7}
+html body .homepage .homepage-footer .ellipse-4{--glow:255 187 0}     /* footer gold */
+html body .homepage .homepage-footer .ellipse-5{--glow:0 186 245}     /* footer cyan */
+html body .homepage .homepage-footer .ellipse-4::before{opacity:.5}
+html body .homepage .homepage-footer .ellipse-5::before{opacity:.7}
 
 /* 4) keep the glows clipped to their section and out of the scroll/paint path */
 html body .homepage .group-188 .frame-55,
-html body .homepage .group-217 .frame-65{
+html body .homepage .homepage-footer .frame-65{
   contain:paint;
 }
 /* =====================================================================

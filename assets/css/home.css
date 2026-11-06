@@ -87,7 +87,7 @@ body {
   );
 }
 
-.homepage .frame-wrapper {
+.homepage .announcement-ticker {
   position: absolute;
   top: 0;
   left: 0;
@@ -97,7 +97,7 @@ body {
   background-color: #e5f9ff;
 }
 
-.homepage .frame {
+.homepage .announcement-ticker__viewport {
      margin-top: 13px;
     height: 23px;
     margin-left: 80px;
@@ -106,7 +106,7 @@ body {
     width: 100%;
 }
 
-.homepage .div {
+.homepage .announcement-ticker__track {
   display: inline-flex;
   width: 100%;
   height: 23.5px;
@@ -1128,7 +1128,7 @@ body {
 .homepage .text-wrapper-27 {
   position: absolute;
   top: 28px;
-  left: calc(50% + 473px);
+  left: calc(83% + 473px);
   width: 206px;
   font-family: "Google Sans Flex", Helvetica;
   font-weight: 700;
@@ -1218,7 +1218,7 @@ body {
   gap: 8px;
 }
 
-.homepage .PROJECT {
+.homepage .cs-card__category {
   margin-left: -4px;
   height: 30px;
   width: 367px;
@@ -1283,7 +1283,7 @@ body {
   -webkit-backdrop-filter: blur(3px) brightness(100%);
 }
 
-.homepage .group-42 {
+.homepage .case-study-cursor {
   position: absolute;
   top: 198px;
   left: 429px;
@@ -1368,7 +1368,7 @@ body {
   object-fit: cover;
 }
 
-.homepage .PROJECT-2 {
+.homepage .cs-card__category--secondary {
   position: absolute;
   top: 24px;
   left: calc(50% - 299px);
@@ -3366,7 +3366,7 @@ body {
   line-height: 24px;
 }
 
-.homepage .rectangle-20 {
+.homepage .industry-feature-image {
   position: absolute;
   top: 8504px;
   left: 840px;
@@ -3376,7 +3376,7 @@ body {
   object-fit: cover;
 }
 
-.homepage .frame-42 {
+.homepage .industry-list {
   display: flex;
   flex-direction: column;
   width: 586px;
@@ -3387,7 +3387,7 @@ body {
   left: 80px;
 }
 
-.homepage .group-119 {
+.homepage .industry-list__item {
   position: relative;
   width: 586px;
   height: 30px;
@@ -4232,10 +4232,10 @@ body {
 }
 
 /* ==========================================================================
-   TESTIMONIALS SECTION — group-153
+   TESTIMONIALS SECTION — testimonials-section
    ========================================================================== */
 
-.homepage .group-153 {
+.homepage .testimonials-section {
   position: absolute;
   top: 11086px;
   left: 0;
@@ -4457,7 +4457,7 @@ body {
 }
 
 /* ── COL 2: Matt Lobel quote card ── */
-.homepage .group-162 {
+.homepage .testimonials__column--quote-first {
   flex: 1;
   min-width: 0;
   position: relative;
@@ -4550,7 +4550,7 @@ body {
 }
 
 /* ── COL 3: Steve Perrin card ── */
-.homepage .group-167 {
+.homepage .testimonials__column--author-first {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -4636,14 +4636,14 @@ body {
 }
 
 /* ── Navigation arrows ── */
-.testy-nav {
+.testimonials-nav {
   display: flex;
   justify-content: center;
   gap: 12px;
   padding-top: 8px;
 }
 
-.testy-nav__btn {
+.testimonials-nav__btn {
   width: 48px;
   height: 48px;
   border-radius: 50%;
@@ -4655,22 +4655,22 @@ body {
   transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
-.testy-nav__prev {
+.testimonials-nav__prev {
   background-color: #00baf5 !important;
   color: #ffffff !important;
 }
 
-.testy-nav__next {
+.testimonials-nav__next {
   background-color: #1a1a1a !important;
   color: #ffffff !important;
 }
 
-.testy-nav__btn:hover {
+.testimonials-nav__btn:hover {
   transform: scale(1.1);
 }
 
-.testy-nav__prev:hover { background-color: #009fd6 !important; }
-.testy-nav__next:hover { background-color: #333333 !important; }
+.testimonials-nav__prev:hover { background-color: #009fd6 !important; }
+.testimonials-nav__next:hover { background-color: #333333 !important; }
 
 /* ── frame-51 (dots strip) hidden — replaced by nav arrows ── */
 .homepage .frame-51 {
@@ -4679,7 +4679,7 @@ body {
 
 /* ── Responsive ── */
 @media (max-width: 1100px) {
-  .homepage .group-153 {
+  .homepage .testimonials-section {
     padding: 0 40px;
   }
   .homepage .group-155 {
@@ -4693,11 +4693,11 @@ body {
 }
 
 @media (max-width: 768px) {
-  .homepage .group-153 {
+  .homepage .testimonials-section {
     padding: 0 20px;
   }
-  .homepage .group-162,
-  .homepage .group-167 {
+  .homepage .testimonials__column--quote-first,
+  .homepage .testimonials__column--author-first {
     flex: 0 0 100%;
   }
   .homepage .text-wrapper-102 {
@@ -4713,7 +4713,7 @@ body {
   }
 }
 
-.homepage .group-173 {
+.homepage .faq-section {
   position: absolute;
   top: 12061px;
   left: 80px;
@@ -4775,7 +4775,7 @@ body {
   line-height: 24px;
 }
 
-.homepage .frame-52 {
+.homepage .faq-tabs {
   display: inline-flex;
   height: 47px;
   width: 832px;
@@ -4786,7 +4786,7 @@ body {
   gap: 16px;
 }
 
-.homepage .frame-53 {
+.homepage .faq-tabs__button--active {
   padding: 13px 31px;
   position: relative;
   flex: 0 0 auto;
@@ -4799,7 +4799,7 @@ body {
   overflow: hidden;
 }
 
-.homepage .text-wrapper-110 {
+.homepage .faq-tabs__label--active {
   position: relative;
   width: fit-content;
   margin-top: -1px;
@@ -4812,7 +4812,7 @@ body {
   line-height: normal;
 }
 
-.homepage .frame-54 {
+.homepage .faq-tabs__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -4825,7 +4825,7 @@ body {
   overflow: hidden;
 }
 
-.homepage .text-wrapper-111 {
+.homepage .faq-tabs__label {
   position: relative;
   width: fit-content;
   margin-top: -1px;
@@ -4838,7 +4838,7 @@ body {
   line-height: normal;
 }
 
-.homepage .group-175 {
+.homepage .faq-panel-container {
   height: 488px;
   margin-top: 34px;
   display: flex;
@@ -5788,7 +5788,7 @@ body {
   position: relative;
 }
 
-.homepage .group-217 {
+.homepage .homepage-footer {
   position: absolute;
   top: 14000px;
   left: 0;
@@ -6234,7 +6234,7 @@ body {
   border-radius: 3px;
 }
 
-.homepage .frame-75 {
+.homepage .footer-pill--data-intelligence {
   padding: 13px 31px;
   position: absolute;
   top: 210px;
@@ -6264,7 +6264,7 @@ body {
   line-height: normal;
 }
 
-.homepage .frame-76 {
+.homepage .footer-pill--growth-strategy {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -6294,7 +6294,7 @@ body {
   line-height: normal;
 }
 
-.homepage .frame-77 {
+.homepage .footer-pill--experience-design {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -6311,7 +6311,7 @@ body {
   transform: rotate(-17.23deg);
 }
 
-.homepage .frame-78 {
+.homepage .footer-pill--ai-engineering {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -6328,7 +6328,7 @@ body {
   transform: rotate(-14.64deg);
 }
 
-.homepage .frame-79 {
+.homepage .footer-pill--cloud-architecture {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -6345,7 +6345,7 @@ body {
   transform: rotate(9.46deg);
 }
 
-.homepage .frame-80 {
+.homepage .footer-pill--digital-transformation {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -6362,7 +6362,7 @@ body {
   transform: rotate(2.99deg);
 }
 
-.homepage .frame-81 {
+.homepage .footer-pill--product-strategy {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -6863,15 +6863,15 @@ body {
 }
 
 /* "View Case Study" circle — hidden until the image is hovered */
-.homepage .cs-card__media .group-42 {
+.homepage .cs-card__media .case-study-cursor {
   opacity: 0;
   transform: scale(0.6);
   pointer-events: none;
   transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.homepage .cs-card__media:hover .group-42,
-.homepage .cs-card__media:focus-visible .group-42 {
+.homepage .cs-card__media:hover .case-study-cursor,
+.homepage .cs-card__media:focus-visible .case-study-cursor {
   opacity: 1;
   transform: scale(1);
 }
@@ -6956,7 +6956,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .homepage .cs-card__media .group-42,
+  .homepage .cs-card__media .case-study-cursor,
   .homepage .cs-card__media .rectangle-8,
   .homepage .cs-more__btn,
   .homepage .cs-more__btn svg {
@@ -6993,7 +6993,7 @@ body {
   align-items: center;
 }
 
-.homepage .cs-heads .PROJECT {
+.homepage .cs-heads .cs-card__category {
   width: auto;
   margin-left: 0;
   white-space: nowrap;
@@ -7006,7 +7006,7 @@ body {
   white-space: nowrap;
 }
 
-.homepage .cs-heads .PROJECT { color: #ffffff; }
+.homepage .cs-heads .cs-card__category { color: #ffffff; }
 
 /* ---- stacked cards that fly in from the queue (thumbnails at bottom right) ---- */
 .homepage .cs-card {
@@ -7043,12 +7043,12 @@ body {
   border-radius: inherit;
 }
 
-.homepage .cs-card .group-42 {
+.homepage .cs-card .case-study-cursor {
   top: calc(50% - 67px);
   left: calc(50% - 67px);
 }
 
-.homepage .cs-card:not(.is-active) .group-42 {
+.homepage .cs-card:not(.is-active) .case-study-cursor {
   display: none;
 }
 
